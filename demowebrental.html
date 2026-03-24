@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/3721/3721619.png">
+    
+    <title>MRD Rental - Premium Motorbike Rental Bali | Best Rates</title>
+    <meta name="description" content="Premium motorbike rental in Bali. Rent Honda Vario, Yamaha Fazzio, and more. Best rates, well-maintained units, and easy booking at MRD Rental Tabanan.">
+    <meta name="keywords" content="motorbike rental bali, rent bike bali, mrd rental, sewa motor bali, rental motor tabanan, cheap bike rental bali">
+    <meta name="author" content="MRD Rental">
+    
+    <meta property="og:title" content="MRD Rental - Premium Motorbike Gallery">
+    <meta property="og:description" content="Check our latest collection and book your dream ride in Bali instantly.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mrdokey.github.io/mrdrent/">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1558981403-c5f91cbba527?q=80&w=500">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "MRD Rental Motor Bali",
+      "image": "https://images.unsplash.com/photo-1558981403-c5f91cbba527",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Jl. Raya MRD No. 123",
+        "addressLocality": "Tabanan",
+        "addressRegion": "Bali",
+        "postalCode": "82121",
+        "addressCountry": "ID"
+      },
+      "url": "https://mrdokey.github.io/mrdrent/",
+      "telephone": "+62895428400665",
+      "priceRange": "IDR 50.000 - IDR 200.000"
+    }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root { --primary-color: #0d6efd; --dark-bg: #1a1d20; }
+        body { background-color: #fcfcfc; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        /* Navbar & Hero */
+        .navbar { transition: all 0.4s; padding: 20px 0; }
+        .navbar.scrolled { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 12px 0; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        .navbar-brand { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; }
+        .nav-link { font-weight: 600; color: #fff; margin-left: 20px; }
+        .scrolled .nav-link { color: #333; }
+        .scrolled .navbar-brand { color: var(--primary-color); }
+
+        .hero {
+            height: 70vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1558981403-c5f91cbba527?auto=format&fit=crop&q=80&w=1920');
+            background-size: cover; background-position: center;
+            display: flex; align-items: center; justify-content: center;
+            color: white; text-align: center; clip-path: ellipse(150% 100% at 50% 0%); margin-bottom: 50px;
+        }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; }
+
+        /* Cards */
+        .card-motor { border: none; border-radius: 24px; background: #fff; transition: 0.4s; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 20px; }
+        .card-motor:hover { transform: translateY(-12px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .img-wrapper { position: relative; height: 220px; overflow: hidden; }
+        .img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .card-motor:hover .img-wrapper img { scale: 1.1; }
+        .badge-status { position: absolute; top: 15px; left: 15px; padding: 6px 16px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; z-index: 2; }
+
+        /* Footer */
+        footer { background: var(--dark-bg); color: #adb5bd; padding: 80px 0 30px; margin-top: 100px; }
+        footer h5 { color: #fff; font-weight: 800; margin-bottom: 25px; }
+        footer .footer-link { color: #adb5bd; text-decoration: none; transition: 0.3s; display: block; margin-bottom: 12px; }
+        footer .footer-link:hover { color: var(--primary-color); padding-left: 5px; }
+        .social-icons a { width: 40px; height: 40px; background: #2c3034; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; color: #fff; margin-right: 10px; transition: 0.3s; }
+        .social-icons a:hover { background: var(--primary-color); transform: translateY(-5px); }
+        .map-container { border-radius: 20px; overflow: hidden; height: 200px; }
+        .section-title { font-weight: 800; margin-bottom: 40px; position: relative; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 5px; background: var(--primary-color); margin: 15px auto; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">MRD <span class="text-primary">RENTAL</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold text-warning" href="cariunit.html"><i class="fas fa-search me-1"></i> Check Availability</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="container">
+        <h1 class="display-3 fw-800">Explore the Road.</h1>
+        <p>Premium motorbike fleet for your best travel experience in Bali. Ready when you are.</p>
+        <div class="mt-4">
+            <a href="cariunit.html" class="btn btn-primary btn-lg px-5 py-3 fw-bold rounded-pill shadow-lg">Start Booking Now</a>
+        </div>
+    </div>
+</header>
+
+<div class="container my-5 py-5" id="catalog">
+    <div class="text-center">
+        <h2 class="section-title">Our Collection</h2>
+    </div>
+
+    <div id="loading" class="text-center py-5">
+        <div class="spinner-grow text-primary"></div>
+        <p class="mt-3 fw-bold text-muted">Fetching latest units...</p>
+    </div>
+
+    <div class="row g-4" id="catalogContainer"></div>
+</div>
+
+<div class="modal fade" id="detailModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 rounded-4 shadow-lg overflow-hidden">
+            <div id="modalContent"></div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-4">
+                <h5 class="text-uppercase">MRD <span class="text-primary">Rental</span></h5>
+                <p>Providing the best motorbike rental experience with easy booking and well-maintained units. Your safety and comfort are our priority.</p>
+                <div class="social-icons mt-4">
+                    <a href="https://instagram.com/mrdo.keys" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://facebook.com/mrdo.keys" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://wa.me/62895428400665" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://tiktok.com/mrdo.keys" target="_blank"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6">
+                <h5>Quick Links</h5>
+                <a href="#" class="footer-link">Home</a>
+                <a href="cariunit.html" class="footer-link">Check Availability</a>
+                <a href="#catalog" class="footer-link">Our Gallery</a>
+                <a href="#" class="footer-link">Terms & Conditions</a>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h5>Contact Us</h5>
+                <p><i class="fas fa-map-marker-alt me-2 text-primary"></i> Tabanan, Bali, Indonesia</p>
+                <p><i class="fas fa-phone-alt me-2 text-primary"></i> +62 895 4284 00665</p>
+                <p><i class="fas fa-envelope me-2 text-primary"></i> mrd.reborn33@gmail.com</p>
+            </div>
+            <div class="col-lg-3">
+                <h5>Location</h5>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126253.3957242188!2d115.05602055!3d-8.5411326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23a49f50e6881%3A0x30302863e4604d0!2sTabanan%2C%20Tabanan%20Regency%2C%20Bali!5e0!3m2!1sen!2sid!4v1711200000000!5m2!1sen!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+        <hr class="mt-5 mb-4" style="border-color: rgba(255,255,255,0.1);">
+        <div class="text-center small">
+            <p>© 2026 <b>MRD Rental Motor</b>. All Rights Reserved. Built for Speed & Comfort.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Scroll Effect
+    window.addEventListener('scroll', function() {
+        const nav = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            nav.classList.add('scrolled', 'navbar-light');
+            nav.classList.remove('navbar-dark');
+        } else {
+            nav.classList.remove('scrolled', 'navbar-light');
+            nav.classList.add('navbar-dark');
+        }
+    });
+
+    const API_URL = "https://script.google.com/macros/s/AKfycby3WPdnkIsV5E7_4bd3H_7dGjcEzqVvoxTAfQoT18KHqv9ucZlw9qMQIM7B1vP3OtQ8VQ/exec";
+    const adminWA = "62895428400665";
+
+    async function loadCatalog() {
+        try {
+            const res = await fetch(API_URL);
+            const data = await res.json();
+            renderCatalog(data.items);
+            document.getElementById('loading').style.display = 'none';
+        } catch (e) { console.error(e); }
+    }
+
+    function renderCatalog(items) {
+        const container = document.getElementById('catalogContainer');
+        container.innerHTML = "";
+        items.forEach(m => {
+            const status = m[5] || "Ready";
+            let badgeColor = "bg-success";
+            if(status === "Booked") badgeColor = "bg-warning text-dark";
+            if(status === "Bengkel") badgeColor = "bg-danger";
+
+            container.innerHTML += `
+                <div class="col-lg-4 col-md-6">
+                    <div class="card card-motor h-100 p-3">
+                        <div class="img-wrapper rounded-4">
+                            <span class="badge-status ${badgeColor}">${status}</span>
+                            <img src="${m[4] || 'https://via.placeholder.com/400x250'}" alt="${m[1]} - MRD Rental">
+                        </div>
+                        <div class="card-body px-1 text-center">
+                            <small class="fw-bold text-primary text-uppercase">${m[2]}</small>
+                            <h5 class="fw-bold text-dark mb-4">${m[1]}</h5>
+                            <button onclick="openDetail('${m[2]}', '${m[1]}', '${m[0]}', '${m[3]}', '${m[4]}', '${status}')" class="btn btn-outline-dark w-100 py-2 rounded-3 fw-bold">See Details</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    function openDetail(brand, type, plate, price, img, status) {
+        const modalContent = document.getElementById('modalContent');
+        modalContent.innerHTML = `
+            <div class="position-relative">
+                <img src="${img || 'https://via.placeholder.com/400x250'}" class="w-100" style="height:280px; object-fit:cover;">
+                <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="p-4">
+                <div class="mb-4">
+                    <h3 class="fw-800 text-dark mb-1">${brand} ${type}</h3>
+                    <p class="text-muted"><i class="fas fa-id-card me-2"></i>Plate: <b>${plate}</b></p>
+                </div>
+                <div class="row mb-4 g-2">
+                    <div class="col-6"><div class="p-3 bg-light rounded-4 text-center"><small class="d-block text-muted">Rate</small><span class="fw-bold text-primary">IDR ${Number(price).toLocaleString('id-ID')}</span></div></div>
+                    <div class="col-6"><div class="p-3 bg-light rounded-4 text-center"><small class="d-block text-muted">Status</small><span class="fw-bold text-dark">${status}</span></div></div>
+                </div>
+                <div class="d-grid gap-2">
+                    <a href="cariunit.html" class="btn btn-primary py-3 fw-bold rounded-3">Check Availability</a>
+                    <a href="https://wa.me/${adminWA}?text=Hi MRD Rental, I'm interested in renting the ${brand} ${type} (${plate}). Is it available?" target="_blank" class="btn btn-outline-success py-2 fw-bold rounded-3"><i class="fab fa-whatsapp me-2"></i>Contact Admin</a>
+                </div>
+            </div>
+        `;
+        new bootstrap.Modal(document.getElementById('detailModal')).show();
+    }
+    loadCatalog();
+</script>
+</body>
+</html>

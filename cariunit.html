@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MRD Rental - Booking System</title>
+    <!-- Bootstrap CSS -->
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/3721/3721619.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f4f7f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .hero { background: #343a40; color: white; padding: 60px 0; text-align: center; margin-bottom: 30px; }
+        .card-motor { border: none; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: 0.3s; overflow: hidden; }
+        .card-motor:hover { transform: translateY(-10px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .search-box { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-top: -80px; }
+        .btn-primary { background-color: #007bff; border: none; padding: 12px; }
+        .btn-success { padding: 10px; border-radius: 8px; }
+        .placeholder-text { color: #adb5bd; margin-top: 50px; font-weight: 300; }
+        .img-container { height: 220px; overflow: hidden; background: #eee; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="container">
+        <h1 class="display-4 fw-bold">MRD Motorbike Rental</h1>
+        <p class="lead">Please select your rental dates to see available motorbikes</p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Search Section -->
+    <div class="search-box mb-5">
+        <div class="row g-3">
+            <div class="col-md-5">
+                <label class="form-label fw-bold text-secondary">Pick-up Date</label>
+                <input type="date" id="start" class="form-control form-control-lg">
+            </div>
+            <div class="col-md-5">
+                <label class="form-label fw-bold text-secondary">Return Date</label>
+                <input type="date" id="end" class="form-control form-control-lg">
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <button onclick="handleFilter()" class="btn btn-primary w-100 fw-bold btn-lg">Check Availability</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loading" class="text-center py-5" style="display: none;">
+        <div class="spinner-border text-primary" role="status"></div>
+        <p class="mt-2 text-muted">Checking available units for you...</p>
+    </div>
+
+    <!-- Initial Placeholder Text -->
+    <div id="placeholder" class="text-center py-5">
+        <h2 class="placeholder-text">Please select dates above to check our collection.</h2>
+    </div>
+
+    <!-- Motor List Container -->
+    <div class="row" id="motorContainer"></div>
+</div>
+
+<!-- MODAL CONFIRMATION -->
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title">Booking Confirmation</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-4" id="modalBody">
+        <!-- JS will inject content here -->
+      </div>
+      <div class="modal-footer border-0">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" id="confirmWaBtn" class="btn btn-success px-4 fw-bold">Confirm to WhatsApp</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // KONFIGURASI
+    const API_URL = "https://script.google.com/macros/s/AKfycby3WPdnkIsV5E7_4bd3H_7dGjcEzqVvoxTAfQoT18KHqv9ucZlw9qMQIM7B1vP3OtQ8VQ/exec";
+    const adminNumber = "62895428400665"; // <--- GANTI DENGAN NOMOR WA ANDA (Format: 628...)
+
+    let motors = [];
+    let bookings = [];
+    let isDataLoaded = false;
+
+    // 1. Ambil data saat halaman dibuka (Background)
+    async function fetchData() {
+        try {
+            const response = await fetch(API_URL);
+            const data = await response.json();
+            motors = data.items;
+            bookings = data.bookings;
+            isDataLoaded = true;
+            console.log("Data fetched successfully");
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    }
+
+    // 2. Fungsi Logika Filter Bentrok
+    function isOccupied(plate, startReq, endReq) {
+        const sReq = new Date(startReq);
+        const eReq = new Date(endReq);
+        
+        return bookings.some(b => {
+            if (b.no_motor !== plate) return false;
+            // Rumus bentrok: Tanggal mulai baru < Tanggal selesai lama DAN Tanggal selesai baru > Tanggal mulai lama
+            return (sReq < new Date(b.end) && eReq > new Date(b.start));
+        });
+    }
+
+    // 3. Fungsi Render HTML
+    function renderList(sDate, eDate) {
+        const container = document.getElementById('motorContainer');
+        container.innerHTML = "";
+        let foundCount = 0;
+
+        motors.forEach(m => {
+            // Urutan Data: [0]Plate, [1]Type, [2]Brand, [3]Price, [4]Photo, [5]Status
+            const plate = m[0];
+            const type = m[1];
+            const brand = m[2];
+            const price = m[3];
+            const imgUrl = m[4] || 'https://via.placeholder.com/400x250?text=No+Photo';
+            const status = m[5];
+
+            // Filter status bengkel
+            if (status === "Bengkel") return;
+
+            // Filter bentrok jadwal
+            if (isOccupied(plate, sDate, eDate)) return;
+
+            foundCount++;
+            container.innerHTML += `
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card card-motor h-100">
+                        <div class="img-container">
+                            <img src="${imgUrl}" alt="${brand}">
+                        </div>
+                        <div class="card-body">
+                            <small class="text-primary fw-bold text-uppercase">${brand}</small>
+                            <h5 class="card-title fw-bold">${type}</h5>
+                            <p class="text-muted mb-3" style="font-size: 0.9rem;">Plate: ${plate}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-dark">IDR ${Number(price).toLocaleString('id-ID')} <small class="text-muted">/day</small></span>
+                                <button onclick="openBooking('${brand} ${type}', '${plate}', '${price}')" class="btn btn-success fw-bold px-3">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        if (foundCount === 0) {
+            container.innerHTML = `<div class="text-center py-5 w-100"><h3>😔 Sorry, no motorbikes available for these dates.</h3></div>`;
+        }
+    }
+
+    // 4. Handler Tombol Cek
+    async function handleFilter() {
+        const start = document.getElementById('start').value;
+        const end = document.getElementById('end').value;
+
+        if (!start || !end) {
+            alert("Please select both Pick-up and Return dates.");
+            return;
+        }
+
+        // Tampilkan loading
+        document.getElementById('placeholder').style.display = 'none';
+        document.getElementById('motorContainer').innerHTML = "";
+        document.getElementById('loading').style.display = 'block';
+
+        // Jika data belum siap, tunggu sebentar
+        if (!isDataLoaded) {
+            await fetchData();
+        }
+
+        // Sembunyikan loading dan render
+        setTimeout(() => {
+            document.getElementById('loading').style.display = 'none';
+            renderList(start, end);
+        }, 600);
+    }
+
+    // 5. Fungsi Modal & WA
+    function openBooking(unit, plat, harga) {
+        const sDate = document.getElementById('start').value;
+        const eDate = document.getElementById('end').value;
+        
+        const modalBody = document.getElementById('modalBody');
+        modalBody.innerHTML = `
+            <div class="text-center mb-4">
+                <h4 class="fw-bold">${unit}</h4>
+                <span class="badge bg-dark px-3 py-2">${plat}</span>
+            </div>
+            <div class="bg-light p-3 rounded">
+                <div class="d-flex justify-content-between mb-2">
+                    <span><b>Pick-up:</b></span> <span>${sDate}</span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span><b>Return:</b></span> <span>${eDate}</span>
+                </div>
+                <div class="d-flex justify-content-between border-top pt-2">
+                    <span><b>Daily Rate:</b></span> <span class="text-success fw-bold">IDR ${Number(harga).toLocaleString('id-ID')}</span>
+                </div>
+            </div>
+        `;
+
+        document.getElementById('confirmWaBtn').onclick = () => {
+            const text = `Hello MRD Rental, I want to book unit *${unit}* (${plat})%0A%0A📅 *Dates:* ${sDate} to ${eDate}%0A💰 *Price:* IDR ${Number(harga).toLocaleString('id-ID')}/day%0A%0AIs this unit still available?`;
+            window.open(`https://wa.me/${adminNumber}?text=${text}`, '_blank');
+        };
+
+        const myModal = new bootstrap.Modal(document.getElementById('bookingModal'));
+        myModal.show();
+    }
+
+    // Jalankan fetch data di awal
+    fetchData();
+</script>
+
+</body>
+</html>
