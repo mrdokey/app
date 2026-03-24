@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Artikel & Wawasan Bisnis Digital | MRD Digital Solutions</title>
+    <meta name="description" content="Kumpulan artikel tentang otomasi bisnis, tips MRD APP, dan transformasi digital untuk UMKM di Bali.">
+    
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/4205/4205106.png">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root { --primary-color: #0d6efd; --dark-bg: #0f1113; --card-bg: #1a1d21; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--dark-bg); color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        /* Navbar */
+        .navbar { 
+            background: rgba(15, 17, 19, 0.95) !important; 
+            border-bottom: 1px solid #2d3238; 
+            backdrop-filter: blur(10px); 
+            padding: 15px 0;
+        }
+        .navbar-brand { font-weight: 800; letter-spacing: 1px; }
+        .nav-link { font-weight: 600; font-size: 0.95rem; transition: 0.3s; }
+        .nav-link.active { color: var(--primary-color) !important; }
+
+        /* Header Artikel */
+        .blog-header { padding: 140px 0 60px; text-align: center; background: radial-gradient(circle at top left, rgba(13, 110, 253, 0.1), transparent); }
+        .blog-header h1 { font-size: 3rem; font-weight: 800; letter-spacing: -1px; }
+        .blog-header span { color: var(--primary-color); }
+
+        /* Blog Cards */
+        .blog-card {
+            background: var(--card-bg);
+            border: 1px solid #2d3238;
+            border-radius: 24px;
+            overflow: hidden;
+            height: 100%;
+            transition: 0.4s;
+        }
+        .blog-card:hover { 
+            transform: translateY(-10px); 
+            border-color: var(--primary-color);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+        .blog-img { width: 100%; height: 220px; object-fit: cover; border-bottom: 1px solid #2d3238; background: #2d3238; }
+        .blog-content { padding: 25px; }
+        .blog-category { font-size: 0.75rem; color: var(--primary-color); font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 10px; }
+        .blog-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 15px; }
+        .blog-excerpt { font-size: 0.9rem; opacity: 0.7; margin-bottom: 20px; }
+        .read-more { color: #fff; text-decoration: none; font-weight: 700; display: flex; align-items: center; transition: 0.3s; cursor: pointer; }
+        .read-more:hover { color: var(--primary-color); }
+
+        /* Modal Custom Style */
+        .modal-content { background: #1a1d21; color: #fff; border: 1px solid #2d3238; border-radius: 25px; }
+        .modal-header { border-bottom: 1px solid #2d3238; }
+        .btn-close-white { filter: invert(1) grayscale(100%) brightness(200%); }
+
+        /* Footer */
+        footer { background: #000; border-top: 1px solid #2d3238; padding: 60px 0 40px; margin-top: 80px; }
+        .footer-title { font-weight: 800; margin-bottom: 25px; }
+        .text-footer { color: #fff !important; text-decoration: none; opacity: 0.8; display: block; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">MRD <span style="color: var(--primary-color);">DIGITAL</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item"><a class="nav-link px-3" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link px-3" href="index.html#layanan">Layanan</a></li>
+                <li class="nav-item"><a class="nav-link px-3" href="tutorial.html">Tutorial</a></li>
+                <li class="nav-item"><a class="nav-link px-3 active" href="artikel.html">Artikel</a></li>
+                <li class="nav-item ms-lg-3">
+                    <a class="btn btn-primary btn-sm rounded-pill px-4 fw-bold" href="https://wa.me/62895428400665">Hubungi Kami</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section class="blog-header">
+    <div class="container">
+        <div class="badge bg-primary mb-3 px-3 py-2 rounded-pill">BLOG & INSIGHTS</div>
+        <h1>Artikel <span>Terbaru</span></h1>
+        <p class="text-white opacity-75 mt-3 mx-auto" style="max-width: 700px;">
+            Strategi dan tips teknologi MRD APP untuk efisiensi bisnis Anda.
+        </p>
+    </div>
+</section>
+
+<div class="container pb-5">
+    <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+            <article class="blog-card">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800" class="blog-img" alt="Otomasi Bisnis">
+                <div class="blog-content">
+                    <span class="blog-category">Business Automation</span>
+                    <h2 class="blog-title">Pentingnya Otomasi untuk Bisnis Rental</h2>
+                    <p class="blog-excerpt">Mengapa beralih ke sistem digital dapat meningkatkan profit Anda secara signifikan.</p>
+                    <a class="read-more" data-bs-toggle="modal" data-bs-target="#modal1">Selengkapnya <i class="fas fa-arrow-right ms-2"></i></a>
+                </div>
+            </article>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+            <article class="blog-card">
+                <img src="https://images.unsplash.com/photo-1551288049-bbdac8626ad1?q=80&w=800" class="blog-img" alt="Tips MRD APP">
+                <div class="blog-content">
+                    <span class="blog-category">MRD APP Tips</span>
+                    <h2 class="blog-title">5 Fitur Unggulan MRD APP 2026</h2>
+                    <p class="blog-excerpt">Maksimalkan pengelolaan bisnis dengan fitur sinkronisasi cerdas.</p>
+                    <a class="read-more" data-bs-toggle="modal" data-bs-target="#modal2">Selengkapnya <i class="fas fa-arrow-right ms-2"></i></a>
+                </div>
+            </article>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+            <article class="blog-card">
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800" class="blog-img" alt="Technology">
+                <div class="blog-content">
+                    <span class="blog-category">Technology</span>
+                    <h2 class="blog-title">Mengenal Google Apps Script</h2>
+                    <p class="blog-excerpt">Otomasi sederhana untuk tugas harian bisnis Anda yang membosankan.</p>
+                    <a class="read-more" data-bs-toggle="modal" data-bs-target="#modal3">Selengkapnya <i class="fas fa-arrow-right ms-2"></i></a>
+                </div>
+            </article>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal1" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">Detail Artikel</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4 text-center">
+                <h3 class="fw-bold text-primary mb-3">Pentingnya Otomasi untuk Bisnis Rental</h3>
+                <p>Otomasi membantu pemilik rental memantau unit secara real-time. Dengan sistem MRD APP, tagihan dan pengingat jatuh tempo dikirim otomatis melalui WhatsApp.</p>
+                <a href="https://wa.me/62895428400665" class="btn btn-primary rounded-pill w-100 fw-bold mt-3">Konsultasi Sistem Rental</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal2" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">Detail Artikel</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4 text-center">
+                <h3 class="fw-bold text-primary mb-3">5 Fitur Unggulan MRD APP 2026</h3>
+                <p>Tahun ini, MRD APP menghadirkan sinkronisasi Google Calendar untuk booking. Fitur ini memastikan tidak ada jadwal bentrok pada penyewaan kendaraan Anda.</p>
+                <a href="https://wa.me/62895428400665" class="btn btn-primary rounded-pill w-100 fw-bold mt-3">Tanya Fitur MRD APP</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal3" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">Detail Artikel</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4 text-center">
+                <h3 class="fw-bold text-primary mb-3">Mengenal Google Apps Script</h3>
+                <p>Apps Script adalah mesin di balik otomasi kami. Teknologi ini memungkinkan Google Sheets bekerja seperti aplikasi tingkat tinggi untuk mengelola data bisnis Anda.</p>
+                <a href="https://wa.me/62895428400665" class="btn btn-primary rounded-pill w-100 fw-bold mt-3">Pelajari Otomasi Lebih Dalam</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container text-center">
+        <h3 class="footer-title">MRD DIGITAL SOLUTIONS</h3>
+        <p class="text-footer">Solusi Digital Otomatis untuk Bisnis Masa Depan.</p>
+        <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+        <small class="text-footer opacity-50">© 2026 MRD Digital Bali.</small>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
