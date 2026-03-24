@@ -1,56 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MRD Digital Solutions | Professional AppSheet & Web Developer Bali</title>
     
-    <meta name="description" content="Professional AppSheet & Automation Developer in Tabanan, Bali. Custom solutions for Rental, POS, and Business Management for international and local clients.">
+    <title>Jasa Pembuatan Aplikasi AppSheet & Web Developer Bali | MRD Digital</title>
+    <meta name="description" content="MRD Digital Solutions menyediakan jasa pembuatan aplikasi rental motor, POS kasir, dan manajemen properti menggunakan AppSheet & Google Apps Script di Tabanan, Bali. Solusi digital otomatis untuk bisnis Anda.">
+    <meta name="keywords" content="Jasa Pembuatan Aplikasi, AppSheet Indonesia, Aplikasi Rental Motor Bali, Web Developer Bali, Otomasi Bisnis, Google Apps Script, MRD Digital Solutions">
+    <meta name="author" content="MRD Digital Solutions">
+    
+    <meta property="og:title" content="MRD Digital Solutions - Solusi Aplikasi Bisnis Terpercaya">
+    <meta property="og:description" content="Transformasi bisnis Anda ke digital dengan aplikasi kustom AppSheet. Spesialis sistem rental dan POS di Bali.">
+    <meta property="og:url" content="https://mrdsolution.my.id">
+    <meta property="og:type" content="website">
+
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/4205/4205106.png">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "MRD Digital Solutions",
+      "image": "https://cdn-icons-png.flaticon.com/512/4205/4205106.png",
+      "@id": "https://mrdsolution.my.id",
+      "url": "https://mrdsolution.my.id",
+      "telephone": "+62895428400665",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Tabanan",
+        "addressLocality": "Bali",
+        "addressCountry": "ID"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "08:00",
+        "closes": "20:00"
+      },
+      "sameAs": "https://github.com/mrd-reborn"
+    }
+    </script>
+
     <style>
         :root { --primary-color: #0d6efd; --dark-bg: #0f1113; --card-bg: #1a1d21; --highlight-yellow: #ffeb3b; }
         body { background-color: var(--dark-bg); color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; }
-        
-        /* Hero Section */
         .hero-dev { padding: 120px 0 60px; text-align: center; background: radial-gradient(circle at top right, rgba(13, 110, 253, 0.1), transparent); }
         .hero-dev h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -2px; }
         .hero-dev span { color: var(--primary-color); }
         .promo-badge { background: rgba(13, 110, 253, 0.2); color: #7cb1ff; padding: 8px 20px; border-radius: 50px; font-weight: 700; font-size: 0.85rem; display: inline-block; margin-bottom: 20px; border: 1px solid rgba(13, 110, 253, 0.3); }
-
-        /* Highlight Yellow for Hero Description */
         .text-yellow-highlight { color: var(--highlight-yellow) !important; font-weight: 600; font-size: 1.1rem; opacity: 0.9; }
-
-        /* Service Cards */
         .service-card { background: var(--card-bg); border: 1px solid #2d3238; border-radius: 28px; padding: 40px 30px; height: 100%; transition: 0.4s; text-align: center; }
         .service-card:hover { transform: translateY(-10px); border-color: var(--primary-color); box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
         .icon-box { width: 70px; height: 70px; background: rgba(13, 110, 253, 0.1); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: var(--primary-color); margin: 0 auto 25px auto; }
         .btn-consult { background: var(--primary-color); border: none; border-radius: 14px; padding: 12px 28px; font-weight: 700; color: white; text-decoration: none; display: block; margin: 25px auto 0 auto; transition: 0.3s; text-align: center; max-width: 180px; }
-        
-        /* About Section */
         .about-section { background: #0f1113; border-top: 1px solid #2d3238; }
-
-        /* Our Clients Section - Animated Marquee */
         .client-section { padding: 80px 0; background: #08090a; border-top: 1px solid #2d3238; overflow: hidden; }
         .client-title { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 5px; color: var(--primary-color); font-weight: 800; margin-bottom: 40px; }
         .slider { width: 100%; overflow: hidden; position: relative; }
-        .slide-track { display: flex; width: calc(250px * 12); animation: scroll 20s linear infinite; align-items: center; }
+        .slide-track { display: flex; width: calc(250px * 12); animation: scroll 25s linear infinite; align-items: center; }
         .slide { width: 250px; display: flex; justify-content: center; align-items: center; }
         .client-name { font-size: 1.8rem; font-weight: 900; color: #fff; opacity: 0.7; letter-spacing: 3px; }
-
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-250px * 2)); }
-        }
-
-        /* Footer */
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-250px * 6)); } }
         footer { background: #000; border-top: 1px solid #2d3238; padding: 80px 0 40px; color: #fff; }
         .footer-title { color: #fff !important; font-weight: 800; margin-bottom: 25px; }
-        .text-footer, .footer-link { color: #fff !important; text-decoration: none; opacity: 0.8; display: block; margin-bottom: 10px; }
-        .footer-link:hover { opacity: 1; color: var(--primary-color) !important; }
+        .text-footer { color: #fff !important; text-decoration: none; opacity: 0.8; display: block; margin-bottom: 10px; }
         .map-container { border-radius: 20px; overflow: hidden; height: 200px; border: 1px solid #2d3238; filter: grayscale(1) invert(0.9); }
     </style>
 </head>
@@ -58,10 +74,10 @@
 
 <div class="hero-dev">
     <div class="container">
-        <div class="promo-badge">🚀 TRANSFORM YOUR BUSINESS TO DIGITAL</div>
-        <h1>Code That <span>Empowers</span> Your Business</h1>
+        <div class="promo-badge">🚀 JASA PEMBUATAN APLIKASI CUSTOM BALI</div>
+        <h1>Solusi Digital <span>Otomatis</span> Untuk Bisnis</h1>
         <p class="text-yellow-highlight mt-3 mx-auto" style="max-width: 700px;">
-            We build smart management systems to help your business operations run automatically and more efficiently.
+            Kami membangun sistem manajemen cerdas berbasis AppSheet dan Web untuk membantu operasional bisnis Anda berjalan otomatis 24/7.
         </p>
     </div>
 </div>
@@ -71,79 +87,55 @@
         <div class="col-lg-4 col-md-6">
             <article class="service-card">
                 <div class="icon-box"><i class="fas fa-motorcycle"></i></div>
-                <h3>Rental Systems</h3>
-                <p>Vehicle unit management, inventory tracking, and automated billing in one app.</p>
-                <a href="https://wa.me/62895428400665" class="btn-consult">Request Demo</a>
+                <h3>Sistem Rental Motor</h3>
+                <p>Kelola unit kendaraan, tracking inventaris, dan penagihan otomatis dalam satu aplikasi mobile.</p>
+                <a href="https://wa.me/62895428400665?text=Halo%20MRD%20Digital,%20saya%20tertarik%20demo%20Aplikasi%20Rental" class="btn-consult">Cek Demo</a>
             </article>
         </div>
         <div class="col-lg-4 col-md-6">
             <article class="service-card">
                 <div class="icon-box"><i class="fas fa-home"></i></div>
-                <h3>Property & Kos App</h3>
-                <p>Monitor rent payments, tenant data, and financial reports in real-time.</p>
-                <a href="https://wa.me/62895428400665" class="btn-consult">Request Demo</a>
-            </article>
-        </div>
-        <div class="col-lg-4 col-md-6">
-            <article class="service-card">
-                <div class="icon-box"><i class="fas fa-tshirt"></i></div>
-                <h3>Laundry POS</h3>
-                <p>Laundry cashier system with weight calculation and automated customer notifications.</p>
-                <a href="https://wa.me/62895428400665" class="btn-consult">Request Demo</a>
-            </article>
-        </div>
-        <div class="col-lg-4 col-md-6">
-            <article class="service-card">
-                <div class="icon-box"><i class="fas fa-wallet"></i></div>
-                <h3>Finance Tracking</h3>
-                <p>Manage cash flow, operational costs, and profit/loss reports professionally.</p>
-                <a href="https://wa.me/62895428400665" class="btn-consult">Request Demo</a>
+                <h3>Aplikasi Kos & Properti</h3>
+                <p>Pantau pembayaran sewa, data penghuni, dan laporan keuangan real-time tanpa ribet manual.</p>
+                <a href="https://wa.me/62895428400665" class="btn-consult">Cek Demo</a>
             </article>
         </div>
         <div class="col-lg-4 col-md-6">
             <article class="service-card">
                 <div class="icon-box"><i class="fas fa-cash-register"></i></div>
-                <h3>Shop & Cashier</h3>
-                <p>Stock management, sales transactions, and digital receipt printing.</p>
-                <a href="https://wa.me/62895428400665" class="btn-consult">Request Demo</a>
+                <h3>Sistem Kasir (POS)</h3>
+                <p>Manajemen stok, transaksi penjualan, hingga cetak struk digital langsung dari smartphone.</p>
+                <a href="https://wa.me/62895428400665" class="btn-consult">Cek Demo</a>
             </article>
         </div>
-        <div class="col-lg-4 col-md-6">
-            <article class="service-card" style="border: 2px dashed var(--primary-color);">
-                <div class="icon-box" style="background: var(--primary-color); color: #fff;"><i class="fas fa-terminal"></i></div>
-                <h3>Custom Software</h3>
-                <p>Have unique business needs? We build custom digital solutions tailored just for you.</p>
-                <a href="https://wa.me/62895428400665" class="btn-consult">Consult Now</a>
-            </article>
         </div>
-    </div>
 </div>
 
 <section class="about-section py-5">
     <div class="container py-5">
         <div class="row align-items-center">
             <div class="col-lg-6">
-                <h2 class="fw-bold mb-4" style="font-size: 2.5rem;">Building Your <span style="color: #0d6efd;">Digital Future</span></h2>
+                <h2 class="fw-bold mb-4" style="font-size: 2.5rem;">Membangun <span style="color: #0d6efd;">Masa Depan Digital</span> Bisnis Anda</h2>
                 <p class="text-white opacity-75" style="font-size: 1.1rem; line-height: 1.8;">
-                    At <strong>MRD Digital Solutions</strong>, we focus on efficient digital transformation. Based in <strong>Tabanan, Bali</strong>, we build smart management systems to help your business operations run automatically and smoothly.
+                    <strong>MRD Digital Solutions</strong> berlokasi di <strong>Tabanan, Bali</strong>. Kami adalah spesialis transformasi digital yang fokus pada efisiensi kerja melalui sistem otomatis.
                 </p>
                 <div class="mt-4">
                     <div class="d-flex align-items-center mb-3">
                         <i class="fas fa-check-circle text-primary me-3 fs-4"></i>
-                        <span>AppSheet & Google Apps Script Specialists</span>
+                        <span>Spesialis AppSheet & Google Apps Script</span>
                     </div>
                     <div class="d-flex align-items-center mb-3">
                         <i class="fas fa-check-circle text-primary me-3 fs-4"></i>
-                        <span>WhatsApp Automation & Billing Notifications</span>
+                        <span>Otomasi WhatsApp & Notifikasi Penagihan</span>
                     </div>
                     <div class="d-flex align-items-center">
                         <i class="fas fa-check-circle text-primary me-3 fs-4"></i>
-                        <span>Real-time Financial & Inventory Reports</span>
+                        <span>Laporan Keuangan & Stok Real-time</span>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6 mt-5 mt-lg-0 text-center">
-                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=600" alt="Development" class="img-fluid rounded-5 shadow-lg" style="border: 1px solid #2d3238;">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=600" alt="Jasa Pembuatan Aplikasi AppSheet Bali" class="img-fluid rounded-5 shadow-lg" style="border: 1px solid #2d3238;">
             </div>
         </div>
     </div>
@@ -151,14 +143,14 @@
 
 <div class="client-section text-center">
     <div class="container">
-        <p class="client-title">Our Clients</p>
+        <p class="client-title">Klien Yang Menggunakan Sistem Kami</p>
         <div class="slider">
             <div class="slide-track">
                 <div class="slide"><div class="client-name">JSR</div></div>
                 <div class="slide"><div class="client-name">ARTA RENTAL</div></div>
                 <div class="slide"><div class="client-name">KETUT RENT BIKE</div></div>
-                <div class="slide"><div class="client-name">ARTA RENTAL</div></div>
                 <div class="slide"><div class="client-name">JSR</div></div>
+                <div class="slide"><div class="client-name">ARTA RENTAL</div></div>
                 <div class="slide"><div class="client-name">KETUT RENT BIKE</div></div>
             </div>
         </div>
@@ -170,10 +162,10 @@
         <div class="row g-5">
             <div class="col-lg-4 text-center text-lg-start">
                 <h3 class="footer-title">MRD DIGITAL SOLUTIONS</h3>
-                <p class="text-footer">Specialists in AppSheet development and business automation in Tabanan, Bali.</p>
+                <p class="text-footer">Spesialis pengembangan AppSheet dan otomasi bisnis di Tabanan, Bali.</p>
             </div>
             <div class="col-lg-4 text-start">
-                <h5 class="footer-title">Contact & Location</h5>
+                <h5 class="footer-title">Kontak & Lokasi</h5>
                 <p class="text-footer"><i class="fas fa-map-marker-alt text-primary me-2"></i> Tabanan, Bali, Indonesia</p>
                 <p class="text-footer"><i class="fas fa-phone text-primary me-2"></i> +62 895-4284-00665</p>
                 <p class="text-footer"><i class="fas fa-envelope text-primary me-2"></i> mrd.reborn33@gmail.com</p>
@@ -181,14 +173,14 @@
             <div class="col-lg-4 text-center">
                 <div class="map-container mx-auto">
                     <iframe width="100%" height="100%" frameborder="0" style="border:0"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126253.39414674723!2d115.0253488!3d-8.5443428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23094883e0e15%3A0x3030bfbcaf497d0!2sTabanan%2C%20Tabanan%20Regency%2C%20Bali!5e0!3m2!1sen!2sid!4v1711200000000" allowfullscreen>
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126266.33120610309!2d115.04505981640625!3d-8.524584400000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23089d460787d%3A0x3030bf380a3d130!2sTabanan%2C%20Tabanan%20Regency%2C%20Bali!5e0!3m2!1sen!2sid!4v1710000000000!5m2!1sen!2sid" allowfullscreen>
                     </iframe>
                 </div>
             </div>
         </div>
         <hr class="mt-5 mb-4" style="border-color: rgba(255,255,255,0.1);">
         <div class="text-center">
-            <small class="text-footer opacity-50">© 2026 MRD Digital Bali. All Rights Reserved.</small>
+            <small class="text-footer opacity-50">© 2026 MRD Digital Solutions Bali. Hak Cipta Dilindungi.</small>
         </div>
     </div>
 </footer>
