@@ -62,6 +62,10 @@
         .navbar-brand { font-weight: 800; letter-spacing: 1px; }
         .nav-link { font-weight: 600; font-size: 0.95rem; transition: 0.3s; }
         .nav-link:hover { color: var(--primary-color) !important; }
+        
+        /* Highlight khusus untuk menu registrasi */
+        .nav-registrasi { color: var(--highlight-yellow) !important; }
+        .nav-registrasi:hover { opacity: 0.8; }
 
         /* Content Styling */
         .hero-dev { padding: 140px 0 80px; text-align: center; background: radial-gradient(circle at top right, rgba(13, 110, 253, 0.1), transparent); }
@@ -98,14 +102,15 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container">
-        <a class="navbar-brand" href="#">MRD <span style="color: var(--primary-color);">DIGITAL</span></a>
+        <a class="navbar-brand" href="index.html">MRD <span style="color: var(--primary-color);">DIGITAL</span></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto align-items-center">
-                <li class="nav-item"><a class="nav-link px-3" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link px-3" href="index.html">Home</a></li>
                 <li class="nav-item"><a class="nav-link px-3" href="#layanan">Layanan</a></li>
+                <li class="nav-item"><a class="nav-link px-3 nav-registrasi" href="registrasi.html"><i class="fas fa-edit me-1"></i> Registrasi</a></li>
                 <li class="nav-item"><a class="nav-link px-3" href="tutorial.html">Tutorial</a></li>
                 <li class="nav-item"><a class="nav-link px-3" href="artikel.html">Artikel</a></li>
                 <li class="nav-item ms-lg-3">
@@ -123,6 +128,9 @@
         <p class="text-yellow-highlight mt-3 mx-auto" style="max-width: 700px;">
             Kami membangun sistem manajemen cerdas dan Web untuk membantu operasional bisnis Anda berjalan otomatis 24/7.
         </p>
+        <div class="mt-4">
+            <a href="registrasi.html" class="btn btn-outline-primary rounded-pill px-4 py-2 fw-bold">Daftar Sekarang <i class="fas fa-arrow-right ms-2"></i></a>
+        </div>
     </div>
 </div>
 
@@ -168,7 +176,7 @@
                     <h3>Custom Software</h3>
                     <p>Butuh fitur unik? Kami membangun solusi digital khusus berbasis Google Apps Script sesuai kebutuhan bisnis Anda.</p>
                 </div>
-                <a href="https://wa.me/62895428400665?text=Halo%20MRD%20Digital,%20saya%20ingin%20konsultasi%20pembuatan%20software%20custom%20menggunakan%20Apps%20Script." class="btn-consult" style="background: #198754;">Konsultasi Gratis</a>
+                <a href="registrasi.html" class="btn-consult" style="background: #198754;">Mulai Project</a>
             </article>
         </div>
     </div>
@@ -237,7 +245,7 @@
             <div class="col-lg-4 text-center">
                 <div class="map-container mx-auto">
                     <iframe width="100%" height="100%" frameborder="0" style="border:0"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126252.37896434863!2d115.050516!3d-8.541481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd230693a1c1d93%3A0x3030bfb52939020!2sTabanan%2C%20Tabanan%20Regency%2C%20Bali!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid" allowfullscreen>
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126266.04655201173!2d115.02706349354026!3d-8.517316377543787!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd2309990793771%3A0x3030bf38a242090!2sTabanan%2C%20Kec.%20Tabanan%2C%20Kabupaten%20Tabanan%2C%20Bali!5e0!3m2!1sid!2sid!4v1710000000000!5m2!1sid!2sid" allowfullscreen>
                     </iframe>
                 </div>
             </div>
@@ -251,5 +259,5 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-                </html>
-                
+    </html>
+        
