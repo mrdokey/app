@@ -13,6 +13,53 @@
     <style>
         :root { --primary-color: #0d6efd; --dark-bg: #0f1113; --card-bg: #1a1d21; --highlight-yellow: #ffeb3b; }
         body { background-color: var(--dark-bg); color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        /* --- CSS FLOATING MENU BOTTOM --- */
+        .mobile-nav { display: none; }
+
+        @media (max-width: 768px) {
+            body { padding-bottom: 100px; } /* Padding ekstra untuk form registrasi */
+
+            .mobile-nav {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 70px;
+                background: rgba(26, 29, 33, 0.95);
+                backdrop-filter: blur(15px);
+                border-top: 1px solid #2d3238;
+                z-index: 10000;
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+
+            .nav-item-mobile {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                color: #fff;
+                text-decoration: none;
+                font-size: 10px;
+                font-weight: 600;
+                opacity: 0.7;
+            }
+
+            .nav-item-mobile i {
+                font-size: 1.4rem;
+                margin-bottom: 4px;
+                color: var(--primary-color);
+            }
+
+            .nav-item-mobile.active {
+                opacity: 1;
+                color: var(--primary-color);
+            }
+        }
+        /* --- END FLOATING MENU --- */
+
         .navbar { background: rgba(15, 17, 19, 0.95) !important; border-bottom: 1px solid #2d3238; backdrop-filter: blur(10px); padding: 15px 0; }
         .navbar-brand { font-weight: 800; letter-spacing: 1px; }
         .nav-link { font-weight: 600; font-size: 0.95rem; transition: 0.3s; }
@@ -49,6 +96,25 @@
         </div>
     </div>
 </nav>
+
+<div class="mobile-nav">
+    <a href="index.html" class="nav-item-mobile">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+    </a>
+    <a href="tutorial.html" class="nav-item-mobile">
+        <i class="fas fa-play-circle"></i>
+        <span>Tutorial</span>
+    </a>
+    <a href="registrasi.html" class="nav-item-mobile active">
+        <i class="fas fa-edit"></i>
+        <span>Daftar</span>
+    </a>
+    <a href="https://wa.me/62895428400665" class="nav-item-mobile">
+        <i class="fab fa-whatsapp"></i>
+        <span>Chat</span>
+    </a>
+</div>
 
 <section class="registration-section">
     <div class="container">
@@ -153,7 +219,7 @@
     document.getElementById('registrationForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const btn = document.getElementById('btnSubmit');
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzmL943QHriJQnVkvz5KQsFDBl1GEPqOdRcSdWayGOi4kr0I6oTn1neaY_vNE8AJZ8l/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyBS5oEfcsbPKXwFZVZ6411x6kXs_-wRuDySbML3Xvp0FHIYpyGK7YOSXEqVpXYFULL/exec';
         
         btn.innerText = "SEDANG MENGIRIM...";
         btn.disabled = true;

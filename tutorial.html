@@ -17,6 +17,52 @@
         html { scroll-behavior: smooth; }
         body { background-color: var(--dark-bg); color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; }
 
+        /* --- CSS FLOATING MENU BOTTOM --- */
+        .mobile-nav { display: none; }
+
+        @media (max-width: 768px) {
+            body { padding-bottom: 90px; } 
+
+            .mobile-nav {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 70px;
+                background: rgba(26, 29, 33, 0.95);
+                backdrop-filter: blur(15px);
+                border-top: 1px solid #2d3238;
+                z-index: 10000;
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+
+            .nav-item-mobile {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                color: #fff;
+                text-decoration: none;
+                font-size: 10px;
+                font-weight: 600;
+                opacity: 0.7;
+            }
+
+            .nav-item-mobile i {
+                font-size: 1.4rem;
+                margin-bottom: 4px;
+                color: var(--primary-color);
+            }
+
+            .nav-item-mobile.active {
+                opacity: 1;
+                color: var(--primary-color);
+            }
+        }
+        /* --- END FLOATING MENU --- */
+
         /* Navbar */
         .navbar { 
             background: rgba(15, 17, 19, 0.95) !important; 
@@ -34,16 +80,10 @@
         .tutorial-header span { color: var(--primary-color); }
 
         /* Video Section */
-        .video-caption {
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            color: #fff;
-            text-align: center;
-        }
+        .video-caption { font-size: 1.5rem; font-weight: 800; margin-bottom: 20px; color: #fff; text-align: center; }
         .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 ratio */
+            padding-bottom: 56.25%; 
             height: 0;
             overflow: hidden;
             border-radius: 30px;
@@ -51,10 +91,7 @@
             border: 1px solid #2d3238;
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-        }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
         /* Footer */
         footer { background: #000; border-top: 1px solid #2d3238; padding: 80px 0 40px; margin-top: 60px; }
@@ -84,6 +121,25 @@
         </div>
     </div>
 </nav>
+
+<div class="mobile-nav">
+    <a href="index.html" class="nav-item-mobile">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+    </a>
+    <a href="index.html#layanan" class="nav-item-mobile">
+        <i class="fas fa-th-large"></i>
+        <span>Layanan</span>
+    </a>
+    <a href="tutorial.html" class="nav-item-mobile active">
+        <i class="fas fa-play-circle"></i>
+        <span>Tutorial</span>
+    </a>
+    <a href="https://wa.me/62895428400665" class="nav-item-mobile">
+        <i class="fab fa-whatsapp"></i>
+        <span>Chat</span>
+    </a>
+</div>
 
 <section class="tutorial-header">
     <div class="container">

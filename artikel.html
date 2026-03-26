@@ -17,6 +17,52 @@
         html { scroll-behavior: smooth; }
         body { background-color: var(--dark-bg); color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; }
 
+        /* --- CSS FLOATING MENU BOTTOM --- */
+        .mobile-nav { display: none; }
+
+        @media (max-width: 768px) {
+            body { padding-bottom: 80px; } 
+
+            .mobile-nav {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 70px;
+                background: rgba(26, 29, 33, 0.95);
+                backdrop-filter: blur(15px);
+                border-top: 1px solid #2d3238;
+                z-index: 10000;
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+
+            .nav-item-mobile {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                color: #fff;
+                text-decoration: none;
+                font-size: 10px;
+                font-weight: 600;
+                opacity: 0.7;
+            }
+
+            .nav-item-mobile i {
+                font-size: 1.4rem;
+                margin-bottom: 4px;
+                color: var(--primary-color);
+            }
+
+            .nav-item-mobile.active {
+                opacity: 1;
+                color: var(--primary-color);
+            }
+        }
+        /* --- END FLOATING MENU --- */
+
         /* Navbar */
         .navbar { 
             background: rgba(15, 17, 19, 0.95) !important; 
@@ -80,7 +126,7 @@
                 <li class="nav-item"><a class="nav-link px-3" href="index.html#layanan">Layanan</a></li>
                 <li class="nav-item"><a class="nav-link px-3" href="tutorial.html">Tutorial</a></li>
                 <li class="nav-item"><a class="nav-link px-3 active" href="artikel.html">Artikel</a></li>
-                <li class="nav-item"><a class="nav-link px-3 text-warning" href="registrasi.html fw-bold">Registrasi</a></li>
+                <li class="nav-item"><a class="nav-link px-3 text-warning fw-bold" href="registrasi.html">Registrasi</a></li>
                 <li class="nav-item ms-lg-3">
                     <a class="btn btn-primary btn-sm rounded-pill px-4 fw-bold" href="https://wa.me/62895428400665">Hubungi Kami</a>
                 </li>
@@ -88,6 +134,25 @@
         </div>
     </div>
 </nav>
+
+<div class="mobile-nav">
+    <a href="index.html" class="nav-item-mobile">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+    </a>
+    <a href="index.html#layanan" class="nav-item-mobile">
+        <i class="fas fa-th-large"></i>
+        <span>Layanan</span>
+    </a>
+    <a href="artikel.html" class="nav-item-mobile active">
+        <i class="fas fa-newspaper"></i>
+        <span>Artikel</span>
+    </a>
+    <a href="https://wa.me/62895428400665" class="nav-item-mobile">
+        <i class="fab fa-whatsapp"></i>
+        <span>Chat</span>
+    </a>
+</div>
 
 <section class="blog-header">
     <div class="container">
