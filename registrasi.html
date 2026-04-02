@@ -57,6 +57,7 @@
     #countdown { font-family: monospace; font-size: 2rem; font-weight: 800; color: var(--highlight-yellow); letter-spacing: 2px; }
     footer { background: #000; border-top: 1px solid #2d3238; padding: 80px 0 40px; color: #fff; }
     .payment-card { background: #000; border: 1px solid #2d3238; border-radius: 20px; padding: 30px; }
+    .promo-applied { color: #2ecc71; font-size: 0.85rem; font-weight: bold; margin-top: 5px; display: none; }
     </style>
 </head>
 <body onload="updateHarga()">
@@ -119,22 +120,24 @@
                             <div class="col-md-6">
                                 <label class="form-label">Pilih Paket *</label>
                                 <select name="Paket" id="paketSelect" class="form-select" required onchange="updateHarga()">
+                                    <option value="" disabled selected>-- Pilih Paket --</option>
                                     <option value="Basic">Basic</option>
-                                    <option value="Advance" selected>Advance</option>
+                                    <option value="Advance">Advance</option>
                                     <option value="Full Package">Full Package</option>
                                 </select>
                             </div>
 
                             <div class="col-12">
                                 <label class="form-label">Referensi / Kode Promo</label>
-                                <input type="text" name="Referensi" class="form-control" placeholder="Tahu kami dari mana?">
+                                <input type="text" name="Referensi" id="referralCode" class="form-control" placeholder="Masukkan kode promo (opsional)" oninput="updateHarga()">
+                                <div id="promoNotice" class="promo-applied"><i class="fas fa-tags me-1"></i> Kode Promo Berhasil Digunakan!</div>
                             </div>
 
                             <div class="col-12">
                                 <div class="price-badge text-center">
                                     <span class="d-block text-uppercase small fw-bold opacity-50 mb-1">Total Investasi</span>
-                                    <h3 class="fw-800 m-0 text-primary" id="hargaDisplay">Rp. 1.500.000</h3>
-                                    <input type="hidden" name="Harga" id="hargaHidden" value="1500000">
+                                    <h3 class="fw-800 m-0 text-primary" id="hargaDisplay">Rp. 0</h3>
+                                    <input type="hidden" name="Harga" id="hargaHidden" value="0">
                                 </div>
                             </div>
                             
@@ -176,23 +179,56 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+    function formatRupiah(angka) {
+        return "Rp. " + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
     function updateHarga() {
         const paket = document.getElementById('paketSelect').value;
+        const promo = document.getElementById('referralCode').value.trim().toUpperCase();
         const display = document.getElementById('hargaDisplay');
         const hidden = document.getElementById('hargaHidden');
-        let h = { 
-            "Basic": ["Rp. 750.000", 750000], 
-            "Advance": ["Rp. 1.500.000", 1500000], 
-            "Full Package": ["Rp. 2.500.000", 2500000] 
+        const promoNotice = document.getElementById('promoNotice');
+        
+        let hargaFinal = 0;
+        let showPromoLabel = false;
+
+        if (!paket) {
+            display.innerText = "Rp. 0";
+            hidden.value = 0;
+            return;
+        }
+
+        // Harga Dasar
+        let basePrices = {
+            "Basic": 750000,
+            "Advance": 1500000,
+            "Full Package": 2500000
         };
-        display.innerText = h[paket][0];
-        hidden.value = h[paket][1];
+
+        hargaFinal = basePrices[paket];
+
+        // Cek Logika Referral
+        if (paket === "Advance" && promo === "MRDADV") {
+            hargaFinal = 1500000 * 0.8; // Diskon 20%
+            showPromoLabel = true;
+        } else if (paket === "Full Package" && promo === "MRDFULL") {
+            hargaFinal = 2000000; // Harga khusus
+            showPromoLabel = true;
+        }
+
+        // Tampilkan Label Promo
+        promoNotice.style.display = showPromoLabel ? "block" : "none";
+
+        // Update ke Tampilan
+        display.innerText = formatRupiah(hargaFinal);
+        hidden.value = hargaFinal;
     }
 
     document.getElementById('registrationForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const btn = document.getElementById('btnSubmit');
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbyU3baMz8O5xSMSSPkODmZc2hSCsoFTOni5yJwEoZ9z-Ei6Ih475B-GHzmLtaxqmVL5/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwGFntnXK8RZSv7ayCqks_2uw4KzIriuBtzhcYLmtdVwaSKRvqbUcqSHe0lT9ZVYeG-/exec';
         
         btn.innerText = "SEDANG MEMPROSES...";
         btn.disabled = true;
