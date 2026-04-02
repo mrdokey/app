@@ -107,7 +107,7 @@
                             
                             <div class="col-md-6">
                                 <label class="form-label">Pilih Jenis Aplikasi *</label>
-                                <select name="Aplikasi" class="form-select" required>
+                                <select name="Aplikasi" id="aplikasiSelect" class="form-select" required onchange="updateHarga()">
                                     <option value="" disabled selected>-- Pilih Jenis Aplikasi --</option>
                                     <option value="App Rental">App Rental</option>
                                     <option value="App Sewa Property">App Sewa Property</option>
@@ -185,6 +185,7 @@
     }
 
     function updateHarga() {
+        const aplikasi = document.getElementById('aplikasiSelect').value;
         const paket = document.getElementById('paketSelect').value;
         const promo = document.getElementById('referralCode').value.trim().toUpperCase();
         const display = document.getElementById('hargaDisplay');
@@ -201,7 +202,6 @@
             return;
         }
 
-        // Harga Dasar
         let basePrices = {
             "Paket Demo": 0,
             "Basic": 750000,
@@ -211,23 +211,21 @@
 
         hargaFinal = basePrices[paket];
 
-        // Cek Logika Referral
-        if (paket === "Advance" && promo === "MRDADV") {
-            hargaFinal = 1500000 * 0.8; // Diskon 20%
-            showPromoLabel = true;
-        } else if (paket === "Full Package" && promo === "MRDFULL") {
-            hargaFinal = 2000000; // Harga khusus
-            showPromoLabel = true;
+        // LOGIKA PROMO HANYA UNTUK APP RENTAL
+        if (aplikasi === "App Rental") {
+            if (paket === "Advance" && promo === "MRDADV") {
+                hargaFinal = 1500000 * 0.8;
+                showPromoLabel = true;
+            } else if (paket === "Full Package" && promo === "MRDFULL") {
+                hargaFinal = 2000000;
+                showPromoLabel = true;
+            }
         }
 
-        // Tampilkan Label Promo (hanya jika harga > 0)
         promoNotice.style.display = (showPromoLabel && hargaFinal > 0) ? "block" : "none";
-
-        // Update ke Tampilan
         display.innerText = formatRupiah(hargaFinal);
         hidden.value = hargaFinal;
 
-        // Sesuaikan teks tombol
         if (paket === "Paket Demo") {
             btn.innerText = "DAFTAR & COBA DEMO SEKARANG";
         } else {
@@ -238,8 +236,11 @@
     document.getElementById('registrationForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const btn = document.getElementById('btnSubmit');
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwGFntnXK8RZSv7ayCqks_2uw4KzIriuBtzhcYLmtdVwaSKRvqbUcqSHe0lT9ZVHeG-/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwGFntnXK8RZSv7ayCqks_2uw4KzIriuBtzhcYLmtdVwaSKRvqbUcqSHe0lT9ZVYeG-/exec';
         
+        const aplikasi = document.getElementById('aplikasiSelect').value;
+        const paket = document.getElementById('paketSelect').value;
+
         btn.innerText = "SEDANG MEMPROSES...";
         btn.disabled = true;
 
@@ -247,9 +248,10 @@
         .then(res => res.json())
         .then(res => {
             if(res.result === "success") {
-                // Untuk Paket Demo seharga 0, window payment mungkin tidak perlu dibuka 
-                // tergantung logika backend kak Dody, tapi kode ini tetap menjaga alur aslinya.
-                if(res.payment_url && res.payment_url !== "#") {
+                const isAppRental = (aplikasi === "App Rental");
+                const isPaidPackage = ["Basic", "Advance", "Full Package"].includes(paket);
+
+                if(isAppRental && isPaidPackage && res.payment_url && res.payment_url !== "#") {
                     const w = 500; const h = 700;
                     const left = (window.innerWidth/2)-(w/2); const top = (window.innerHeight/2)-(h/2);
                     window.open(res.payment_url, 'Payment', `width=${w},height=${h},top=${top},left=${left},scrollbars=yes`);
@@ -261,13 +263,13 @@
             } else {
                 alert("Gagal: " + res.message);
                 btn.disabled = false; 
-                updateHarga(); // Reset teks tombol
+                updateHarga();
             }
         })
         .catch(() => {
             alert('Kesalahan koneksi.');
             btn.disabled = false; 
-            updateHarga(); // Reset teks tombol
+            updateHarga();
         });
     });
 </script>
