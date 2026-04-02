@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Jasa Pembuatan Aplikasi AppSheet & Web Developer Bali | MRD Digital</title>
-    <meta name="description" content="MRD Digital Solutions menyediakan jasa pembuatan aplikasi rental motor, POS kasir, dan manajemen properti menggunakan AppSheet & Google Apps Script di Tabanan, Bali. Solusi digital otomatis untuk bisnis Anda.">
-    <meta name="keywords" content="Jasa Pembuatan Aplikasi, AppSheet Indonesia, Aplikasi Rental Motor Bali, Web Developer Bali, Otomasi Bisnis, Google Apps Script, MRD Digital Solutions">
+    <meta name="description" content="MRD Digital Solutions menyediakan jasa pembuatan aplikasi rental motor, POS kasir, dan otomasi bisnis. Temukan juga rekomendasi sewa motor murah di Bali melalui mitra resmi kami.">
+    <meta name="keywords" content="Jasa Pembuatan Aplikasi, AppSheet Indonesia, Aplikasi Rental Motor Bali, Web Developer Bali, Otomasi Bisnis, Google Apps Script, Sewa Motor Murah di Bali, Rental Motor Bali Terpercaya, MRD Digital Solutions">
     <meta name="author" content="MRD Digital Solutions">
     
-    <meta property="og:title" content="MRD Digital Solutions - Solusi Aplikasi Bisnis Terpercaya">
-    <meta property="og:description" content="Transformasi bisnis Anda ke digital dengan aplikasi kustom AppSheet. Spesialis sistem rental dan POS di Bali.">
+    <meta property="og:title" content="MRD Digital Solutions - Solusi Aplikasi Bisnis & Partner Rental Bali">
+    <meta property="og:description" content="Transformasi bisnis Anda ke digital dan temukan solusi sewa motor murah di Bali melalui jaringan klien kami.">
     <meta property="og:url" content="https://mrdsolution.my.id">
     <meta property="og:type" content="website">
 
@@ -18,131 +18,74 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
     /* Perbaikan agar pas di layar HP */
-* {
-    max-width: 100%;
-    box-sizing: border-box;
-}
+    * { max-width: 100%; box-sizing: border-box; }
+    html, body { width: 100%; margin: 0; padding: 0; overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+    .container { max-width: 100vw; overflow-x: hidden; padding-left: 15px; padding-right: 15px; }
+    img, iframe, video { max-width: 100% !important; height: auto !important; }
 
-html, body {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* Mencegah geser kanan-kiri */
-    -webkit-text-size-adjust: 100%; /* Mencegah font membesar sendiri di iPhone */
-}
+    :root { --primary-color: #0d6efd; --dark-bg: #0f1113; --card-bg: #1a1d21; --highlight-yellow: #ffeb3b; }
+    html { scroll-behavior: smooth; }
+    body { background-color: var(--dark-bg); color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; }
 
-.container {
-    max-width: 100vw;
-    overflow-x: hidden;
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-/* Pastikan semua gambar & video tidak melebihi layar */
-img, iframe, video {
-    max-width: 100% !important;
-    height: auto !important;
-}
-
-        :root { --primary-color: #0d6efd; --dark-bg: #0f1113; --card-bg: #1a1d21; --highlight-yellow: #ffeb3b; }
-        
-        /* Smooth Scroll */
-        html { scroll-behavior: smooth; }
-        
-        body { background-color: var(--dark-bg); color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; }
-
-        /* --- CSS UNTUK FLOATING MENU BOTTOM --- */
+    /* --- MOBILE NAV --- */
+    .mobile-nav { display: none; }
+    @media (max-width: 768px) {
+        body { padding-bottom: 80px; }
         .mobile-nav {
-            display: none; /* Sembunyikan secara default (di desktop) */
+            display: flex; justify-content: space-around; align-items: center;
+            position: fixed; bottom: 0; left: 0; right: 0; height: 70px;
+            background: rgba(26, 29, 33, 0.95); backdrop-filter: blur(15px);
+            border-top: 1px solid #2d3238; z-index: 10000; padding-bottom: env(safe-area-inset-bottom);
         }
+        .nav-item-mobile { display: flex; flex-direction: column; align-items: center; color: #fff; text-decoration: none; font-size: 10px; font-weight: 600; opacity: 0.7; }
+        .nav-item-mobile i { font-size: 1.4rem; margin-bottom: 4px; color: var(--primary-color); }
+        .nav-item-mobile:hover, .nav-item-mobile.active { opacity: 1; color: var(--primary-color); }
+    }
 
-        @media (max-width: 768px) {
-            body { padding-bottom: 80px; } /* Jaga agar konten bawah tidak tertutup menu */
+    /* Navbar */
+    .navbar { background: rgba(15, 17, 19, 0.95) !important; border-bottom: 1px solid #2d3238; backdrop-filter: blur(10px); padding: 15px 0; }
+    .navbar-brand { font-weight: 800; letter-spacing: 1px; }
+    .nav-link { font-weight: 600; font-size: 0.95rem; transition: 0.3s; }
+    .nav-link:hover { color: var(--primary-color) !important; }
+    .nav-registrasi { color: var(--highlight-yellow) !important; }
 
-            .mobile-nav {
-                display: flex;
-                justify-content: space-around;
-                align-items: center;
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                height: 70px;
-                background: rgba(26, 29, 33, 0.95); /* Warna Card BG dengan blur */
-                backdrop-filter: blur(15px);
-                border-top: 1px solid #2d3238;
-                z-index: 10000;
-                padding-bottom: env(safe-area-inset-bottom);
-            }
+    /* Hero */
+    .hero-dev { padding: 140px 0 80px; text-align: center; background: radial-gradient(circle at top right, rgba(13, 110, 253, 0.1), transparent); }
+    .hero-dev h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -2px; }
+    .hero-dev span { color: var(--primary-color); }
+    .promo-badge { background: rgba(13, 110, 253, 0.2); color: #7cb1ff; padding: 8px 20px; border-radius: 50px; font-weight: 700; font-size: 0.85rem; display: inline-block; margin-bottom: 20px; border: 1px solid rgba(13, 110, 253, 0.3); }
+    .text-yellow-highlight { color: var(--highlight-yellow) !important; font-weight: 600; font-size: 1.1rem; opacity: 0.9; }
+    
+    /* Cards */
+    .service-card { background: var(--card-bg); border: 1px solid #2d3238; border-radius: 28px; padding: 40px 30px; height: 100%; transition: 0.4s; text-align: center; display: flex; flex-direction: column; justify-content: space-between; }
+    .service-card:hover { transform: translateY(-10px); border-color: var(--primary-color); box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
+    .icon-box { width: 70px; height: 70px; background: rgba(13, 110, 253, 0.1); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: var(--primary-color); margin: 0 auto 25px auto; transition: 0.5s; }
+    .service-card:hover .icon-box { transform: rotateY(360deg); background: var(--primary-color); color: white; }
+    .btn-consult { background: var(--primary-color); border: none; border-radius: 14px; padding: 12px 28px; font-weight: 700; color: white !important; text-decoration: none; display: block; margin: 25px auto 0 auto; transition: 0.3s; text-align: center; max-width: 180px; }
+    .btn-consult:hover { background: #0b5ed7; transform: scale(1.05); }
 
-            .nav-item-mobile {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                color: #fff;
-                text-decoration: none;
-                font-size: 10px;
-                font-weight: 600;
-                transition: 0.3s;
-                opacity: 0.7;
-            }
-
-            .nav-item-mobile i {
-                font-size: 1.4rem;
-                margin-bottom: 4px;
-                color: var(--primary-color);
-            }
-
-            .nav-item-mobile:hover, .nav-item-mobile.active {
-                opacity: 1;
-                color: var(--primary-color);
-            }
-        }
-        /* --- AKHIR CSS FLOATING MENU --- */
-
-        /* Navbar Styling */
-        .navbar { 
-            background: rgba(15, 17, 19, 0.95) !important; 
-            border-bottom: 1px solid #2d3238; 
-            backdrop-filter: blur(10px); 
-            padding: 15px 0;
-        }
-        .navbar-brand { font-weight: 800; letter-spacing: 1px; }
-        .nav-link { font-weight: 600; font-size: 0.95rem; transition: 0.3s; }
-        .nav-link:hover { color: var(--primary-color) !important; }
-        
-        .nav-registrasi { color: var(--highlight-yellow) !important; }
-        .hero-dev { padding: 140px 0 80px; text-align: center; background: radial-gradient(circle at top right, rgba(13, 110, 253, 0.1), transparent); }
-        .hero-dev h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -2px; }
-        .hero-dev span { color: var(--primary-color); }
-        .promo-badge { background: rgba(13, 110, 253, 0.2); color: #7cb1ff; padding: 8px 20px; border-radius: 50px; font-weight: 700; font-size: 0.85rem; display: inline-block; margin-bottom: 20px; border: 1px solid rgba(13, 110, 253, 0.3); }
-        .text-yellow-highlight { color: var(--highlight-yellow) !important; font-weight: 600; font-size: 1.1rem; opacity: 0.9; }
-        
-        .service-card { background: var(--card-bg); border: 1px solid #2d3238; border-radius: 28px; padding: 40px 30px; height: 100%; transition: 0.4s; text-align: center; display: flex; flex-direction: column; justify-content: space-between; }
-        .service-card:hover { transform: translateY(-10px); border-color: var(--primary-color); box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
-        .icon-box { width: 70px; height: 70px; background: rgba(13, 110, 253, 0.1); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: var(--primary-color); margin: 0 auto 25px auto; }
-        
-        .btn-consult { background: var(--primary-color); border: none; border-radius: 14px; padding: 12px 28px; font-weight: 700; color: white !important; text-decoration: none; display: block; margin: 25px auto 0 auto; transition: 0.3s; text-align: center; max-width: 180px; }
-        .btn-consult:hover { background: #0b5ed7; transform: scale(1.05); }
-
-        .about-section { background: #0f1113; border-top: 1px solid #2d3238; }
-        
-        .client-section { padding: 80px 0; background: #08090a; border-top: 1px solid #2d3238; overflow: hidden; }
-        .client-title { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 5px; color: var(--primary-color); font-weight: 800; margin-bottom: 40px; }
-        .slider { width: 100%; overflow: hidden; position: relative; }
-        .slide-track { display: flex; width: calc(250px * 12); animation: scroll 25s linear infinite; align-items: center; }
-        .slide { width: 250px; display: flex; justify-content: center; align-items: center; }
-        .client-name { font-size: 1.8rem; font-weight: 900; color: #fff; opacity: 0.7; letter-spacing: 3px; }
-        
-        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-250px * 6)); } }
-        
-        footer { background: #000; border-top: 1px solid #2d3238; padding: 80px 0 40px; color: #fff; }
-        .footer-title { color: #fff !important; font-weight: 800; margin-bottom: 25px; }
-        .text-footer { color: #fff !important; text-decoration: none; opacity: 0.8; display: block; margin-bottom: 10px; }
-        .map-container { border-radius: 20px; overflow: hidden; height: 200px; border: 1px solid #2d3238; filter: grayscale(1) invert(0.9); }
+    .about-section { background: #0f1113; border-top: 1px solid #2d3238; }
+    
+    /* --- CLIENT SECTION --- */
+    .client-section { padding: 60px 0; background: #08090a; border-top: 1px solid #2d3238; }
+    .client-title { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 5px; color: var(--primary-color); font-weight: 800; margin-bottom: 10px; }
+    .client-subtitle { font-size: 0.9rem; color: #fff; opacity: 0.6; margin-bottom: 30px; }
+    .client-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; align-items: center; }
+    .client-link { text-decoration: none; transition: 0.3s; }
+    .client-name { font-size: 1.4rem; font-weight: 900; color: #fff; opacity: 0.5; letter-spacing: 2px; cursor: pointer; }
+    .client-link:hover .client-name { opacity: 1; color: var(--primary-color); transform: scale(1.1); }
+    
+    footer { background: #000; border-top: 1px solid #2d3238; padding: 80px 0 40px; color: #fff; }
+    .footer-title { color: #fff !important; font-weight: 800; margin-bottom: 25px; }
+    .text-footer { color: #fff !important; text-decoration: none; opacity: 0.8; display: block; margin-bottom: 10px; }
+    
+    /* Perbaikan Map agar full dan tidak hitam */
+    .map-container { border-radius: 20px; overflow: hidden; height: 220px; border: 1px solid #2d3238; position: relative; background: #1a1d21; }
+    .map-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; filter: grayscale(1) invert(0.9); border: 0; }
     </style>
 </head>
 <body>
@@ -169,30 +112,18 @@ img, iframe, video {
 </nav>
 
 <div class="mobile-nav">
-    <a href="index.html" class="nav-item-mobile">
-        <i class="fas fa-home"></i>
-        <span>Home</span>
-    </a>
-    <a href="#layanan" class="nav-item-mobile">
-        <i class="fas fa-th-large"></i>
-        <span>Layanan</span>
-    </a>
-    <a href="registrasi.html" class="nav-item-mobile">
-        <i class="fas fa-edit"></i>
-        <span>Daftar</span>
-    </a>
-    <a href="https://wa.me/62895428400665" class="nav-item-mobile">
-        <i class="fab fa-whatsapp"></i>
-        <span>Chat</span>
-    </a>
+    <a href="index.html" class="nav-item-mobile"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="#layanan" class="nav-item-mobile"><i class="fas fa-th-large"></i><span>Layanan</span></a>
+    <a href="registrasi.html" class="nav-item-mobile"><i class="fas fa-edit"></i><span>Daftar</span></a>
+    <a href="https://wa.me/62895428400665" class="nav-item-mobile"><i class="fab fa-whatsapp"></i><span>Chat</span></a>
 </div>
 
-<div class="hero-dev">
+<div class="hero-dev" data-aos="fade-up" data-aos-duration="1000">
     <div class="container">
         <div class="promo-badge">🚀 JASA PEMBUATAN APLIKASI CUSTOM BALI</div>
         <h1>Solusi Digital <span>Otomatis</span> Untuk Bisnis</h1>
         <p class="text-yellow-highlight mt-3 mx-auto" style="max-width: 700px;">
-            Kami membangun sistem manajemen cerdas dan Web untuk membantu operasional bisnis Anda berjalan otomatis 24/7.
+            Kami membangun sistem manajemen cerdas untuk operasional bisnis Anda, termasuk sistem manajemen <strong>sewa motor murah di Bali</strong> yang terintegrasi.
         </p>
         <div class="mt-4">
             <a href="registrasi.html" class="btn btn-outline-primary rounded-pill px-4 py-2 fw-bold">Daftar Sekarang <i class="fas fa-arrow-right ms-2"></i></a>
@@ -202,47 +133,34 @@ img, iframe, video {
 
 <div class="container pb-5" id="layanan">
     <div class="row g-4 justify-content-center">
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <article class="service-card">
                 <div>
                     <div class="icon-box"><i class="fas fa-motorcycle"></i></div>
                     <h3>Sistem Rental Motor</h3>
-                    <p>Kelola unit kendaraan, tracking inventaris, dan penagihan otomatis dalam satu aplikasi mobile.</p>
+                    <p>Optimalkan bisnis <strong>sewa motor murah di Bali</strong> Anda dengan fitur tracking inventaris dan penagihan otomatis.</p>
                 </div>
-                <a href="https://wa.me/62895428400665?text=Halo%20MRD%20Digital,%20saya%20tertarik%20melihat%20demo%20Aplikasi%20Rental%20Motor%20seperti%20Arta%20Rental." class="btn-consult">Cek Demo</a>
+                <a href="https://wa.me/62895428400665?text=Halo%20MRD%20Digital,%20saya%20tertarik%20melihat%20demo%20Aplikasi%20Rental%20Motor." class="btn-consult">Cek Demo</a>
             </article>
         </div>
-        
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
             <article class="service-card">
                 <div>
                     <div class="icon-box"><i class="fas fa-home"></i></div>
-                    <h3>Aplikasi Homestay & Properti</h3>
+                    <h3>Aplikasi Homestay</h3>
                     <p>Pantau pembayaran sewa, data penghuni, dan laporan keuangan real-time tanpa ribet manual.</p>
                 </div>
-                <a href="https://wa.me/62895428400665?text=Halo%20MRD%20Digital,%20saya%20ingin%20tanya%20mengenai%20Aplikasi%20Manajemen%20Homestay/Properti." class="btn-consult">Cek Demo</a>
+                <a href="https://wa.me/62895428400665?text=Halo%20MRD%20Digital,%20saya%20ingin%20tanya%20Aplikasi%20Homestay." class="btn-consult">Cek Demo</a>
             </article>
         </div>
-        
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
             <article class="service-card">
                 <div>
                     <div class="icon-box"><i class="fas fa-cash-register"></i></div>
                     <h3>Sistem Kasir (POS)</h3>
                     <p>Manajemen stok, transaksi penjualan, hingga cetak struk digital langsung dari smartphone.</p>
                 </div>
-                <a href="https://wa.me/62895428400665?text=Halo%20MRD%20Digital,%20saya%20tertarik%20dengan%20Sistem%20Kasir%20Digital%20untuk%20usaha%20saya." class="btn-consult">Cek Demo</a>
-            </article>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-            <article class="service-card" style="border: 2px dashed var(--primary-color); background: rgba(13, 110, 253, 0.05);">
-                <div>
-                    <div class="icon-box" style="background: var(--primary-color); color: #fff;"><i class="fas fa-code"></i></div>
-                    <h3>Custom Software</h3>
-                    <p>Butuh fitur unik? Kami membangun solusi digital khusus berbasis Google Apps Script sesuai kebutuhan bisnis Anda.</p>
-                </div>
-                <a href="registrasi.html" class="btn-consult" style="background: #198754;">Mulai Project</a>
+                <a href="https://wa.me/62895428400665?text=Halo%20MRD%20Digital,%20saya%20tertarik%20Sistem%20Kasir%20Digital." class="btn-consult">Cek Demo</a>
             </article>
         </div>
     </div>
@@ -251,45 +169,34 @@ img, iframe, video {
 <section class="about-section py-5" id="tentang">
     <div class="container py-5">
         <div class="row align-items-center">
-            <div class="col-lg-6">
+            <div class="col-lg-6" data-aos="fade-right">
                 <h2 class="fw-bold mb-4" style="font-size: 2.5rem;">Membangun <span style="color: #0d6efd;">Masa Depan Digital</span> Bisnis Anda</h2>
                 <p class="text-white opacity-75" style="font-size: 1.1rem; line-height: 1.8;">
-                    <strong>MRD Digital Solutions</strong> berlokasi di <strong>Tabanan, Bali</strong>. Kami adalah spesialis transformasi digital yang fokus pada efisiensi kerja melalui sistem otomatis.
+                    <strong>MRD Digital Solutions</strong> berlokasi di <strong>Tabanan, Bali</strong>. Kami membantu digitalisasi UMKM lokal, terutama partner kami yang bergerak di bidang jasa <strong>sewa motor murah di Bali</strong> agar lebih efisien.
                 </p>
                 <div class="mt-4">
-                    <div class="d-flex align-items-center mb-3">
-                        <i class="fas fa-check-circle text-primary me-3 fs-4"></i>
-                        <span>Spesialis AppSheet & Google Apps Script</span>
-                    </div>
-                    <div class="d-flex align-items-center mb-3">
-                        <i class="fas fa-check-circle text-primary me-3 fs-4"></i>
-                        <span>Otomasi WhatsApp & Notifikasi Penagihan</span>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <i class="fas fa-check-circle text-primary me-3 fs-4"></i>
-                        <span>Laporan Keuangan & Stok Real-time</span>
-                    </div>
+                    <div class="d-flex align-items-center mb-3"><i class="fas fa-check-circle text-primary me-3 fs-4"></i><span>Spesialis AppSheet & Google Apps Script</span></div>
+                    <div class="d-flex align-items-center mb-3"><i class="fas fa-check-circle text-primary me-3 fs-4"></i><span>Otomasi WhatsApp & Notifikasi Penagihan</span></div>
+                    <div class="d-flex align-items-center"><i class="fas fa-check-circle text-primary me-3 fs-4"></i><span>Laporan Keuangan & Stok Real-time</span></div>
                 </div>
             </div>
-            <div class="col-lg-6 mt-5 mt-lg-0 text-center">
-                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=600" alt="Jasa Pembuatan Aplikasi AppSheet Bali" class="img-fluid rounded-5 shadow-lg" style="border: 1px solid #2d3238;">
+            <div class="col-lg-6 mt-5 mt-lg-0 text-center" data-aos="zoom-in-left">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=600" alt="Jasa Pembuatan Aplikasi Bali" class="img-fluid rounded-5 shadow-lg" style="border: 1px solid #2d3238;">
             </div>
         </div>
     </div>
 </section>
 
 <div class="client-section text-center">
-    <div class="container">
-        <p class="client-title">Klien Yang Menggunakan Sistem Kami</p>
-        <div class="slider">
-            <div class="slide-track">
-                <div class="slide"><div class="client-name">JSR</div></div>
-                <div class="slide"><div class="client-name">ARTA RENTAL</div></div>
-                <div class="slide"><div class="client-name">KRB</div></div>
-                <div class="slide"><div class="client-name">RMB1</div></div>
-                <div class="slide"><div class="client-name">ARTA RENTAL</div></div>
-                <div class="slide"><div class="client-name">KRB</div></div>
-            </div>
+    <div class="container" data-aos="fade-up">
+        <p class="client-title">Klien & Partner Kami</p>
+        <p class="client-subtitle">Rekomendasi Jasa <strong>Sewa Motor Murah di Bali</strong> Terpercaya</p>
+        <div class="client-grid">
+            <a href="https://wa.me/6281338763197?text=Halo%20saya%20tahu%20informasi%20Dari%20website%20MRD%20DIGITAL%20SOLUTION" target="_blank" class="client-link"><div class="client-name">JSR</div></a>
+            <a href="https://wa.me/6287860075587?text=Halo%20saya%20tahu%20informasi%20Dari%20website%20MRD%20DIGITAL%20SOLUTION" target="_blank" class="client-link"><div class="client-name">ARTA RENTAL</div></a>
+            <a href="https://wa.me/6282236589190?text=Halo%20saya%20tahu%20informasi%20Dari%20website%20MRD%20DIGITAL%20SOLUTION" target="_blank" class="client-link"><div class="client-name">KRB</div></a>
+            <a href="https://wa.me/6281238037764?text=Halo%20saya%20tahu%20informasi%20Dari%20website%20MRD%20DIGITAL%20SOLUTION" target="_blank" class="client-link"><div class="client-name">RMB1</div></a>
+            <a href="https://wa.me/6285333243900?text=Halo%20saya%20tahu%20informasi%20Dari%20website%20MRD%20DIGITAL%20SOLUTION" target="_blank" class="client-link"><div class="client-name">HR BIKE</div></a>
         </div>
     </div>
 </div>
@@ -299,7 +206,7 @@ img, iframe, video {
         <div class="row g-5">
             <div class="col-lg-4 text-center text-lg-start">
                 <h3 class="footer-title">MRD DIGITAL SOLUTIONS</h3>
-                <p class="text-footer">Spesialis pengembangan AppSheet dan otomasi bisnis di Tabanan, Bali.</p>
+                <p class="text-footer">Solusi digitalisasi bisnis dan partner penyedia <strong>sewa motor murah di Bali</strong> yang profesional.</p>
             </div>
             <div class="col-lg-4 text-start">
                 <h5 class="footer-title">Kontak & Lokasi</h5>
@@ -309,9 +216,7 @@ img, iframe, video {
             </div>
             <div class="col-lg-4 text-center">
                 <div class="map-container mx-auto">
-                    <iframe width="100%" height="100%" frameborder="0" style="border:0"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126266.04655201173!2d115.02706349354026!3d-8.517316377543787!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd2309990793771%3A0x3030bf38a242090!2sTabanan%2C%20Kec.%20Tabanan%2C%20Kabupaten%20Tabanan%2C%20Bali!5e0!3m2!1sid!2sid!4v1710000000000!5m2!1sid!2sid" allowfullscreen>
-                    </iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126258.9691924613!2d115.04595245842835!3d-8.541463133345472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23a694863c871%3A0x3027a7635292720!2sTabanan%2C%20Kec.%20Tabanan%2C%20Kabupaten%20Tabanan%2C%20Bali!5e0!3m2!1sid!2sid!4v1711900000000!5m2!1sid!2sid" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </div>
@@ -323,5 +228,12 @@ img, iframe, video {
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    once: true,
+  });
+</script>
 </body>
 </html>

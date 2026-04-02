@@ -121,6 +121,7 @@
                                 <label class="form-label">Pilih Paket *</label>
                                 <select name="Paket" id="paketSelect" class="form-select" required onchange="updateHarga()">
                                     <option value="" disabled selected>-- Pilih Paket --</option>
+                                    <option value="Paket Demo">Paket Demo (Gratis)</option>
                                     <option value="Basic">Basic</option>
                                     <option value="Advance">Advance</option>
                                     <option value="Full Package">Full Package</option>
@@ -189,6 +190,7 @@
         const display = document.getElementById('hargaDisplay');
         const hidden = document.getElementById('hargaHidden');
         const promoNotice = document.getElementById('promoNotice');
+        const btn = document.getElementById('btnSubmit');
         
         let hargaFinal = 0;
         let showPromoLabel = false;
@@ -201,6 +203,7 @@
 
         // Harga Dasar
         let basePrices = {
+            "Paket Demo": 0,
             "Basic": 750000,
             "Advance": 1500000,
             "Full Package": 2500000
@@ -217,18 +220,25 @@
             showPromoLabel = true;
         }
 
-        // Tampilkan Label Promo
-        promoNotice.style.display = showPromoLabel ? "block" : "none";
+        // Tampilkan Label Promo (hanya jika harga > 0)
+        promoNotice.style.display = (showPromoLabel && hargaFinal > 0) ? "block" : "none";
 
         // Update ke Tampilan
         display.innerText = formatRupiah(hargaFinal);
         hidden.value = hargaFinal;
+
+        // Sesuaikan teks tombol
+        if (paket === "Paket Demo") {
+            btn.innerText = "DAFTAR & COBA DEMO SEKARANG";
+        } else {
+            btn.innerText = "DAFTAR & BAYAR SEKARANG";
+        }
     }
 
     document.getElementById('registrationForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const btn = document.getElementById('btnSubmit');
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwGFntnXK8RZSv7ayCqks_2uw4KzIriuBtzhcYLmtdVwaSKRvqbUcqSHe0lT9ZVYeG-/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwGFntnXK8RZSv7ayCqks_2uw4KzIriuBtzhcYLmtdVwaSKRvqbUcqSHe0lT9ZVHeG-/exec';
         
         btn.innerText = "SEDANG MEMPROSES...";
         btn.disabled = true;
@@ -237,21 +247,27 @@
         .then(res => res.json())
         .then(res => {
             if(res.result === "success") {
-                const w = 500; const h = 700;
-                const left = (window.innerWidth/2)-(w/2); const top = (window.innerHeight/2)-(h/2);
-                window.open(res.payment_url, 'Payment', `width=${w},height=${h},top=${top},left=${left},scrollbars=yes`);
+                // Untuk Paket Demo seharga 0, window payment mungkin tidak perlu dibuka 
+                // tergantung logika backend kak Dody, tapi kode ini tetap menjaga alur aslinya.
+                if(res.payment_url && res.payment_url !== "#") {
+                    const w = 500; const h = 700;
+                    const left = (window.innerWidth/2)-(w/2); const top = (window.innerHeight/2)-(h/2);
+                    window.open(res.payment_url, 'Payment', `width=${w},height=${h},top=${top},left=${left},scrollbars=yes`);
+                }
                 
                 document.getElementById('formWrapper').style.display = 'none';
                 document.getElementById('successMessage').style.display = 'block';
                 window.scrollTo(0, 0);
             } else {
                 alert("Gagal: " + res.message);
-                btn.disabled = false; btn.innerText = "DAFTAR & BAYAR SEKARANG";
+                btn.disabled = false; 
+                updateHarga(); // Reset teks tombol
             }
         })
         .catch(() => {
             alert('Kesalahan koneksi.');
-            btn.disabled = false; btn.innerText = "DAFTAR & BAYAR SEKARANG";
+            btn.disabled = false; 
+            updateHarga(); // Reset teks tombol
         });
     });
 </script>
