@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Klien - MRD Digital Solutions</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root { --primary-color: #0d6efd; --dark-bg: #0f1113; --card-bg: #1a1d21; }
+        body { background-color: var(--dark-bg); color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; min-height: 100vh; }
+        
+        .navbar { background: rgba(26, 29, 33, 0.95); border-bottom: 1px solid #2d3238; }
+        .dashboard-card { background: var(--card-bg); border: 1px solid #2d3238; border-radius: 24px; padding: 30px; }
+        
+        .status-badge { padding: 8px 20px; border-radius: 50px; font-weight: 700; font-size: 0.85rem; display: inline-block; }
+        .status-lunas { background: rgba(40, 167, 69, 0.2); color: #72ff94; border: 1px solid rgba(40, 167, 69, 0.3); }
+        .status-pending { background: rgba(255, 193, 7, 0.2); color: #ffeb3b; border: 1px solid rgba(255, 193, 7, 0.3); }
+        
+        .btn-app { background: var(--primary-color); border: none; border-radius: 18px; padding: 18px 30px; font-weight: 800; font-size: 1.1rem; color: white !important; text-decoration: none; display: inline-block; transition: 0.3s; box-shadow: 0 10px 25px rgba(13, 110, 253, 0.3); }
+        .btn-app:hover { transform: translateY(-5px) scale(1.02); background: #0b5ed7; box-shadow: 0 15px 35px rgba(13, 110, 253, 0.5); }
+        
+        .info-label { opacity: 0.5; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; margin-bottom: 5px; }
+        .info-value { font-size: 1.1rem; font-weight: 600; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand fw-800" href="#">MRD <span style="color: var(--primary-color);">CLIENT PORTAL</span></a>
+        <button onclick="logout()" class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-bold">
+            <i class="fas fa-sign-out-alt me-1"></i> Logout
+        </button>
+    </div>
+</nav>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="mb-5 text-center text-md-start" data-aos="fade-up">
+                <h1 class="fw-800 mb-2" id="welcomeUser">Halo, Kak ...!</h1>
+                <p class="text-white-50" id="welcomeCompany">Nama Perusahaan Anda</p>
+            </div>
+
+            <div class="dashboard-card shadow-lg mb-4">
+                <div class="row g-4 mb-5">
+                    <div class="col-6 col-md-4">
+                        <div class="info-label">Paket Anda</div>
+                        <div class="info-value" id="valPaket">-</div>
+                    </div>
+                    <div class="col-6 col-md-4 text-md-center">
+                        <div class="info-label">Status Bayar</div>
+                        <div id="valStatusContainer">
+                             <span class="status-badge" id="valStatus">-</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 text-md-end">
+                        <div class="info-label">Tgl Pemasangan</div>
+                        <div class="info-value" id="valTgl">-</div>
+                    </div>
+                </div>
+
+                <div class="text-center py-4 border-top border-secondary border-opacity-25">
+                    <p class="text-white-50 mb-4">Klik tombol di bawah ini untuk mengakses sistem manajemen Anda secara langsung.</p>
+                    <a href="#" id="btnOpenApp" target="_blank" class="btn-app">
+                        <i class="fas fa-rocket me-2"></i> BUKA APLIKASI SAYA
+                    </a>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <p class="text-white-50 mb-3">Butuh bantuan teknis atau maintenance?</p>
+                <a href="https://wa.me/62895428400665" class="text-primary fw-bold text-decoration-none">
+                    <i class="fab fa-whatsapp me-1"></i> Hubungi Support MRD Digital
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Ambil data dari LocalStorage yang disimpan saat login di index.html
+    const rawData = localStorage.getItem('clientData');
+    const data = JSON.parse(rawData);
+
+    // Proteksi Halaman: Jika tidak ada data login, tendang balik ke login.html
+    if (!data) {
+        window.location.href = "index.html"; 
+    } else {
+        // Tampilkan Data ke Layar
+        document.getElementById('welcomeUser').innerText = `Halo, Kak ${data.nama_owner}!`;
+        document.getElementById('welcomeCompany').innerText = data.perusahaan;
+        document.getElementById('valPaket').innerText = data.paket;
+        document.getElementById('valTgl').innerText = formatDate(data.tgl_pasang);
+        
+        // Atur Tombol Aplikasi (Link dari Kolom M)
+        document.getElementById('btnOpenApp').href = data.url_app;
+
+        // Atur Style Status Bayar (LUNAS / PENDING)
+        const statusEl = document.getElementById('valStatus');
+        const statusText = data.status.toUpperCase();
+        statusEl.innerText = statusText;
+        
+        if (statusText === 'LUNAS') {
+            statusEl.classList.add('status-lunas');
+        } else {
+            statusEl.classList.add('status-pending');
+        }
+    }
+
+    // Fungsi Format Tanggal agar lebih cantik
+    function formatDate(dateString) {
+        if(!dateString) return "-";
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return new Date(dateString).toLocaleDateString('id-ID', options);
+    }
+
+    // Fungsi Logout
+    function logout() {
+        localStorage.clear();
+        window.location.href = "index.html";
+    }
+</script>
+
+</body>
+</html>
