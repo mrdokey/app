@@ -7,19 +7,24 @@
 </head>
 <body>
     <header>
-        <div class="container nav-wrapper">
-            <a href="zelly.html" class="logo">ZELLY <span>RENTAL</span></a>
-            <nav>
-                <ul>
-                    <li><a href="zelly.html">Home</a></li>
-                    <li><a href="cekunitzelly.html">Cek Unit</a></li>
-                    <li><a href="aboutzelly.html">About</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
-                </ul>
-            </nav>
-            <a href="cekunitzelly.html" class="btn-gold">Booking Now</a>
+    <div class="container nav-wrapper">
+        <a href="zelly.html" class="logo">ZELLY <span>RENTAL</span></a>
+        <div class="hamburger" id="hamburger">
+            <span></span><span></span><span></span>
         </div>
-    </header>
+        <nav id="nav-menu">
+            <ul>
+                <li><a href="zelly.html">Home</a></li>
+                <li><a href="cekunitzelly.html">Cek Unit</a></li>
+                <li><a href="aboutzelly.html">About</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+        </nav>
+        <a href="cekunitzelly.html" class="btn-gold desktop-only">Booking</a>
+    </div>
+</header>
+
+
 
     <section style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=1600'); height: 80vh; display: flex; align-items: center; color: white; background-size: cover; background-position: center;">
         <div class="container">
@@ -30,5 +35,15 @@
     </section>
 
     <a href="https://wa.me/6285187502977" class="wa-float"><i class="fab fa-whatsapp"></i> Chat AI (2 Menit Balas)</a>
+    <script>
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+</script>
+
 </body>
 </html>

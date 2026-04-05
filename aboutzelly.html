@@ -2,20 +2,64 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>About Us - Zelly Rental</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Zelly Rental - Professional Bike Rental</title>
     <link rel="stylesheet" href="stylezelly.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <section class="container">
-        <h2 class="title">About <span>Us</span></h2>
-        <div style="display: flex; gap: 40px; align-items: center; flex-wrap: wrap;">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400" style="width: 300px; border-radius: 20px; border: 5px solid var(--gold);">
+
+    <header>
+        <div class="container nav-wrapper">
+            <a href="zelly.html" class="logo">ZELLY <span>RENTAL</span></a>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+            <nav id="nav-menu">
+                <ul>
+                    <li><a href="zelly.html">Home</a></li>
+                    <li><a href="cekunitzelly.html">Cek Unit</a></li>
+                    <li><a href="aboutzelly.html">About</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </nav>
+            <a href="cekunitzelly.html" class="btn-gold desktop-only">Booking Now</a>
+        </div>
+    </header>
+
+    <section class="about-section container">
+        <h2 class="title">Tentang <span>Kami</span></h2>
+        
+        <div style="display: flex; gap: 50px; align-items: center; flex-wrap: wrap;">
             <div style="flex: 1; min-width: 300px;">
-                <h3>The Brain Behind the System</h3>
-                <p>Zelly Rental Bali bekerjasama dengan <strong>MRD Digital Solution</strong> untuk memberikan pengalaman sewa motor digital terbaik di Bali.</p>
-                <p>Kami percaya bahwa waktu Anda di Bali sangat berharga. Itulah sebabnya kami mengintegrasikan AI untuk merespon Anda lebih cepat dari siapapun.</p>
+                <img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=600" alt="Zelly Rental Bali" style="width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+            </div>
+
+            <div style="flex: 1; min-width: 300px;">
+                <h3 style="font-size: 28px; margin-bottom: 20px; color: var(--dark);">Solusi Berkendara Terbaik di Bali</h3>
+                <p style="margin-bottom: 15px; color: #666;">Zelly Rental Bali lahir dari keinginan untuk memberikan layanan sewa motor yang jujur, cepat, dan berkualitas di area Denpasar dan sekitarnya.</p>
+                <p style="margin-bottom: 25px; color: #666;">Kami bekerja sama dengan <strong>MRD Digital Solution</strong> untuk menghadirkan sistem pemesanan otomatis. Jadi, Anda tidak perlu menunggu lama untuk mendapatkan motor impian Anda.</p>
+                
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--gold);"></i> Armada selalu unit terbaru & servis rutin.</li>
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--gold);"></i> Gratis antar-jemput (Area Denpasar).</li>
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--gold);"></i> Dukungan asisten AI 24/7.</li>
+                </ul>
             </div>
         </div>
     </section>
+
+    <footer>
+        <p>&copy; 2024 Zelly Rental Bali | System by <strong>MRD Digital Solution</strong></p>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
