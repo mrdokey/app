@@ -1,49 +1,221 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zelly Rental Bali - Home</title>
-    <link rel="stylesheet" href="stylezelly.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Zelly Rental Bali - Premium Bike Experience</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <style>
+        :root { 
+            --cream: #F5F1E9; 
+            --navy: #1B3C59; 
+            --gold: #E6A63E; 
+            --white: #ffffff; 
+        }
+        
+        html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; scroll-behavior: smooth; background: var(--cream); color: var(--navy); }
+        * { box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+
+        /* STICKY HEADER NAVIGATION */
+        header { 
+            background: var(--navy); 
+            padding: 12px 0; 
+            position: sticky; 
+            top: 0; 
+            z-index: 3000; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        .logo-box { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img { width: 45px; height: 45px; object-fit: cover; border-radius: 50%; border: 2px solid var(--gold); background: white; }
+        .logo-text { color: var(--white); font-weight: 800; font-size: 18px; letter-spacing: 1px; }
+        .logo-text span { color: var(--gold); }
+        
+        .nav-right { display: flex; align-items: center; gap: 15px; }
+        .lang-switch { display: flex; background: #0d253a; padding: 4px; border-radius: 50px; }
+        .lang-btn { background: none; border: none; color: #5a7a95; padding: 5px 12px; cursor: pointer; font-size: 11px; font-weight: 800; border-radius: 50px; transition: 0.3s; }
+        .lang-btn.active { background: var(--gold); color: var(--navy); }
+
+        .hamburger { cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
+        .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); transition: 0.3s; }
+        
+        nav { position: fixed; top: 0; right: -100%; width: 75%; height: 100vh; background: var(--navy); display: flex; align-items: center; transition: 0.5s; z-index: 2050; }
+        nav.active { right: 0; }
+        nav ul { list-style: none; width: 100%; padding: 0; text-align: center; }
+        nav a { color: var(--white); text-decoration: none; display: block; padding: 22px; font-size: 18px; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+        /* HERO AREA */
+        .hero { 
+            height: 80vh; 
+            background: linear-gradient(rgba(27, 60, 89, 0.7), rgba(27, 60, 89, 0.85)), url('https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=1200');
+            background-position: center; background-size: cover;
+            display: flex; align-items: center; justify-content: center; text-align: center; color: var(--white); padding: 0 20px;
+        }
+        .hero h1 { font-size: clamp(30px, 8vw, 55px); font-weight: 900; margin-bottom: 15px; text-transform: uppercase; }
+        .hero h1 span { color: var(--gold); }
+        .hero p { font-size: 16px; max-width: 650px; margin: 0 auto 30px; color: var(--cream); opacity: 0.9; }
+        .btn-gold { background: var(--gold); color: var(--navy); padding: 16px 35px; border-radius: 50px; text-decoration: none; font-weight: 800; transition: 0.3s; display: inline-block; text-transform: uppercase; }
+
+        /* SECTIONS */
+        section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; margin-bottom: 50px; font-size: 30px; font-weight: 900; }
+        .section-title span { color: var(--gold); }
+
+        /* ABOUT SECTION */
+        .about-content { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 30px; }
+        .about-text { font-size: 17px; line-height: 1.8; color: #444; max-width: 800px; }
+
+        /* FAQ SECTION */
+        .faq-item { background: var(--white); border-radius: 15px; margin-bottom: 15px; padding: 20px; cursor: pointer; transition: 0.3s; border: 1px solid #ddd; }
+        .faq-item:hover { border-color: var(--gold); }
+        .faq-question { font-weight: 800; display: flex; justify-content: space-between; align-items: center; }
+        .faq-answer { display: none; padding-top: 15px; color: #666; line-height: 1.6; }
+        .faq-item.active .faq-answer { display: block; }
+        .faq-item.active .fa-chevron-down { transform: rotate(180deg); color: var(--gold); }
+
+        /* TESTIMONIAL SLIDER */
+        .swiper-container { width: 100%; padding: 40px 0; }
+        .testi-card { background: var(--white); padding: 40px; border-radius: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #eee; height: 100%; }
+        .testi-img { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; border: 3px solid var(--gold); }
+        .testi-text { font-style: italic; color: #555; margin-bottom: 15px; font-size: 14px; }
+        .testi-name { font-weight: 800; color: var(--navy); }
+
+        /* MAP BOX */
+        .map-box { border-radius: 30px; overflow: hidden; border: 6px solid var(--white); box-shadow: 0 15px 30px rgba(0,0,0,0.05); height: 350px; }
+
+        /* WA FLOAT */
+        .wa-float { position: fixed; bottom: 30px; right: 25px; width: 60px; height: 60px; background: #25d366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 4000; box-shadow: 0 8px 20px rgba(37,211,102,0.3); }
+
+        footer { background: var(--navy); color: var(--white); text-align: center; padding: 50px 20px; }
+    </style>
 </head>
 <body>
+
     <header>
-    <div class="container nav-wrapper">
-        <a href="zelly.html" class="logo">ZELLY <span>RENTAL</span></a>
-        <div class="hamburger" id="hamburger">
-            <span></span><span></span><span></span>
+        <div class="nav-wrapper">
+            <a href="#" class="logo-box">
+                <img src="https://i.ibb.co.com/dwVhqq8Z/images-10.jpg" class="logo-img" alt="Zelly Logo">
+                <div class="logo-text">ZELLY<span>RENTAL</span></div>
+            </a>
+            <div class="nav-right">
+                <div class="lang-switch">
+                    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+                    <button class="lang-btn" id="id-btn" onclick="setLang('id')">ID</button>
+                </div>
+                <div class="hamburger" id="h-btn"><span></span><span></span><span></span></div>
+            </div>
+            <nav id="n-menu">
+                <ul>
+                    <li><a href="#home" class="lang" data-en="Home" data-id="Beranda">Home</a></li>
+                    <li><a href="cekunitzelly.html" class="lang" data-en="Our Fleet" data-id="Katalog Unit">Our Fleet</a></li>
+                    <li><a href="#about" class="lang" data-en="About Zelly" data-id="Tentang Zelly">About Zelly</a></li>
+                    <li><a href="#faq" class="lang" data-en="FAQ" data-id="Tanya Jawab">FAQ</a></li>
+                    <li><a href="#location" class="lang" data-en="Location" data-id="Lokasi">Location</a></li>
+                </ul>
+            </nav>
         </div>
-        <nav id="nav-menu">
-            <ul>
-                <li><a href="zelly.html">Home</a></li>
-                <li><a href="cekunitzelly.html">Cek Unit</a></li>
-                <li><a href="aboutzelly.html">About</a></li>
-                <li><a href="faq.html">FAQ</a></li>
-            </ul>
-        </nav>
-        <a href="cekunitzelly.html" class="btn-gold desktop-only">Booking</a>
-    </div>
-</header>
+    </header>
 
-
-
-    <section style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=1600'); height: 80vh; display: flex; align-items: center; color: white; background-size: cover; background-position: center;">
-        <div class="container">
-            <h1 style="font-size: 48px;">Premium Bike Rental Bali</h1>
-            <p style="font-size: 20px; margin: 20px 0;">Solusi sewa motor tanpa ribet dengan asisten digital 24 jam.</p>
-            <a href="cekunitzelly.html" class="btn-gold">Lihat Koleksi Motor</a>
+    <section id="home" class="hero" style="max-width: 100%; padding: 0;">
+        <div class="hero-content">
+            <h1 class="lang" data-en="Ride in <span>Retro Style</span>" data-id="Berkendara <span>Gaya Klasik</span>">Ride in Retro Style</h1>
+            <p class="lang" data-en="Enjoy Bali with our premium motorbikes. We provide free luggage storage and 24/7 digital assistance for your comfort." data-id="Nikmati Bali dengan motor premium kami. Kami sediakan gratis titip koper dan asisten digital 24 jam untuk kenyamanan Anda.">Enjoy Bali with our premium motorbikes.</p>
+            <a href="cekunitzelly.html" class="btn-gold lang" data-en="Book Now" data-id="Pesan Sekarang">Book Now</a>
         </div>
     </section>
 
-    <a href="https://wa.me/6285187502977" class="wa-float"><i class="fab fa-whatsapp"></i> Chat AI (2 Menit Balas)</a>
+    <section id="about">
+        <h2 class="section-title lang" data-en="Who is <span>Zelly</span>?" data-id="Siapa <span>Zelly</span>?">Who is Zelly?</h2>
+        <div class="about-content">
+            <p class="about-text lang" 
+               data-en="Zelly Rental is your premium motorbike partner in Denpasar, Bali. We specialize in providing well-maintained, latest-model bikes for travelers who value safety and style. Our mission is to make your Bali trip seamless with unique services like free luggage storage and instant digital support."
+               data-id="Zelly Rental adalah mitra sewa motor premium Anda di Denpasar, Bali. Kami ahli dalam menyediakan motor model terbaru yang terawat untuk pelancong yang mengutamakan keamanan dan gaya. Misi kami adalah membuat perjalanan Bali Anda lancar dengan layanan unik seperti penitipan koper gratis dan dukungan digital instan.">
+               Zelly Rental is your premium motorbike partner in Denpasar, Bali.
+            </p>
+        </div>
+    </section>
+
+    <section id="faq">
+        <h2 class="section-title lang" data-en="Common <span>Questions</span>" data-id="Pertanyaan <span>Populer</span>">Common Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question lang" data-en="What are the rental requirements? <i class='fas fa-chevron-down'></i>" data-id="Apa saja syarat menyewa? <i class='fas fa-chevron-down'></i>">Requirements?</div>
+                <div class="faq-answer lang" data-en="You only need an ID Card (e-KTP/Passport) and a valid driving license. No hidden deposits!" data-id="Anda hanya butuh ID (KTP/Paspor) dan SIM yang masih berlaku. Tanpa deposit tersembunyi!">You only need an ID Card...</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question lang" data-en="Is there a delivery service? <i class='fas fa-chevron-down'></i>" data-id="Apakah ada layanan antar jemput? <i class='fas fa-chevron-down'></i>">Delivery service?</div>
+                <div class="faq-answer lang" data-en="Yes! We provide delivery services to various areas in Denpasar and surrounding Bali areas." data-id="Ya! Kami menyediakan layanan antar jemput ke berbagai area di Denpasar dan sekitarnya.">Yes! We provide delivery...</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question lang" data-en="Can I leave my luggage? <i class='fas fa-chevron-down'></i>" data-id="Bisa titip koper? <i class='fas fa-chevron-down'></i>">Luggage?</div>
+                <div class="faq-answer lang" data-en="Absolutely! You can store your luggage at our workshop for free during your rental period." data-id="Tentu saja! Anda bisa menitipkan koper di workshop kami secara gratis selama masa sewa.">Absolutely! You can store...</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <h2 class="section-title lang" data-en="Happy <span>Riders</span>" data-id="Rider <span>Bahagia</span>">Happy Riders</h2>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="testi-card">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" class="testi-img">
+                        <p class="testi-text">"Bike was brand new and very clean. Free storage saved my day!"</p>
+                        <p class="testi-name">- John D.</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="testi-card">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100" class="testi-img">
+                        <p class="testi-text">"Sangat ramah dan proses cepat. Motornya enak dipakai keliling Bali."</p>
+                        <p class="testi-name">- Maya S.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <section id="location">
+        <h2 class="section-title lang" data-en="Find <span>Us</span>" data-id="Cari <span>Kami</span>">Find Us</h2>
+        <div class="map-box">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126214.34587884705!2d115.14815416249999!3d-8.672683299999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd2409b0e5e3859%3A0x27ec1e66c9f69741!2sDenpasar%2C%20Bali!5e0!3m2!1sen!2sid!4v1712200000000!5m2!1sen!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <a href="https://wa.me/6285187502977" class="wa-float"><i class="fab fa-whatsapp"></i></a>
+
+    <footer>
+        <p>© 2026 Zelly Rental Bali | System by <strong>MRD DIGITAL SOLUTION</strong></p>
+    </footer>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('nav-menu');
+        function setLang(lang) {
+            document.querySelectorAll('.lang').forEach(el => { el.innerHTML = el.getAttribute('data-' + lang); });
+            localStorage.setItem('zelly_lang', lang);
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById((lang === 'en' ? 'btn-en' : 'id-btn')).classList.add('active');
+        }
 
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
-</script>
+        function toggleFaq(el) {
+            el.classList.toggle('active');
+        }
 
+        window.onload = () => {
+            const saved = localStorage.getItem('zelly_lang') || 'en';
+            setLang(saved);
+            new Swiper('.swiper-container', { loop: true, autoplay: { delay: 3000 }, pagination: { el: '.swiper-pagination', clickable: true } });
+            ScrollReveal().reveal('section', { delay: 200, distance: '20px', origin: 'bottom' });
+        };
+
+        const btn = document.getElementById('h-btn');
+        const menu = document.getElementById('n-menu');
+        btn.onclick = () => { menu.classList.toggle('active'); }
+        document.querySelectorAll('nav a').forEach(a => { a.onclick = () => menu.classList.remove('active'); });
+    </script>
 </body>
 </html>
