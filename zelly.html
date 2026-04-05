@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Zelly Rental Bali - Premium Bike Experience</title>
+    <title>Zelly Rental Bali - Premium Experience</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <script src="https://unpkg.com/scrollreveal"></script>
+    
     <style>
         :root { 
             --cream: #F5F1E9; 
@@ -18,14 +19,16 @@
         html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; scroll-behavior: smooth; background: var(--cream); color: var(--navy); }
         * { box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
 
-        /* STICKY HEADER NAVIGATION */
+        /* HEADER STICKY - FIXED */
         header { 
             background: var(--navy); 
             padding: 12px 0; 
-            position: sticky; 
+            position: fixed; /* Kunci mati di atas */
+            width: 100%;
             top: 0; 
-            z-index: 3000; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            left: 0;
+            z-index: 5000; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
         }
         .nav-wrapper { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
@@ -42,54 +45,60 @@
         .hamburger { cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
         .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); transition: 0.3s; }
         
-        nav { position: fixed; top: 0; right: -100%; width: 75%; height: 100vh; background: var(--navy); display: flex; align-items: center; transition: 0.5s; z-index: 2050; }
+        /* MOBILE MENU Overlay */
+        nav { position: fixed; top: 0; right: -100%; width: 80%; height: 100vh; background: var(--navy); display: flex; align-items: center; transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1); z-index: 4500; }
         nav.active { right: 0; }
         nav ul { list-style: none; width: 100%; padding: 0; text-align: center; }
-        nav a { color: var(--white); text-decoration: none; display: block; padding: 22px; font-size: 18px; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        nav a { color: var(--white); text-decoration: none; display: block; padding: 25px; font-size: 20px; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.05); }
 
-        /* HERO AREA */
+        /* HERO - Adjusted for fixed header */
         .hero { 
-            height: 80vh; 
-            background: linear-gradient(rgba(27, 60, 89, 0.7), rgba(27, 60, 89, 0.85)), url('https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=1200');
+            height: 90vh; 
+            margin-top: 60px;
+            background: linear-gradient(rgba(27, 60, 89, 0.65), rgba(27, 60, 89, 0.85)), url('https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=1200');
             background-position: center; background-size: cover;
             display: flex; align-items: center; justify-content: center; text-align: center; color: var(--white); padding: 0 20px;
         }
-        .hero h1 { font-size: clamp(30px, 8vw, 55px); font-weight: 900; margin-bottom: 15px; text-transform: uppercase; }
+        .hero h1 { font-size: clamp(32px, 8vw, 60px); font-weight: 900; margin-bottom: 20px; text-transform: uppercase; line-height: 1.1; }
         .hero h1 span { color: var(--gold); }
-        .hero p { font-size: 16px; max-width: 650px; margin: 0 auto 30px; color: var(--cream); opacity: 0.9; }
-        .btn-gold { background: var(--gold); color: var(--navy); padding: 16px 35px; border-radius: 50px; text-decoration: none; font-weight: 800; transition: 0.3s; display: inline-block; text-transform: uppercase; }
+        .hero p { font-size: 18px; max-width: 700px; margin: 0 auto 35px; color: var(--cream); opacity: 0.95; line-height: 1.6; }
+        
+        .btn-gold { background: var(--gold); color: var(--navy); padding: 18px 45px; border-radius: 50px; text-decoration: none; font-weight: 800; transition: 0.3s; display: inline-block; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-gold:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(230,166,62,0.3); }
 
         /* SECTIONS */
-        section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
-        .section-title { text-align: center; margin-bottom: 50px; font-size: 30px; font-weight: 900; }
-        .section-title span { color: var(--gold); }
+        section { padding: 100px 20px; max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; margin-bottom: 60px; font-size: 34px; font-weight: 900; text-transform: uppercase; }
+        .section-title span { color: var(--gold); border-bottom: 4px solid var(--gold); }
 
-        /* ABOUT SECTION */
-        .about-content { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 30px; }
-        .about-text { font-size: 17px; line-height: 1.8; color: #444; max-width: 800px; }
+        /* ABOUT ANIMATION CONTAINER */
+        .about-box { background: var(--white); padding: 50px; border-radius: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.03); text-align: center; border: 1px solid #eee; }
+        .about-text { font-size: 18px; line-height: 1.9; color: #444; margin-bottom: 0; }
 
-        /* FAQ SECTION */
-        .faq-item { background: var(--white); border-radius: 15px; margin-bottom: 15px; padding: 20px; cursor: pointer; transition: 0.3s; border: 1px solid #ddd; }
-        .faq-item:hover { border-color: var(--gold); }
-        .faq-question { font-weight: 800; display: flex; justify-content: space-between; align-items: center; }
-        .faq-answer { display: none; padding-top: 15px; color: #666; line-height: 1.6; }
-        .faq-item.active .faq-answer { display: block; }
-        .faq-item.active .fa-chevron-down { transform: rotate(180deg); color: var(--gold); }
+        /* FAQ ACCORDION */
+        .faq-container { max-width: 800px; margin: 0 auto; }
+        .faq-item { background: var(--white); border-radius: 20px; margin-bottom: 15px; padding: 25px; cursor: pointer; transition: 0.4s; border: 1px solid #eee; }
+        .faq-item:hover { border-color: var(--gold); transform: translateX(5px); }
+        .faq-question { font-weight: 800; font-size: 18px; display: flex; justify-content: space-between; align-items: center; }
+        .faq-answer { height: 0; overflow: hidden; transition: 0.3s ease-out; color: #666; line-height: 1.7; font-size: 16px; }
+        .faq-item.active .faq-answer { height: auto; padding-top: 20px; }
+        .faq-item.active { background: #fffdf9; border-color: var(--gold); }
+        .faq-item i { transition: 0.3s; color: var(--gold); }
+        .faq-item.active i { transform: rotate(180deg); }
 
-        /* TESTIMONIAL SLIDER */
-        .swiper-container { width: 100%; padding: 40px 0; }
-        .testi-card { background: var(--white); padding: 40px; border-radius: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #eee; height: 100%; }
-        .testi-img { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; border: 3px solid var(--gold); }
-        .testi-text { font-style: italic; color: #555; margin-bottom: 15px; font-size: 14px; }
-        .testi-name { font-weight: 800; color: var(--navy); }
+        /* TESTIMONIAL */
+        .swiper-container { width: 100%; padding-bottom: 50px; }
+        .testi-card { background: var(--white); padding: 40px; border-radius: 35px; text-align: center; border: 1px solid #eee; height: 100%; transition: 0.3s; }
+        .testi-img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; border: 4px solid var(--gold); }
 
-        /* MAP BOX */
-        .map-box { border-radius: 30px; overflow: hidden; border: 6px solid var(--white); box-shadow: 0 15px 30px rgba(0,0,0,0.05); height: 350px; }
+        /* MAP */
+        .map-box { border-radius: 35px; overflow: hidden; border: 10px solid var(--white); height: 400px; box-shadow: 0 20px 50px rgba(0,0,0,0.06); }
 
         /* WA FLOAT */
-        .wa-float { position: fixed; bottom: 30px; right: 25px; width: 60px; height: 60px; background: #25d366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 4000; box-shadow: 0 8px 20px rgba(37,211,102,0.3); }
+        .wa-float { position: fixed; bottom: 30px; right: 25px; width: 65px; height: 65px; background: #25d366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; z-index: 6000; box-shadow: 0 10px 25px rgba(37,211,102,0.4); transition: 0.3s; }
+        .wa-float:hover { transform: scale(1.1); }
 
-        footer { background: var(--navy); color: var(--white); text-align: center; padding: 50px 20px; }
+        footer { background: var(--navy); color: var(--white); text-align: center; padding: 70px 20px; }
     </style>
 </head>
 <body>
@@ -110,8 +119,8 @@
             <nav id="n-menu">
                 <ul>
                     <li><a href="#home" class="lang" data-en="Home" data-id="Beranda">Home</a></li>
-                    <li><a href="cekunitzelly.html" class="lang" data-en="Our Fleet" data-id="Katalog Unit">Our Fleet</a></li>
-                    <li><a href="#about" class="lang" data-en="About Zelly" data-id="Tentang Zelly">About Zelly</a></li>
+                    <li><a href="cekunitzelly.html" class="lang" data-en="Fleet Catalog" data-id="Katalog Unit">Fleet Catalog</a></li>
+                    <li><a href="#about" class="lang" data-en="About Us" data-id="Tentang Kami">About Us</a></li>
                     <li><a href="#faq" class="lang" data-en="FAQ" data-id="Tanya Jawab">FAQ</a></li>
                     <li><a href="#location" class="lang" data-en="Location" data-id="Lokasi">Location</a></li>
                 </ul>
@@ -122,56 +131,56 @@
     <section id="home" class="hero" style="max-width: 100%; padding: 0;">
         <div class="hero-content">
             <h1 class="lang" data-en="Ride in <span>Retro Style</span>" data-id="Berkendara <span>Gaya Klasik</span>">Ride in Retro Style</h1>
-            <p class="lang" data-en="Enjoy Bali with our premium motorbikes. We provide free luggage storage and 24/7 digital assistance for your comfort." data-id="Nikmati Bali dengan motor premium kami. Kami sediakan gratis titip koper dan asisten digital 24 jam untuk kenyamanan Anda.">Enjoy Bali with our premium motorbikes.</p>
-            <a href="cekunitzelly.html" class="btn-gold lang" data-en="Book Now" data-id="Pesan Sekarang">Book Now</a>
+            <p class="lang" data-en="The most reliable premium motorbike rental in Denpasar. We combine classic soul with modern service for your perfect Bali journey." data-id="Sewa motor premium paling terpercaya di Denpasar. Kami memadukan jiwa klasik dengan layanan modern untuk perjalanan Bali yang sempurna.">The most reliable premium motorbike rental in Denpasar.</p>
+            <a href="cekunitzelly.html" class="btn-gold lang" data-en="Book Your Ride" data-id="Pesan Sekarang">Book Your Ride</a>
         </div>
     </section>
 
     <section id="about">
-        <h2 class="section-title lang" data-en="Who is <span>Zelly</span>?" data-id="Siapa <span>Zelly</span>?">Who is Zelly?</h2>
-        <div class="about-content">
+        <h2 class="section-title lang" data-en="Story of <span>Zelly</span>" data-id="Cerita <span>Zelly</span>">Story of Zelly</h2>
+        <div class="about-box reveal-up">
             <p class="about-text lang" 
-               data-en="Zelly Rental is your premium motorbike partner in Denpasar, Bali. We specialize in providing well-maintained, latest-model bikes for travelers who value safety and style. Our mission is to make your Bali trip seamless with unique services like free luggage storage and instant digital support."
-               data-id="Zelly Rental adalah mitra sewa motor premium Anda di Denpasar, Bali. Kami ahli dalam menyediakan motor model terbaru yang terawat untuk pelancong yang mengutamakan keamanan dan gaya. Misi kami adalah membuat perjalanan Bali Anda lancar dengan layanan unik seperti penitipan koper gratis dan dukungan digital instan.">
-               Zelly Rental is your premium motorbike partner in Denpasar, Bali.
+               data-en="Zelly Rental was born from a passion for exploring Bali with style and comfort. Located in the heart of Denpasar, we provide only the best maintained motorbikes. Beyond just a rental, we offer peace of mind with free luggage storage and a 24/7 digital assistant, ensuring you never feel alone on the road."
+               data-id="Zelly Rental lahir dari semangat untuk menjelajahi Bali dengan gaya dan kenyamanan. Berlokasi di jantung kota Denpasar, kami menyediakan hanya motor dengan perawatan terbaik. Lebih dari sekadar sewa, kami menawarkan ketenangan pikiran dengan fasilitas titip koper gratis dan asisten digital 24 jam.">
+               Zelly Rental was born from a passion for exploring Bali...
             </p>
         </div>
     </section>
 
     <section id="faq">
-        <h2 class="section-title lang" data-en="Common <span>Questions</span>" data-id="Pertanyaan <span>Populer</span>">Common Questions</h2>
+        <h2 class="section-title lang" data-en="Quick <span>FAQ</span>" data-id="Tanya <span>Jawab</span>">Quick FAQ</h2>
         <div class="faq-container">
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-question lang" data-en="What are the rental requirements? <i class='fas fa-chevron-down'></i>" data-id="Apa saja syarat menyewa? <i class='fas fa-chevron-down'></i>">Requirements?</div>
-                <div class="faq-answer lang" data-en="You only need an ID Card (e-KTP/Passport) and a valid driving license. No hidden deposits!" data-id="Anda hanya butuh ID (KTP/Paspor) dan SIM yang masih berlaku. Tanpa deposit tersembunyi!">You only need an ID Card...</div>
+            <div class="faq-item reveal-left" onclick="toggleFaq(this)">
+                <div class="faq-question lang" data-en="What do I need to rent? <i class='fas fa-chevron-down'></i>" data-id="Apa syarat menyewanya? <i class='fas fa-chevron-down'></i>">What do I need to rent?</div>
+                <div class="faq-answer lang" data-en="Simply provide your Passport/ID and a valid Driving License. We believe in trust, so there are no hidden deposit fees!" data-id="Cukup siapkan Paspor/KTP dan SIM yang berlaku. Kami mengutamakan kepercayaan, jadi tidak ada biaya deposit tersembunyi!">Passport/ID and Driving License.</div>
             </div>
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-question lang" data-en="Is there a delivery service? <i class='fas fa-chevron-down'></i>" data-id="Apakah ada layanan antar jemput? <i class='fas fa-chevron-down'></i>">Delivery service?</div>
-                <div class="faq-answer lang" data-en="Yes! We provide delivery services to various areas in Denpasar and surrounding Bali areas." data-id="Ya! Kami menyediakan layanan antar jemput ke berbagai area di Denpasar dan sekitarnya.">Yes! We provide delivery...</div>
+            <div class="faq-item reveal-left" onclick="toggleFaq(this)">
+                <div class="faq-question lang" data-en="Can you deliver the bike? <i class='fas fa-chevron-down'></i>" data-id="Bisa antar motornya? <i class='fas fa-chevron-down'></i>">Can you deliver the bike?</div>
+                <div class="faq-answer lang" data-en="Yes, we offer delivery and pick-up services throughout Denpasar and major tourism areas in Bali. Contact us for rates!" data-id="Ya, kami melayani antar jemput di seluruh Denpasar dan area wisata utama di Bali. Hubungi kami untuk cek tarif!">Yes, we offer delivery services!</div>
             </div>
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-question lang" data-en="Can I leave my luggage? <i class='fas fa-chevron-down'></i>" data-id="Bisa titip koper? <i class='fas fa-chevron-down'></i>">Luggage?</div>
-                <div class="faq-answer lang" data-en="Absolutely! You can store your luggage at our workshop for free during your rental period." data-id="Tentu saja! Anda bisa menitipkan koper di workshop kami secara gratis selama masa sewa.">Absolutely! You can store...</div>
+            <div class="faq-item reveal-left" onclick="toggleFaq(this)">
+                <div class="faq-question lang" data-en="Is luggage storage really free? <i class='fas fa-chevron-down'></i>" data-id="Titip koper beneran gratis? <i class='fas fa-chevron-down'></i>">Free luggage storage?</div>
+                <div class="faq-answer lang" data-en="Absolutely! You can leave your heavy bags at our secure workshop while you ride freely around the island." data-id="Tentu saja! Anda bisa menitipkan tas berat Anda di workshop kami yang aman selagi Anda berkeliling pulau dengan bebas.">Absolutely! It's free for our customers.</div>
             </div>
         </div>
     </section>
 
     <section id="testimonials">
-        <h2 class="section-title lang" data-en="Happy <span>Riders</span>" data-id="Rider <span>Bahagia</span>">Happy Riders</h2>
-        <div class="swiper-container">
+        <h2 class="section-title lang" data-en="Our <span>Riders</span>" data-id="Para <span>Rider</span>">Our Riders</h2>
+        <div class="swiper-container reveal-fade">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <div class="testi-card">
                         <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" class="testi-img">
-                        <p class="testi-text">"Bike was brand new and very clean. Free storage saved my day!"</p>
-                        <p class="testi-name">- John D.</p>
+                        <p class="testi-text">"Amazing experience! The bike was spotless and the luggage storage service is a game changer for travelers."</p>
+                        <p class="testi-name">- Alex, UK</p>
                     </div>
                 </div>
                 <div class="swiper-slide">
                     <div class="testi-card">
                         <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100" class="testi-img">
-                        <p class="testi-text">"Sangat ramah dan proses cepat. Motornya enak dipakai keliling Bali."</p>
-                        <p class="testi-name">- Maya S.</p>
+                        <p class="testi-text">"Motornya sangat terawat, helmnya wangi. Respon lewat WA juga sangat cepat dan membantu."</p>
+                        <p class="testi-name">- Shinta, Jakarta</p>
                     </div>
                 </div>
             </div>
@@ -180,20 +189,23 @@
     </section>
 
     <section id="location">
-        <h2 class="section-title lang" data-en="Find <span>Us</span>" data-id="Cari <span>Kami</span>">Find Us</h2>
-        <div class="map-box">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126214.34587884705!2d115.14815416249999!3d-8.672683299999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd2409b0e5e3859%3A0x27ec1e66c9f69741!2sDenpasar%2C%20Bali!5e0!3m2!1sen!2sid!4v1712200000000!5m2!1sen!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <h2 class="section-title lang" data-en="Our <span>Base</span>" data-id="Lokasi <span>Kami</span>">Our Base</h2>
+        <div class="map-box reveal-up">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126214.34116035092!2d115.14324204369062!3d-8.672535497277637!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23ef8321e2f3d%3A0x5f5431668469d51e!2sDenpasar%2C%20Bali!5e0!3m2!1sid!2sid!4v1712330000000!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
     </section>
 
     <a href="https://wa.me/6285187502977" class="wa-float"><i class="fab fa-whatsapp"></i></a>
 
     <footer>
-        <p>© 2026 Zelly Rental Bali | System by <strong>MRD DIGITAL SOLUTION</strong></p>
+        <img src="https://i.ibb.co.com/dwVhqq8Z/images-10.jpg" style="width: 50px; border-radius: 50%; border: 2px solid var(--gold); margin-bottom: 15px;">
+        <p>© 2026 Zelly Rental Bali | Built by <strong>MRD DIGITAL SOLUTION</strong></p>
     </footer>
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
     <script>
+        // Language
         function setLang(lang) {
             document.querySelectorAll('.lang').forEach(el => { el.innerHTML = el.getAttribute('data-' + lang); });
             localStorage.setItem('zelly_lang', lang);
@@ -202,14 +214,21 @@
         }
 
         function toggleFaq(el) {
+            document.querySelectorAll('.faq-item').forEach(item => { if(item !== el) item.classList.remove('active'); });
             el.classList.toggle('active');
         }
 
         window.onload = () => {
             const saved = localStorage.getItem('zelly_lang') || 'en';
             setLang(saved);
-            new Swiper('.swiper-container', { loop: true, autoplay: { delay: 3000 }, pagination: { el: '.swiper-pagination', clickable: true } });
-            ScrollReveal().reveal('section', { delay: 200, distance: '20px', origin: 'bottom' });
+            
+            // Slider
+            new Swiper('.swiper-container', { loop: true, autoplay: { delay: 4000 }, pagination: { el: '.swiper-pagination', clickable: true } });
+
+            // ANIMATIONS - DYNAMIC!
+            ScrollReveal().reveal('.reveal-up', { delay: 200, distance: '50px', origin: 'bottom', duration: 1000 });
+            ScrollReveal().reveal('.reveal-left', { delay: 300, distance: '40px', origin: 'left', interval: 200, duration: 800 });
+            ScrollReveal().reveal('.reveal-fade', { delay: 400, opacity: 0, duration: 1500 });
         };
 
         const btn = document.getElementById('h-btn');
