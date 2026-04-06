@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | MRD Digital Solution</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
+    <style>
+        :root { --primary: #0d6efd; --dark: #0f1113; --card: #1a1d21; }
+        body { background-color: var(--dark); color: white; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .login-box { height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; }
+        #dashboard-content { display: none; padding: 20px; } /* Sembunyi sebelum login */
+        .stat-card { background: var(--card); border: 1px solid #2d3238; border-radius: 20px; padding: 20px; }
+    </style>
+</head>
+<body>
+
+    <div id="login-page" class="login-box text-center">
+        <h2 class="fw-800 mb-4">MRD <span style="color:var(--primary)">DIGITAL</span> LOGIN</h2>
+        <p class="text-secondary mb-4">Gunakan Akun Google Klien yang Terdaftar</p>
+        <div id="buttonDiv"></div> </div>
+
+    <div id="dashboard-content">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4>Welcome, <span id="user-name" class="text-primary">Master</span></h4>
+            <button class="btn btn-outline-danger btn-sm" onclick="logout()">Logout</button>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4"><div class="stat-card"><h5>Income</h5><h2 id="income">Rp 0</h2></div></div>
+            <div class="col-md-4"><div class="stat-card"><h5>Units</h5><h2 id="units">0</h2></div></div>
+            <div class="col-md-4"><div class="stat-card"><h5>Customers</h5><h2 id="customers">0</h2></div></div>
+        </div>
+        
+        <div class="mt-4 p-4 text-center" style="background: var(--card); border-radius: 20px;" id="svg-area">
+             <p class="text-secondary">Visualizing Data...</p>
+        </div>
+    </div>
+
+    <script>
+        function handleCredentialResponse(response) {
+            // 1. Ambil Token dari Google
+            const responsePayload = parseJwt(response.credential);
+            document.getElementById('user-name').innerText = responsePayload.name;
+            
+            // 2. Kirim email ke GAS Master untuk cek database
+            fetchDataFromGAS(responsePayload.email);
+        }
+
+        function fetchDataFromGAS(email) {
+            // URL Web App GAS Master (Ganti dengan URL yang Master deploy)
+            const webAppUrl = "https://script.google.com/macros/s/AKfycbx2QXUgFhRSPiyQtMy5WKNtXaOy8tdGYgVGkYXUAAoBpcf4siB40rFVONfg1CBZEz2FUA/exec";
+            
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('dashboard-content').style.display = 'block';
+
+            fetch(`${webAppUrl}?email=${email}`)
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('income').innerText = data.income;
+                    document.getElementById('units').innerText = data.units;
+                    document.getElementById('svg-area').innerHTML = data.svg;
+                });
+        }
+
+        function parseJwt (token) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            return JSON.parse(window.atob(base64));
+        };
+
+        window.onload = function () {
+            google.accounts.id.initialize({
+                client_id: "212161035085-1e9tq8phf1tmski9hnvhd0v17b6tkp9o.apps.googleusercontent.com",
+                callback: handleCredentialResponse
+            });
+            google.accounts.id.renderButton(
+                document.getElementById("buttonDiv"),
+                { theme: "outline", size: "large" }
+            );
+        };
+
+        function logout() { location.reload(); }
+    </script>
+</body>
+</html>
