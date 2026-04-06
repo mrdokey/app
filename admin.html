@@ -11,266 +11,174 @@
     
     <style>
         body { font-family: 'Public Sans', sans-serif; background-color: #f5f5f9; color: #697a8d; margin: 0; }
-        .layout-wrapper { display: flex; min-height: 100vh; }
-        .content-area { flex-grow: 1; padding: 15px; max-width: 100%; }
+        .content-area { padding: 15px; max-width: 100%; }
         
-        /* Dashboard Cards */
+        /* Dashboard Card Style */
         .card { border: none; border-radius: 12px; box-shadow: 0 2px 6px 0 rgba(67, 89, 113, 0.12); background: #fff; height: 100%; }
-        .card-stat { border-left: 5px solid #696cff; transition: 0.3s; }
-        .card-stat.border-success { border-left-color: #71dd37; }
-        .card-stat.border-warning { border-left-color: #ffab00; }
-        .card-stat.border-info { border-left-color: #03c3ec; }
+        .card-stat { border-left: 5px solid #696cff; }
+        .card-stat.st-tersedia { border-left-color: #71dd37; } /* Green */
+        .card-stat.st-disewa { border-left-color: #696cff; }   /* Blue */
+        .card-stat.st-waiting { border-left-color: #ffab00; }  /* Orange */
+        .card-stat.st-armada { border-left-color: #8592a3; }  /* Grey */
         
-        .icon-box { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-size: 1.3rem; }
-        .bg-light-success { background: #e8fadf; color: #71dd37; }
-        .bg-light-primary { background: #e7e7ff; color: #696cff; }
-        .bg-light-warning { background: #fff2d6; color: #ffab00; }
-        .bg-light-info { background: #d7f5fc; color: #03c3ec; }
+        .stat-label { font-size: 0.7rem; color: #a1acb8; font-weight: 700; text-transform: uppercase; }
+        .stat-number { font-size: 1.8rem; font-weight: 800; color: #566a7f; line-height: 1; margin-top: 5px; }
         
-        .stat-label { font-size: 0.65rem; color: #a1acb8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; }
-        .stat-number { font-size: 1.4rem; font-weight: 800; color: #566a7f; line-height: 1.2; }
+        .card-income { background: #696cff; color: white; border: none; }
+        .btn-primary { background-color: #696cff; border-color: #696cff; font-weight: 700; }
         
-        /* Hero Income */
-        .card-income { background: linear-gradient(72deg, #696cff 0%, #3f42ef 100%); color: white; border: none; }
-        .stat-income-val { font-size: 1.9rem; font-weight: 800; }
-
-        .btn-primary { background-color: #696cff; border-color: #696cff; box-shadow: 0 4px 10px 0 rgba(105, 108, 255, 0.3); }
-        
-        #loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; }
-        #dashboard-content { display: none; }
-        #login-page { height:100vh; display:none; flex-direction:column; justify-content:center; align-items:center; background:#fff; text-align: center; }
-        
+        #loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.9); display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; }
         .badge-date { background: #e1f0ff; color: #03c3ec; padding: 4px 8px; border-radius: 4px; font-weight: 700; font-size: 0.7rem; }
-        .table thead th { background: #f8f9fa; text-transform: uppercase; font-size: 0.65rem; font-weight: 700; padding: 12px; border: none; }
     </style>
 </head>
 <body>
 
     <div id="loading-overlay">
-        <div class="spinner-border text-primary mb-3" style="width: 3rem; height: 3rem;"></div>
-        <p class="fw-bold text-primary">SINKRONISASI DATABASE AMS...</p>
+        <div class="spinner-border text-primary mb-3"></div>
+        <p class="fw-bold">SINKRONISASI DATA...</p>
     </div>
 
-    <div id="login-page">
-        <img src="https://i.ibb.co.com/wTG6VXf/1775452711898-removebg-preview.png" alt="Logo" style="width: 130px; margin-bottom: 10px;">
-        <h3 class="fw-bold text-dark mb-1">AMS <span style="color:#696cff">RIDE</span></h3>
-        <p class="text-muted small px-4">Command Center Portal<br>MRD Digital Solution</p>
-        <div id="buttonDiv" class="mt-3"></div>
-    </div>
+    <div id="dashboard-content" class="content-area">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold mb-0">AMS RIDE / DASHBOARD</h5>
+            <button class="btn btn-outline-danger btn-sm rounded-pill fw-bold" onclick="logout()">LOG OUT</button>
+        </div>
 
-    <div id="dashboard-content" class="layout-wrapper">
-        <div class="content-area">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h5 class="fw-bold mb-0">AMS RIDE / <span class="text-muted fw-light">DASHBOARD</span></h5>
-                <button class="btn btn-label-danger btn-sm rounded-pill px-3 border-danger text-danger fw-bold" onclick="logout()">LOG OUT</button>
-            </div>
-
-            <div class="row g-2 mb-3">
-                <div class="col-6 col-md-3">
-                    <div class="card p-3 card-stat border-success">
-                        <div class="d-flex align-items-center">
-                            <div class="icon-box bg-light-success me-2"><i class="fas fa-motorcycle"></i></div>
-                            <div>
-                                <div class="stat-label">Tersedia</div>
-                                <div class="stat-number" id="stat-ready">0</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="card p-3 card-stat border-primary">
-                        <div class="d-flex align-items-center">
-                            <div class="icon-box bg-light-primary me-2"><i class="fas fa-user-clock"></i></div>
-                            <div>
-                                <div class="stat-label">Disewa</div>
-                                <div class="stat-number" id="stat-rented">0</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="card p-3 card-stat border-warning">
-                        <div class="d-flex align-items-center">
-                            <div class="icon-box bg-light-warning me-2"><i class="fas fa-calendar-alt"></i></div>
-                            <div>
-                                <div class="stat-label">Booking</div>
-                                <div class="stat-number" id="stat-booking">0</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="card p-3 card-stat border-info">
-                        <div class="d-flex align-items-center">
-                            <div class="icon-box bg-light-info me-2"><i class="fas fa-layer-group"></i></div>
-                            <div>
-                                <div class="stat-label">Armada</div>
-                                <div class="stat-number" id="stat-total">0</div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="row g-2 mb-3">
+            <div class="col-6">
+                <div class="card p-3 card-stat st-tersedia">
+                    <div class="stat-label">Unit Tersedia</div>
+                    <div class="stat-number" id="val-tersedia">0</div>
                 </div>
             </div>
-
-            <div class="row g-3 mb-4">
-                <div class="col-12 col-md-7">
-                    <div class="card p-3 card-income">
-                        <div class="d-flex justify-content-between align-items-start">
-                            <div>
-                                <small class="fw-bold text-uppercase opacity-75">Estimasi Income Bulan Ini</small>
-                                <div class="stat-income-val mt-1" id="stat-income">Rp 0</div>
-                            </div>
-                            <i class="fas fa-wallet fa-2x opacity-25"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-5">
-                    <button class="btn btn-primary w-100 h-100 py-3 fw-bold rounded-3 shadow" data-bs-toggle="modal" data-bs-target="#modalInput">
-                        <i class="fas fa-plus-circle me-2"></i> REGISTER RENTAL BARU
-                    </button>
+            <div class="col-6">
+                <div class="card p-3 card-stat st-disewa">
+                    <div class="stat-label">Sedang Disewa</div>
+                    <div class="stat-number" id="val-disewa">0</div>
                 </div>
             </div>
+            <div class="col-6">
+                <div class="card p-3 card-stat st-waiting">
+                    <div class="stat-label">Waiting List</div>
+                    <div class="stat-number" id="val-waiting">0</div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card p-3 card-stat st-armada">
+                    <div class="stat-label">Total Armada</div>
+                    <div class="stat-number" id="val-armada">0</div>
+                </div>
+            </div>
+        </div>
 
-            <div class="card shadow-sm">
-                <div class="card-header bg-transparent py-3 border-bottom d-flex align-items-center">
-                    <i class="fas fa-history text-primary me-2"></i><h6 class="mb-0 fw-bold">Recent History</h6>
+        <div class="card p-3 card-income mb-3 shadow">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <small class="fw-bold opacity-75">ESTIMASI INCOME BULAN INI</small>
+                    <div class="h3 fw-bold mb-0" id="val-income">Rp 0</div>
                 </div>
-                <div class="table-responsive text-nowrap">
-                    <table class="table table-hover mb-0">
-                        <thead>
-                            <tr>
-                                <th>TGL</th>
-                                <th>UNIT</th>
-                                <th>PENYEWA</th>
-                                <th>TOTAL</th>
-                            </tr>
-                        </thead>
-                        <tbody id="table-body" style="font-size: 0.85rem;"></tbody>
-                    </table>
-                </div>
+                <i class="fas fa-wallet fa-2x opacity-50"></i>
+            </div>
+        </div>
+
+        <button class="btn btn-primary w-100 py-3 mb-4 shadow rounded-3" data-bs-toggle="modal" data-bs-target="#modalReg">
+            <i class="fas fa-plus-circle me-2"></i> REGISTER RENTAL BARU
+        </button>
+
+        <div class="card">
+            <div class="card-header bg-transparent border-bottom py-3">
+                <h6 class="mb-0 fw-bold"><i class="fas fa-history text-primary me-2"></i>Recent History</h6>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover mb-0" style="font-size: 0.85rem;">
+                    <thead>
+                        <tr>
+                            <th>TGL</th>
+                            <th>UNIT</th>
+                            <th>PENYEWA</th>
+                            <th>TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-history"></tbody>
+                </table>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="modalInput" tabindex="-1">
+    <div class="modal fade" id="modalReg" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered p-3">
-            <div class="modal-content border-0 rounded-4 shadow-lg">
+            <div class="modal-content rounded-4 border-0">
                 <div class="modal-body p-4">
-                    <h5 class="fw-bold text-dark mb-4">Register Rental Baru</h5>
-                    <form id="formRegister">
+                    <h5 class="fw-bold mb-4">Input Register Baru</h5>
+                    <form id="formInput">
                         <div class="mb-3">
-                            <label class="form-label small fw-bold text-muted">PILIH MOTOR</label>
-                            <select class="form-select border-2" id="motor_id" required></select>
+                            <label class="form-label small fw-bold">PILIH MOTOR</label>
+                            <select id="sel-motor" class="form-select" required></select>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label small fw-bold text-muted">NAMA PENYEWA</label>
-                            <input list="listCustomer" class="form-control border-2" id="customer_id" placeholder="Cari/Tulis Nama" required>
-                            <datalist id="listCustomer"></datalist>
+                            <label class="form-label small fw-bold">NAMA PENYEWA</label>
+                            <input list="cust-list" id="inp-nama" class="form-control" required>
+                            <datalist id="cust-list"></datalist>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label small fw-bold text-muted">NO WHATSAPP</label>
-                            <input type="tel" class="form-control border-2" id="wa_number" placeholder="08..." required>
-                        </div>
-                        <div class="row mb-3">
+                        <div class="row g-2 mb-4">
                             <div class="col-6">
-                                <label class="form-label small fw-bold text-muted">DURASI</label>
-                                <input type="number" class="form-control border-2" id="duration" placeholder="Hari" required>
+                                <label class="form-label small fw-bold">DURASI (HARI)</label>
+                                <input type="number" id="inp-durasi" class="form-control" required>
                             </div>
                             <div class="col-6">
-                                <label class="form-label small fw-bold text-muted">TOTAL RP</label>
-                                <input type="number" class="form-control border-2" id="total_price" placeholder="Rupiah" required>
+                                <label class="form-label small fw-bold">TOTAL HARGA</label>
+                                <input type="number" id="inp-total" class="form-control" required>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100 py-3 fw-bold mt-2">SIMPAN TRANSAKSI</button>
+                        <button type="submit" class="btn btn-primary w-100 py-2">SIMPAN DATA</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const webAppUrl = "https://script.google.com/macros/s/AKfycbxcXYNKgxMYEtQKMyFrcPvvF0sHHn3I3GBZa6lkFhPhhTV-2rYUeS8C4Lgc4BojVETDtQ/exec";
-        let userEmail = "";
-
-        window.onload = () => {
-            const savedEmail = localStorage.getItem('ams_user_email');
-            if (savedEmail) { userEmail = savedEmail; showDashboard(); } 
-            else { document.getElementById('login-page').style.display = 'flex'; initGoogleLogin(); }
-        };
-
-        function initGoogleLogin() {
-            google.accounts.id.initialize({ client_id: "212161035085-1e9tq8phf1tmski9hnvhd0v17b6tkp9o.apps.googleusercontent.com", callback: handleCredentialResponse });
-            google.accounts.id.renderButton(document.getElementById("buttonDiv"), { theme: "outline", size: "large" });
-        }
-
-        function handleCredentialResponse(r) {
-            const p = JSON.parse(atob(r.credential.split('.')[1]));
-            userEmail = p.email;
-            localStorage.setItem('ams_user_email', userEmail);
-            showDashboard();
-        }
-
-        function showDashboard() {
-            document.getElementById('login-page').style.display = 'none';
-            document.getElementById('dashboard-content').style.display = 'block';
-            loadData();
-        }
-
-        function logout() { localStorage.clear(); location.reload(); }
-
+        
         function loadData() {
             document.getElementById('loading-overlay').style.display = 'flex';
-            fetch(`${webAppUrl}?action=read_full&email=${userEmail}`)
-            .then(r => r.json())
+            fetch(`${webAppUrl}?action=read_full`)
+            .then(res => res.json())
             .then(data => {
-                // SINKRONISASI 4 KOTAK STATS DARI TABEL ITEM & REGISTER
-                document.getElementById('stat-ready').innerText = data.unitsReady || 0;
-                document.getElementById('stat-rented').innerText = data.unitsRented || 0;
-                document.getElementById('stat-booking').innerText = data.unitsBooking || 0;
-                document.getElementById('stat-total').innerText = data.totalArmada || 0;
-                document.getElementById('stat-income').innerText = "Rp " + (data.income || 0);
-                
-                let h = ""; 
-                data.records.forEach(r => { 
-                    h += `<tr>
+                // LOGIKA SINKRONISASI (DIAMBIL DARI DATA.JSON HASIL GOOGLE SCRIPT)
+                document.getElementById('val-tersedia').innerText = data.unitsAvailable; // Dari Item status Available
+                document.getElementById('val-disewa').innerText = data.unitsRented;       // Dari Item status Rent
+                document.getElementById('val-waiting').innerText = data.unitsBooked;      // Dari Register status Booked
+                document.getElementById('val-armada').innerText = data.totalArmada;       // Total Baris Item
+                document.getElementById('val-income').innerText = "Rp " + data.income;
+
+                // Update Table History
+                let rows = "";
+                data.records.forEach(r => {
+                    rows += `<tr>
                         <td><span class="badge-date">${r.tgl}</span></td>
                         <td class="fw-bold">${r.unit}</td>
                         <td>${r.nama}</td>
                         <td class="text-primary fw-bold">${r.total}</td>
-                    </tr>`; 
+                    </tr>`;
                 });
-                document.getElementById('table-body').innerHTML = h;
+                document.getElementById('table-history').innerHTML = rows;
 
-                let m = '<option value="">-- Pilih Unit --</option>'; 
-                data.motors.forEach(i => { m += `<option value="${i.no_motor}">${i.no_motor} - ${i.tipe}</option>`; });
-                document.getElementById('motor_id').innerHTML = m;
-
-                let c = ""; 
-                data.customers.forEach(i => { c += `<option value="${i.nama}">`; });
-                document.getElementById('listCustomer').innerHTML = c;
+                // Update Motor Select (Hanya yang Available)
+                let opt = '<option value="">-- Pilih Unit --</option>';
+                data.motors.filter(m => m.status === "Available").forEach(m => {
+                    opt += `<option value="${m.no_motor}">${m.no_motor} - ${m.tipe}</option>`;
+                });
+                document.getElementById('sel-motor').innerHTML = opt;
 
                 document.getElementById('loading-overlay').style.display = 'none';
             });
         }
 
-        document.getElementById('formRegister').onsubmit = (e) => {
-            e.preventDefault();
-            document.getElementById('loading-overlay').style.display = 'flex';
-            const body = {
-                action: "insert_register", email: userEmail,
-                no_motor: document.getElementById('motor_id').value,
-                customer: document.getElementById('customer_id').value,
-                wa: document.getElementById('wa_number').value,
-                durasi: document.getElementById('duration').value,
-                total: document.getElementById('total_price').value
-            };
-            fetch(webAppUrl, { method: "POST", body: JSON.stringify(body) }).then(() => {
-                bootstrap.Modal.getInstance(document.getElementById('modalInput')).hide();
-                document.getElementById('formRegister').reset();
-                loadData();
-            });
-        };
+        // Jalankan load data saat halaman siap
+        window.onload = loadData;
+        
+        function logout() { localStorage.clear(); location.reload(); }
     </script>
 </body>
 </html>
