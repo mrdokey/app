@@ -3,140 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AMS RIDE | Dashboard</title>
+    <title>AMS RIDE | Master Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Public Sans', sans-serif; background-color: #f5f5f9; margin: 0; padding: 15px; }
-        .card { border: none; border-radius: 12px; box-shadow: 0 2px 6px rgba(67, 89, 113, 0.12); margin-bottom: 12px; }
+        body { font-family: 'Public Sans', sans-serif; background-color: #f5f5f9; margin: 0; padding: 12px; }
+        .card { border: none; border-radius: 12px; box-shadow: 0 2px 8px rgba(67, 89, 113, 0.1); margin-bottom: 12px; }
         
-        /* Stats Styling sesuai Arta */
-        .st-box { padding: 15px; border-left: 5px solid; }
-        .st-available { border-left-color: #71dd37; color: #71dd37; } /* Hijau */
-        .st-rent { border-left-color: #696cff; color: #696cff; }      /* Biru */
-        .st-booked { border-left-color: #ffab00; color: #ffab00; }    /* Oranye */
-        .st-total { border-left-color: #8592a3; color: #8592a3; }     /* Abu-abu */
+        /* Stats Box Arta Style (Tersedia, Disewa, Booking, Armada) */
+        .st-box { padding: 15px; border-left: 5px solid; transition: 0.3s; }
+        .st-available { border-left-color: #71dd37; } /* Hijau */
+        .st-rent { border-left-color: #696cff; }      /* Biru */
+        .st-booked { border-left-color: #ffab00; }    /* Oranye */
+        .st-total { border-left-color: #8592a3; }     /* Abu-abu */
         
-        .st-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; color: #a1acb8; }
-        .st-val { font-size: 1.8rem; font-weight: 800; color: #566a7f; }
+        .st-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; color: #a1acb8; display: block; margin-bottom: 4px; }
+        .st-val { font-size: 1.8rem; font-weight: 800; color: #566a7f; line-height: 1.1; }
         
-        .card-income { background: linear-gradient(72deg, #696cff 0%, #3f42ef 100%); color: white; }
-        .btn-reg { background: #696cff; color: white; font-weight: 700; border-radius: 8px; border: none; width: 100%; padding: 15px; }
+        /* Hero Income */
+        .card-income { background: linear-gradient(135deg, #696cff 0%, #3f42ef 100%); color: white; border: none; }
+        .btn-reg { background: #696cff; color: white; font-weight: 700; border: none; border-radius: 10px; width: 100%; padding: 15px; box-shadow: 0 4px 12px rgba(105, 108, 255, 0.3); }
         
-        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.9); 
+        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; 
                    display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; }
-        .table-history { font-size: 0.8rem; }
+        
+        .badge-info-mrd { background: #e7e7ff; color: #696cff; padding: 4px 8px; border-radius: 4px; font-weight: 700; font-size: 0.7rem; }
+        .table thead th { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; color: #a1acb8; border-bottom-width: 1px; }
     </style>
 </head>
 <body>
 
     <div id="overlay">
-        <div class="spinner-border text-primary mb-2"></div>
-        <div class="fw-bold text-primary">SINKRONISASI DATA...</div>
+        <div class="spinner-border text-primary mb-3" style="width: 3rem; height: 3rem;"></div>
+        <div class="fw-bold text-primary">SINKRONISASI DATABASE...</div>
     </div>
 
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h5 class="fw-bold mb-0">AMS RIDE / <span class="text-muted">DASHBOARD</span></h5>
-        <button class="btn btn-sm btn-outline-danger" onclick="location.reload()">REFRESH</button>
+        <h5 class="fw-bold mb-0">AMS <span style="color:#696cff">RIDE</span></h5>
+        <button class="btn btn-sm btn-outline-secondary rounded-pill" onclick="fetchDashboardData()">
+            <i class="fas fa-sync-alt me-1"></i> Refresh
+        </button>
     </div>
 
     <div class="row g-2 mb-3">
         <div class="col-6">
             <div class="card st-box st-available">
-                <div class="st-label">Unit Tersedia</div>
+                <span class="st-label">Tersedia</span>
                 <div class="st-val" id="val-available">0</div>
             </div>
         </div>
         <div class="col-6">
             <div class="card st-box st-rent">
-                <div class="st-label">Sedang Disewa</div>
+                <span class="st-label">Sedang Disewa</span>
                 <div class="st-val" id="val-rent">0</div>
             </div>
         </div>
         <div class="col-6">
             <div class="card st-box st-booked">
-                <div class="st-label">Waiting List</div>
+                <span class="st-label">Waiting List</span>
                 <div class="st-val" id="val-booked">0</div>
             </div>
         </div>
         <div class="col-6">
             <div class="card st-box st-total">
-                <div class="st-label">Total Armada</div>
+                <span class="st-label">Total Armada</span>
                 <div class="st-val" id="val-total">0</div>
             </div>
         </div>
     </div>
 
-    <div class="card card-income p-3 mb-3">
-        <small class="fw-bold opacity-75">ESTIMASI INCOME BULAN INI</small>
-        <div class="h2 fw-bold mb-0" id="val-income">Rp 0</div>
+    <div class="card card-income p-3 mb-3 shadow">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <small class="fw-bold opacity-75">ESTIMASI INCOME (BALI TIME)</small>
+                <div class="h2 fw-bold mb-0 mt-1" id="val-income">Rp 0</div>
+            </div>
+            <i class="fas fa-wallet fa-2x opacity-25"></i>
+        </div>
     </div>
 
-    <button class="btn-reg shadow-sm mb-4" data-bs-toggle="modal" data-bs-target="#modalReg">
+    <button class="btn-reg mb-4" onclick="alert('Form Register sedang disiapkan!')">
         <i class="fas fa-plus-circle me-2"></i> REGISTER RENTAL BARU
     </button>
 
-    <div class="card">
-        <div class="card-header bg-transparent py-3 fw-bold border-bottom">
-            <i class="fas fa-history me-2 text-primary"></i>Recent History
+    <div class="card overflow-hidden">
+        <div class="card-header bg-white py-3 border-bottom d-flex align-items-center">
+            <h6 class="mb-0 fw-bold"><i class="fas fa-history text-primary me-2"></i>Riwayat Terakhir</h6>
         </div>
         <div class="table-responsive">
-            <table class="table table-hover mb-0 table-history">
+            <table class="table table-hover mb-0">
                 <thead>
                     <tr>
-                        <th>TGL</th>
-                        <th>UNIT</th>
-                        <th>PENYEWA</th>
-                        <th>TOTAL</th>
+                        <th>TGL</th><th>UNIT</th><th>NAMA</th><th>TOTAL</th>
                     </tr>
                 </thead>
-                <tbody id="table-body"></tbody>
+                <tbody id="table-body" style="font-size: 0.8rem;"></tbody>
             </table>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // GANTI INI DENGAN URL WEB APP MASTER
-        const URL_APP = "https://script.google.com/macros/s/AKfycbxcXYNKgxMYEtQKMyFrcPvvF0sHHn3I3GBZa6lkFhPhhTV-2rYUeS8C4Lgc4BojVETDtQ/exec";
+        // URL DEPLOY BARU HASIL CLASP PUSH
+        const URL_APP = "https://script.google.com/macros/s/AKfycbroH3Jh3-OoWt4Gh30JYWpn7tZCdOmIhirP4FsssoDHM9T7CvdeA_LyLQ8lbdQrjZkXA/exec";
+        
+        // Sesuaikan dengan email user yang login (sementara hardcoded)
+        const USER_EMAIL = "mrd.digital.sol@gmail.com"; 
 
-        function fetchData() {
-            document.getElementById('overlay').style.display = 'flex';
+        async function fetchDashboardData() {
+            const loader = document.getElementById('overlay');
+            loader.style.display = 'flex';
             
-            fetch(`${URL_APP}?action=read_full`)
-            .then(res => res.json())
-            .then(data => {
-                // SINKRONISASI LOGIKA ARTA
-                // Pastikan di Google Script Master mengirim field: unitsAvailable, unitsRented, unitsBooked, totalArmada
-                document.getElementById('val-available').innerText = data.unitsAvailable || 0;
-                document.getElementById('val-rent').innerText = data.unitsRented || 0;
-                document.getElementById('val-booked').innerText = data.unitsBooked || 0;
-                document.getElementById('val-total').innerText = data.totalArmada || 0;
-                document.getElementById('val-income').innerText = "Rp " + (data.income || 0);
-
-                let rows = "";
-                data.records.forEach(r => {
-                    rows += `<tr>
-                        <td><span class="badge bg-label-info">${r.tgl}</span></td>
-                        <td class="fw-bold">${r.unit}</td>
-                        <td>${r.nama}</td>
-                        <td class="text-primary fw-bold">${r.total}</td>
-                    </tr>`;
-                });
-                document.getElementById('table-body').innerHTML = rows;
+            try {
+                // Menambahkan email ke parameter untuk sistem Multi-Client Master
+                const response = await fetch(`${URL_APP}?action=read_full&email=${encodeURIComponent(USER_EMAIL)}`);
+                const data = await response.json();
                 
-                document.getElementById('overlay').style.display = 'none';
-            })
-            .catch(err => {
-                console.error(err);
-                alert("Gagal ambil data. Cek koneksi atau Script Master!");
-                document.getElementById('overlay').style.display = 'none';
-            });
+                console.log("Response Data:", data);
+
+                if (data.error) {
+                    alert("Akses Ditolak: " + data.error);
+                } else {
+                    // Update Stats dengan pengaman || 0 agar tidak undefined
+                    document.getElementById('val-available').innerText = data.unitsAvailable || 0;
+                    document.getElementById('val-rent').innerText      = data.unitsRented || 0;
+                    document.getElementById('val-booked').innerText    = data.unitsBooked || 0;
+                    document.getElementById('val-total').innerText     = data.totalArmada || 0;
+                    document.getElementById('val-income').innerText    = "Rp " + (data.income || 0);
+
+                    // Update Riwayat (History)
+                    let rows = "";
+                    if (data.records && data.records.length > 0) {
+                        data.records.forEach(r => {
+                            rows += `<tr>
+                                <td><span class="badge-info-mrd">${r.tgl}</span></td>
+                                <td class="fw-bold">${r.unit}</td>
+                                <td>${r.nama}</td>
+                                <td class="text-primary fw-bold">${r.total}</td>
+                            </tr>`;
+                        });
+                    } else {
+                        rows = "<tr><td colspan='4' class='text-center p-3'>Belum ada transaksi</td></tr>";
+                    }
+                    document.getElementById('table-body').innerHTML = rows;
+                }
+            } catch (err) {
+                console.error("Fetch Error:", err);
+                alert("Gagal terhubung ke database. Cek koneksi internet atau URL Deploy!");
+            } finally {
+                // Pastikan overlay hilang
+                loader.style.display = 'none';
+            }
         }
 
-        window.onload = fetchData;
+        // Jalankan saat halaman pertama kali dibuka
+        window.onload = fetchDashboardData;
     </script>
 </body>
 </html>
