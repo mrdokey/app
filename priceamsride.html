@@ -9,41 +9,83 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8f9fa; color: #2d3436; padding-bottom: 50px; overflow-x: hidden; }
-        .hero-section { background: linear-gradient(135deg, #696cff 0%, #3f42ef 100%); padding: 40px 0 80px; color: white; text-align: center; border-radius: 0 0 40px 40px; position: relative; }
-        .btn-back-top { position: absolute; top: 20px; left: 20px; color: white; text-decoration: none; font-weight: 600; font-size: 0.85rem; background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.3); transition: 0.3s; z-index: 10; }
         
-        .table-container { margin-top: -50px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); overflow: hidden; margin-left: 10px; margin-right: 10px; }
+        /* HERO SECTION */
+        .hero-section { 
+            background: linear-gradient(135deg, #696cff 0%, #3f42ef 100%); 
+            padding: 40px 0 70px; /* Padding bawah dikurangi sedikit */
+            color: white; 
+            text-align: center; 
+            border-radius: 0 0 40px 40px; 
+            position: relative; 
+        }
+        .btn-back-top { position: absolute; top: 20px; left: 20px; color: white; text-decoration: none; font-weight: 600; font-size: 0.8rem; background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.3); z-index: 10; }
         
-        /* FIX AGAR TIDAK SCROLL KANAN */
+        /* TABLE CONTAINER */
+        .table-container { 
+            margin-top: -30px; /* Diturunkan agar tidak menabrak teks hero */
+            background: white; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+            overflow: hidden; 
+            margin-left: 10px; 
+            margin-right: 10px; 
+        }
+        
         .table { margin-bottom: 0; vertical-align: middle; table-layout: fixed; width: 100%; }
-        .table thead th { background: #f4f5fb; padding: 15px 5px; border: none; text-align: center; vertical-align: bottom; }
-        .table tbody td { padding: 12px 5px; border-color: #f1f2f6; font-size: 0.75rem; text-align: center; }
         
-        /* KOLOM KIRI (FITUR UTAMA) */
+        /* HEADER TABEL */
+        .table thead th { 
+            background: #f4f5fb; 
+            padding: 12px 2px; 
+            border: none; 
+            text-align: center; 
+            vertical-align: middle;
+            word-wrap: break-word;
+        }
+
+        /* NAMA PAKET (BASIC, ADVANCE, FULL) */
+        .pkg-name {
+            display: block;
+            font-weight: 800;
+            font-size: 0.65rem;
+            line-height: 1.2;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+        }
+        
+        /* KOLOM FITUR UTAMA */
         .feature-name { 
             font-weight: 700; 
             color: #566a7f; 
-            width: 35%; /* Mengunci lebar kolom kiri */
+            width: 35%; /* Lebar kolom kiri */
             text-align: left !important; 
             padding-left: 12px !important;
-            word-wrap: break-word; /* Teks otomatis ke bawah */
-            white-space: normal; /* Paksa baris baru */
-            line-height: 1.2;
+            word-wrap: break-word; 
+            white-space: normal; 
+            line-height: 1.1;
+            font-size: 0.75rem;
         }
 
-        .price-old { text-decoration: line-through; color: #b2bec3; font-size: 0.65rem; display: block; }
-        .price-new { font-size: 0.9rem; font-weight: 800; color: #696cff; display: block; }
+        .table tbody td { padding: 12px 5px; border-color: #f1f2f6; font-size: 0.7rem; text-align: center; }
         
-        .check-icon { color: #2ecc71; font-size: 1.1rem; }
-        .cross-icon { color: #dfe6e9; font-size: 1.1rem; }
+        /* HARGA */
+        .price-old { text-decoration: line-through; color: #b2bec3; font-size: 0.6rem; display: block; line-height: 1; }
+        .price-new { font-size: 0.8rem; font-weight: 800; color: #696cff; display: block; line-height: 1.2; }
+        
+        .check-icon { color: #2ecc71; font-size: 1rem; }
+        .cross-icon { color: #dfe6e9; font-size: 1rem; }
         .highlight-col { background-color: rgba(105, 108, 255, 0.03); }
-        .btn-select { border-radius: 8px; font-weight: 700; font-size: 0.7rem; text-transform: uppercase; width: 100%; padding: 8px 2px; }
-        .badge-domain { background: #fff3cd; color: #856404; font-size: 0.6rem; padding: 4px 2px; border-radius: 4px; font-weight: 800; display: block; margin-top: 5px; line-height: 1; }
+        
+        .btn-select { border-radius: 8px; font-weight: 700; font-size: 0.65rem; text-transform: uppercase; width: 100%; padding: 6px 2px; }
+        .badge-domain { background: #fff3cd; color: #856404; font-size: 0.55rem; padding: 4px 2px; border-radius: 4px; font-weight: 800; display: block; margin-top: 5px; line-height: 1; }
         
         @media (max-width: 576px) {
-            .table tbody td { font-size: 0.7rem; }
-            .feature-name { width: 32%; padding-left: 8px !important; }
-            .hero-section h2 { font-size: 1.5rem; }
+            .hero-section h2 { font-size: 1.4rem; }
+            .table-container { margin-top: -25px; }
+            .feature-name { width: 34%; font-size: 0.7rem; }
+            .pkg-name { font-size: 0.6rem; }
+            .price-new { font-size: 0.75rem; }
         }
     </style>
 </head>
@@ -53,7 +95,7 @@
         <a href="index.html" class="btn-back-top"><i class="fas fa-arrow-left me-2"></i>Beranda</a>
         
         <div class="container">
-            <img src="https://i.ibb.co.com/wTG6VXf/1775452711898-removebg-preview.png" alt="AMS RIDE" style="width: 80px;" class="mb-2">
+            <img src="https://i.ibb.co.com/wTG6VXf/1775452711898-removebg-preview.png" alt="AMS RIDE" style="width: 70px;" class="mb-2">
             <h2 class="fw-800">Paket Harga <span style="color: #ffda79;">AMS RIDE</span></h2>
             <p class="opacity-75 small">Bandingkan Fitur & Pilih Paket Anda</p>
         </div>
@@ -65,9 +107,21 @@
                 <thead>
                     <tr>
                         <th class="feature-name">FITUR UTAMA</th>
-                        <th><span class="text-muted small">BASIC</span><span class="price-old">1.000k</span><span class="price-new">750k</span></th>
-                        <th class="highlight-col"><span class="text-primary small">ADVANCE</span><span class="price-old">1.750k</span><span class="price-new">1.500k</span></th>
-                        <th><span class="text-muted small">FULL</span><span class="price-old">3.500k</span><span class="price-new">2.500k</span></th>
+                        <th>
+                            <span class="text-muted pkg-name">BASIC</span>
+                            <span class="price-old">1.000k</span>
+                            <span class="price-new">750k</span>
+                        </th>
+                        <th class="highlight-col">
+                            <span class="text-primary pkg-name">ADVANCE</span>
+                            <span class="price-old">1.750k</span>
+                            <span class="price-new">1.500k</span>
+                        </th>
+                        <th>
+                            <span class="text-muted pkg-name">FULL</span>
+                            <span class="price-old">3.500k</span>
+                            <span class="price-new">2.500k</span>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
