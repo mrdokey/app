@@ -12,153 +12,123 @@
         body { font-family: 'Public Sans', sans-serif; background-color: #f5f5f9; margin: 0; padding: 12px; }
         .card { border: none; border-radius: 12px; box-shadow: 0 2px 8px rgba(67, 89, 113, 0.1); margin-bottom: 12px; }
         
-        /* Stats Box Arta Style (Tersedia, Disewa, Booking, Armada) */
-        .st-box { padding: 15px; border-left: 5px solid; transition: 0.3s; }
-        .st-available { border-left-color: #71dd37; } /* Hijau */
-        .st-rent { border-left-color: #696cff; }      /* Biru */
-        .st-booked { border-left-color: #ffab00; }    /* Oranye */
-        .st-total { border-left-color: #8592a3; }     /* Abu-abu */
+        /* Stats Arta Style */
+        .st-box { padding: 15px; border-left: 5px solid; }
+        .st-available { border-left-color: #71dd37; } 
+        .st-rent { border-left-color: #696cff; }      
+        .st-booked { border-left-color: #ffab00; }    
+        .st-total { border-left-color: #8592a3; }     
         
         .st-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; color: #a1acb8; display: block; margin-bottom: 4px; }
         .st-val { font-size: 1.8rem; font-weight: 800; color: #566a7f; line-height: 1.1; }
         
-        /* Hero Income */
         .card-income { background: linear-gradient(135deg, #696cff 0%, #3f42ef 100%); color: white; border: none; }
         .btn-reg { background: #696cff; color: white; font-weight: 700; border: none; border-radius: 10px; width: 100%; padding: 15px; box-shadow: 0 4px 12px rgba(105, 108, 255, 0.3); }
         
         #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; 
                    display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; }
-        
         .badge-info-mrd { background: #e7e7ff; color: #696cff; padding: 4px 8px; border-radius: 4px; font-weight: 700; font-size: 0.7rem; }
-        .table thead th { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; color: #a1acb8; border-bottom-width: 1px; }
     </style>
 </head>
 <body>
 
     <div id="overlay">
-        <div class="spinner-border text-primary mb-3" style="width: 3rem; height: 3rem;"></div>
-        <div class="fw-bold text-primary">SINKRONISASI DATABASE...</div>
+        <div class="spinner-border text-primary mb-3"></div>
+        <div class="fw-bold text-primary">SINKRONISASI DATA...</div>
     </div>
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h5 class="fw-bold mb-0">AMS <span style="color:#696cff">RIDE</span></h5>
-        <button class="btn btn-sm btn-outline-secondary rounded-pill" onclick="fetchDashboardData()">
-            <i class="fas fa-sync-alt me-1"></i> Refresh
-        </button>
+        <button class="btn btn-sm btn-outline-danger rounded-pill" onclick="logout()">Logout</button>
     </div>
 
     <div class="row g-2 mb-3">
-        <div class="col-6">
-            <div class="card st-box st-available">
-                <span class="st-label">Tersedia</span>
-                <div class="st-val" id="val-available">0</div>
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="card st-box st-rent">
-                <span class="st-label">Sedang Disewa</span>
-                <div class="st-val" id="val-rent">0</div>
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="card st-box st-booked">
-                <span class="st-label">Waiting List</span>
-                <div class="st-val" id="val-booked">0</div>
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="card st-box st-total">
-                <span class="st-label">Total Armada</span>
-                <div class="st-val" id="val-total">0</div>
-            </div>
-        </div>
+        <div class="col-6"><div class="card st-box st-available"><span class="st-label">Tersedia</span><div class="st-val" id="val-available">0</div></div></div>
+        <div class="col-6"><div class="card st-box st-rent"><span class="st-label">Disewa</span><div class="st-val" id="val-rent">0</div></div></div>
+        <div class="col-6"><div class="card st-box st-booked"><span class="st-label">Booking</span><div class="st-val" id="val-booked">0</div></div></div>
+        <div class="col-6"><div class="card st-box st-total"><span class="st-label">Armada</span><div class="st-val" id="val-total">0</div></div></div>
     </div>
 
-    <div class="card card-income p-3 mb-3 shadow">
-        <div class="d-flex justify-content-between align-items-center">
-            <div>
-                <small class="fw-bold opacity-75">ESTIMASI INCOME (BALI TIME)</small>
-                <div class="h2 fw-bold mb-0 mt-1" id="val-income">Rp 0</div>
-            </div>
-            <i class="fas fa-wallet fa-2x opacity-25"></i>
-        </div>
+    <div class="card card-income p-3 mb-3">
+        <small class="fw-bold opacity-75">ESTIMASI INCOME (WITA)</small>
+        <div class="h2 fw-bold mb-0 mt-1" id="val-income">Rp 0</div>
     </div>
 
-    <button class="btn-reg mb-4" onclick="alert('Form Register sedang disiapkan!')">
+    <button class="btn-reg mb-4" onclick="location.href='register.html'">
         <i class="fas fa-plus-circle me-2"></i> REGISTER RENTAL BARU
     </button>
 
     <div class="card overflow-hidden">
-        <div class="card-header bg-white py-3 border-bottom d-flex align-items-center">
-            <h6 class="mb-0 fw-bold"><i class="fas fa-history text-primary me-2"></i>Riwayat Terakhir</h6>
+        <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
+            <h6 class="mb-0 fw-bold">Riwayat Terakhir</h6>
+            <i class="fas fa-sync text-muted" onclick="fetchDashboardData()" style="cursor:pointer"></i>
         </div>
         <div class="table-responsive">
             <table class="table table-hover mb-0">
-                <thead>
-                    <tr>
-                        <th>TGL</th><th>UNIT</th><th>NAMA</th><th>TOTAL</th>
-                    </tr>
-                </thead>
                 <tbody id="table-body" style="font-size: 0.8rem;"></tbody>
             </table>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // URL DEPLOY BARU HASIL CLASP PUSH
+        // URL DEPLOY TERBARU HASIL CLASP PUSH MASTER
         const URL_APP = "https://script.google.com/macros/s/AKfycbroH3Jh3-OoWt4Gh30JYWpn7tZCdOmIhirP4FsssoDHM9T7CvdeA_LyLQ8lbdQrjZkXA/exec";
         
-        // Sesuaikan dengan email user yang login (sementara hardcoded)
-        const USER_EMAIL = "mrd.digital.sol@gmail.com"; 
+        // MENGAMBIL EMAIL DARI LOCAL STORAGE (Sesuai Logika Login Awal)
+        const userEmail = localStorage.getItem("userEmail");
 
         async function fetchDashboardData() {
+            if (!userEmail) {
+                alert("Sesi berakhir, silakan login kembali.");
+                location.href = "index.html"; // Balik ke login
+                return;
+            }
+
             const loader = document.getElementById('overlay');
             loader.style.display = 'flex';
             
             try {
-                // Menambahkan email ke parameter untuk sistem Multi-Client Master
-                const response = await fetch(`${URL_APP}?action=read_full&email=${encodeURIComponent(USER_EMAIL)}`);
+                // Parameter email dikirim secara dinamis
+                const response = await fetch(`${URL_APP}?action=read_full&email=${encodeURIComponent(userEmail)}`);
                 const data = await response.json();
                 
-                console.log("Response Data:", data);
-
                 if (data.error) {
-                    alert("Akses Ditolak: " + data.error);
+                    alert("Akses Gagal: " + data.error);
                 } else {
-                    // Update Stats dengan pengaman || 0 agar tidak undefined
                     document.getElementById('val-available').innerText = data.unitsAvailable || 0;
                     document.getElementById('val-rent').innerText      = data.unitsRented || 0;
                     document.getElementById('val-booked').innerText    = data.unitsBooked || 0;
                     document.getElementById('val-total').innerText     = data.totalArmada || 0;
                     document.getElementById('val-income').innerText    = "Rp " + (data.income || 0);
 
-                    // Update Riwayat (History)
                     let rows = "";
                     if (data.records && data.records.length > 0) {
                         data.records.forEach(r => {
                             rows += `<tr>
-                                <td><span class="badge-info-mrd">${r.tgl}</span></td>
+                                <td style="width:20%"><span class="badge-info-mrd">${r.tgl}</span></td>
                                 <td class="fw-bold">${r.unit}</td>
                                 <td>${r.nama}</td>
-                                <td class="text-primary fw-bold">${r.total}</td>
+                                <td class="text-primary fw-bold text-end">${r.total}</td>
                             </tr>`;
                         });
                     } else {
-                        rows = "<tr><td colspan='4' class='text-center p-3'>Belum ada transaksi</td></tr>";
+                        rows = "<tr><td colspan='4' class='text-center p-3'>Tidak ada data riwayat</td></tr>";
                     }
                     document.getElementById('table-body').innerHTML = rows;
                 }
             } catch (err) {
-                console.error("Fetch Error:", err);
-                alert("Gagal terhubung ke database. Cek koneksi internet atau URL Deploy!");
+                console.error(err);
+                alert("Gagal sinkronisasi data!");
             } finally {
-                // Pastikan overlay hilang
                 loader.style.display = 'none';
             }
         }
 
-        // Jalankan saat halaman pertama kali dibuka
+        function logout() {
+            localStorage.clear();
+            location.href = "index.html";
+        }
+
         window.onload = fetchDashboardData;
     </script>
 </body>
