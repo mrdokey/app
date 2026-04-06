@@ -8,104 +8,76 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8f9fa; color: #2d3436; }
-        .hero-section { background: linear-gradient(135deg, #696cff 0%, #3f42ef 100%); padding: 80px 0 120px; color: white; text-align: center; border-radius: 0 0 50px 50px; }
-        .pricing-container { margin-top: -80px; padding-bottom: 50px; }
-        .card-pricing { border: none; border-radius: 24px; transition: all 0.3s ease; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); height: 100%; display: flex; flex-direction: column; background: #fff; position: relative; }
-        .card-pricing:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(105, 108, 255, 0.15); }
-        .card-pricing.popular { border: 2px solid #696cff; transform: scale(1.05); z-index: 2; }
-        .badge-popular { background: #696cff; color: white; padding: 5px 20px; border-radius: 0 0 15px 15px; font-weight: 700; font-size: 0.8rem; display: inline-block; position: absolute; top: 0; left: 50%; transform: translateX(-50%); }
-        .price-old { text-decoration: line-through; color: #b2bec3; font-size: 0.9rem; font-weight: 600; }
-        .price-new { font-size: 2.2rem; font-weight: 800; color: #2d3436; margin-bottom: 5px; }
-        .feature-list { list-style: none; padding: 0; margin: 25px 0; flex-grow: 1; }
-        .feature-list li { padding: 12px 0; border-bottom: 1px solid #f1f2f6; font-size: 0.85rem; display: flex; align-items: center; color: #636e72; }
-        .feature-list li i { margin-right: 12px; font-size: 1rem; }
-        .text-check { color: #2ecc71; }
-        .text-cross { color: #dfe6e9; }
-        .btn-order { border-radius: 12px; padding: 15px; font-weight: 700; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; margin-top: auto; }
-        .footer-text { font-size: 0.8rem; color: #636e72; text-align: center; margin-top: 50px; }
-        .badge-domain { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; font-size: 0.75rem; padding: 4px 12px; border-radius: 50px; font-weight: 700; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8f9fa; color: #2d3436; padding-bottom: 50px; }
+        .hero-section { background: linear-gradient(135deg, #696cff 0%, #3f42ef 100%); padding: 40px 0 80px; color: white; text-align: center; border-radius: 0 0 40px 40px; position: relative; }
+        .btn-back-top { position: absolute; top: 20px; left: 20px; color: white; text-decoration: none; font-weight: 600; font-size: 0.85rem; background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.3); transition: 0.3s; }
+        .btn-back-top:hover { background: rgba(255,255,255,0.2); }
+        .table-container { margin-top: -50px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); overflow: hidden; }
+        .table { margin-bottom: 0; vertical-align: middle; }
+        .table thead th { background: #f4f5fb; padding: 25px 15px; border: none; text-align: center; }
+        .table tbody td { padding: 15px; border-color: #f1f2f6; font-size: 0.9rem; }
+        .feature-name { font-weight: 600; color: #566a7f; min-width: 180px; }
+        .price-old { text-decoration: line-through; color: #b2bec3; font-size: 0.8rem; display: block; }
+        .price-new { font-size: 1.2rem; font-weight: 800; color: #696cff; display: block; }
+        .check-icon { color: #2ecc71; font-size: 1.2rem; }
+        .cross-icon { color: #dfe6e9; font-size: 1.2rem; }
+        .highlight-col { background-color: rgba(105, 108, 255, 0.03); }
+        .btn-select { border-radius: 8px; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; width: 100%; }
+        .badge-domain { background: #fff3cd; color: #856404; font-size: 0.7rem; padding: 3px 8px; border-radius: 4px; font-weight: 700; display: block; margin-top: 5px; }
+        @media (max-width: 768px) { .price-new { font-size: 1rem; } .btn-back-top { font-size: 0.75rem; padding: 5px 12px; } }
     </style>
 </head>
 <body>
 
     <section class="hero-section">
+        <a href="index.html" class="btn-back-top"><i class="fas fa-arrow-left me-2"></i>Beranda MRD</a>
+        
         <div class="container">
-            <img src="https://i.ibb.co.com/wTG6VXf/1775452711898-removebg-preview.png" alt="AMS RIDE" style="width: 130px;" class="mb-3">
-            <h1 class="fw-800 mb-2">Penawaran <span style="color: #ffda79;">AMS RIDE</span></h1>
-            <p class="opacity-75">Satu Aplikasi, Beribu Kemudahan untuk Rental Anda</p>
+            <img src="https://i.ibb.co.com/wTG6VXf/1775452711898-removebg-preview.png" alt="AMS RIDE" style="width: 100px;" class="mb-2">
+            <h2 class="fw-800">Paket Harga <span style="color: #ffda79;">AMS RIDE</span></h2>
+            <p class="opacity-75 small">Bandingkan Fitur dan Pilih Sesuai Kebutuhan Anda</p>
         </div>
     </section>
 
-    <div class="container pricing-container">
-        <div class="row g-4 align-items-stretch justify-content-center">
-            
-            <div class="col-lg-4 col-md-6">
-                <div class="card card-pricing p-4">
-                    <div class="text-center pt-3">
-                        <h5 class="fw-bold mb-3 text-muted">BASIC</h5>
-                        <div class="price-old">Rp 1.000.000</div>
-                        <div class="price-new">Rp 750.000</div>
-                        <small class="text-secondary fw-bold">Cloud Management System</small>
-                    </div>
-                    <ul class="feature-list">
-                        <li><i class="fa-solid fa-check-circle text-check"></i> Kelola Jadwal Rental</li>
-                        <li><i class="fa-solid fa-check-circle text-check"></i> Automated WA Notification</li>
-                        <li><i class="fa-solid fa-check-circle text-check"></i> Reminder Masa Sewa</li>
-                        <li><i class="fa-solid fa-check-circle text-check"></i> Reminder Start (Booking)</li>
-                        <li><i class="fa-solid fa-check-circle text-check"></i> Reminder Pajak Unit</li>
-                        <li><i class="fa-solid fa-times-circle text-cross"></i> Cashflow & Dashboard</li>
-                    </ul>
-                    <a href="registrasi.html?package=basic" class="btn btn-outline-primary btn-order">Pilih Basic</a>
-                </div>
+    <div class="container mt-4">
+        <div class="table-container">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-start">FITUR UTAMA</th>
+                            <th><span class="text-muted small">BASIC</span><span class="price-old">~~1.000k~~</span><span class="price-new">750k</span></th>
+                            <th class="highlight-col"><span class="text-primary small">ADVANCE</span><span class="price-old">~~1.750k~~</span><span class="price-new">1.500k</span></th>
+                            <th><span class="text-muted small">FULL</span><span class="price-old">~~3.500k~~</span><span class="price-new">2.500k</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="feature-name">Kelola Jadwal Rental</td><td class="text-center"><i class="fa-solid fa-square-check check-icon"></i></td><td class="text-center highlight-col"><i class="fa-solid fa-square-check check-icon"></i></td><td class="text-center"><i class="fa-solid fa-square-check check-icon"></i></td></tr>
+                        <tr><td class="feature-name">Automated WA Notification</td><td class="text-center"><i class="fa-solid fa-square-check check-icon"></i></td><td class="text-center highlight-col"><i class="fa-solid fa-square-check check-icon"></i></td><td class="text-center"><i class="fa-solid fa-square-check check-icon"></i></td></tr>
+                        <tr><td class="feature-name">Reminder Masa Sewa</td><td class="text-center"><i class="fa-solid fa-square-check check-icon"></i></td><td class="text-center highlight-col"><i class="fa-solid fa-square-check check-icon"></i></td><td class="text-center"><i class="fa-solid fa-square-check check-icon"></i></td></tr>
+                        <tr><td class="feature-name">Reminder Pajak Unit</td><td class="text-center"><i class="fa-solid fa-square-check check-icon"></i></td><td class="text-center highlight-col"><i class="fa-solid fa-square-check check-icon"></i></td><td class="text-center"><i class="fa-solid fa-square-check check-icon"></i></td></tr>
+                        <tr><td class="feature-name">Cashflow Keuangan (Unit)</td><td class="text-center"><i class="fa-solid fa-square-xmark cross-icon"></i></td><td class="text-center highlight-col"><i class="fa-solid fa-square-check check-icon"></i></td><td class="text-center"><i class="fa-solid fa-square-check check-icon"></i></td></tr>
+                        <tr><td class="feature-name">Cashflow Global</td><td class="text-center"><i class="fa-solid fa-square-xmark cross-icon"></i></td><td class="text-center highlight-col"><i class="fa-solid fa-square-check check-icon"></i></td><td class="text-center"><i class="fa-solid fa-square-check check-icon"></i></td></tr>
+                        <tr><td class="feature-name">Web Admin (Sneat Style)</td><td class="text-center"><i class="fa-solid fa-square-xmark cross-icon"></i></td><td class="text-center highlight-col"><i class="fa-solid fa-square-check check-icon"></i></td><td class="text-center"><i class="fa-solid fa-square-check check-icon"></i></td></tr>
+                        <tr><td class="feature-name">Website Bisnis Custom</td><td class="text-center"><i class="fa-solid fa-square-xmark cross-icon"></i></td><td class="text-center highlight-col"><i class="fa-solid fa-square-xmark cross-icon"></i></td><td class="text-center"><i class="fa-solid fa-square-check check-icon"></i></td></tr>
+                        <tr><td class="feature-name">Bonus Domain</td><td class="text-center text-muted small">-</td><td class="text-center highlight-col text-muted small">-</td><td class="text-center"><span class="badge-domain">2 TAHUN</span></td></tr>
+                        <tr>
+                            <td></td>
+                            <td class="text-center"><a href="registrasi.html?package=basic" class="btn btn-outline-primary btn-select">Pilih</a></td>
+                            <td class="text-center highlight-col"><a href="registrasi.html?package=advance" class="btn btn-primary btn-select shadow">Pilih</a></td>
+                            <td class="text-center"><a href="registrasi.html?package=full" class="btn btn-dark btn-select">Pilih</a></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="card card-pricing popular p-4">
-                    <div class="text-center pt-4">
-                        <span class="badge-popular">PALING LARIS</span>
-                        <h5 class="fw-bold mb-3 text-primary">ADVANCE</h5>
-                        <div class="price-old">Rp 1.750.000</div>
-                        <div class="price-new text-primary">Rp 1.500.000</div>
-                        <small class="text-primary fw-bold">Professional Dashboard Monitoring</small>
-                    </div>
-                    <ul class="feature-list">
-                        <li><i class="fa-solid fa-check-circle text-check"></i> <b>Semua Fitur Paket Basic</b></li>
-                        <li><i class="fa-solid fa-check-circle text-check"></i> Cashflow Keuangan Per Unit</li>
-                        <li><i class="fa-solid fa-check-circle text-check"></i> Cashflow Keuangan Global</li>
-                        <li><i class="fa-solid fa-check-circle text-check"></i> Custom Template WA</li>
-                        <li><i class="fa-solid fa-check-circle text-check"></i> <b>Web Admin (Sneat Style)</b></li>
-                        <li><i class="fa-solid fa-times-circle text-cross"></i> Website Bisnis Custom</li>
-                    </ul>
-                    <a href="registrasi.html?package=advance" class="btn btn-primary btn-order shadow">Ambil Promo Advance</a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="card card-pricing p-4">
-                    <div class="text-center pt-3">
-                        <h5 class="fw-bold mb-3 text-muted">FULL PACKAGE</h5>
-                        <div class="price-old">Rp 3.500.000</div>
-                        <div class="price-new">Rp 2.500.000</div>
-                        <span class="badge-domain"><i class="fas fa-globe me-1"></i> Bonus Domain 2 Tahun</span>
-                    </div>
-                    <ul class="feature-list">
-                        <li><i class="fa-solid fa-check-circle text-check"></i> <b>Semua Fitur Paket Advance</b></li>
-                        <li><i class="fa-solid fa-check-circle text-check"></i> Website Bisnis Sesuai Nama</li>
-                        <li><i class="fa-solid fa-check-circle text-check"></i> Integrasi Cek Unit Online</li>
-                        <li><i class="fa-solid fa-check-circle text-check"></i> Optimasi Google Maps</li>
-                        <li><i class="fa-solid fa-check-circle text-check"></i> Prioritas Support 24/7</li>
-                    </ul>
-                    <a href="registrasi.html?package=full" class="btn btn-outline-dark btn-order">Pilih Full Package</a>
-                </div>
-            </div>
-
         </div>
-
-        <p class="footer-text">
-            <b>MRD DIGITAL SOLUTION</b><br>
-            &copy; 2026 AMS RIDE System. Seluruh hak cipta dilindungi.
-        </p>
+        
+        <div class="text-center mt-5">
+            <a href="index.html" class="text-decoration-none text-muted small fw-bold">
+                <i class="fas fa-home me-1"></i> Kembali ke Halaman Utama MRD Digital
+            </a>
+            <p class="mt-2 small opacity-50">&copy; 2026 AMS RIDE by MRD Digital Solution</p>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
