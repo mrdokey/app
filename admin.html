@@ -3,82 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMS RIDE | MRD Digital</title>
+    <title>AMS RIDE | Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
-        :root { --primary: #0d6efd; --dark: #0f1113; --card: #1a1d21; }
-        body { background-color: var(--dark); color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        #dashboard-content { display: none; padding: 20px; }
-        .stat-card { background: var(--card); border: 1px solid #2d3238; border-radius: 15px; padding: 15px; text-align: center; }
-        .table-container { background: var(--card); border-radius: 15px; padding: 15px; margin-top: 20px; border: 1px solid #2d3238; }
-        .table { color: #e0e0e0; }
-        #loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; }
-        /* Light Form Styling */
-        .modal-content { background: #ffffff; color: #333; border-radius: 20px; border: none; }
-        .form-label { font-weight: bold; font-size: 0.8rem; color: #666; margin-bottom: 3px; }
-        .form-control, .form-select { background: #f1f3f5; border: 1px solid #dee2e6; color: #333; }
-        .form-control:focus, .form-select:focus { background: #fff; color: #333; border-color: var(--primary); box-shadow: none; }
+        body { font-family: 'Public Sans', sans-serif; background-color: #f5f5f9; color: #697a8d; }
+        .layout-wrapper { display: flex; min-height: 100vh; }
+        /* Sidebar Sneat Style */
+        .sidebar { width: 260px; background: #fff; box-shadow: 0 0.125rem 0.25rem rgba(161, 172, 184, 0.4); z-index: 10; }
+        .content-area { flex-grow: 1; padding: 25px; }
+        /* Card Sneat Style */
+        .card { border: none; border-radius: 0.5rem; box-shadow: 0 2px 6px 0 rgba(67, 89, 113, 0.12); margin-bottom: 24px; background: #fff; }
+        .card-title { color: #566a7f; font-weight: 600; }
+        .stat-value { font-size: 1.5rem; font-weight: 700; color: #566a7f; }
+        .btn-primary { background-color: #696cff; border-color: #696cff; box-shadow: 0 0.125rem 0.25rem 0 rgba(105, 108, 255, 0.4); }
+        .btn-primary:hover { background-color: #5f61e6; border-color: #5f61e6; }
+        #loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.8); display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; }
+        #dashboard-content { display: none; }
     </style>
 </head>
 <body>
-    <div id="loading-overlay"><div class="spinner-grow text-primary mb-2"></div><p class="fw-bold">Syncing AMS RIDE Data...</p></div>
+    <div id="loading-overlay"><div class="spinner-border text-primary mb-2"></div><p class="fw-bold">Menyambungkan ke Mesin AMS...</p></div>
 
-    <div id="login-page" style="height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center;">
-        <h1 class="fw-bold">AMS <span class="text-primary">RIDE</span></h1>
-        <p class="text-secondary small">Powered by MRD Digital Solution</p>
-        <div id="buttonDiv" class="mt-3"></div>
+    <div id="login-page" style="height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#fff;">
+        <img src="https://i.ibb.co/3pS769z/logo-ams.png" alt="Logo" style="width: 80px;" class="mb-3">
+        <h3 class="fw-bold text-dark">AMS <span style="color:#696cff">RIDE</span></h3>
+        <p class="text-muted small">Master Admin Panel - MRD Digital</p>
+        <div id="buttonDiv"></div>
     </div>
 
-    <div id="dashboard-content">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h5 class="fw-bold mb-0">COMMAND <span class="text-primary">CENTER</span></h5>
-            <button class="btn btn-outline-danger btn-sm rounded-pill px-3" onclick="location.reload()">Logout</button>
-        </div>
+    <div id="dashboard-content" class="layout-wrapper">
+        <div class="content-area">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="fw-bold"><span class="text-muted fw-light">Dashboard /</span> Analistik</h4>
+                <button class="btn btn-outline-danger btn-sm" onclick="location.reload()">Log Out</button>
+            </div>
 
-        <div class="row g-3 mb-4">
-            <div class="col-6"><div class="stat-card"><small class="text-secondary">INCOME</small><h4 class="fw-bold mb-0" id="stat-income">0</h4></div></div>
-            <div class="col-6"><div class="stat-card"><small class="text-secondary">READY UNIT</small><h4 class="fw-bold mb-0" id="stat-units">0</h4></div></div>
-        </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card p-3">
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="badge bg-label-success p-2 rounded me-2" style="background:#e8fadf; color:#71dd37;"><i class="fas fa-wallet"></i></div>
+                            <small class="fw-semibold">Estimasi Income</small>
+                        </div>
+                        <div class="stat-value" id="stat-income">Rp 0</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-3">
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="badge bg-label-primary p-2 rounded me-2" style="background:#e7e7ff; color:#696cff;"><i class="fas fa-motorcycle"></i></div>
+                            <small class="fw-semibold">Unit Aktif</small>
+                        </div>
+                        <div class="stat-value" id="stat-units">0 Unit</div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-end">
+                    <button class="btn btn-primary btn-lg shadow w-100 py-3 mb-4" data-bs-toggle="modal" data-bs-target="#modalInput">
+                        <i class="fas fa-plus-circle me-2"></i> REGISTER RENTAL BARU
+                    </button>
+                </div>
+            </div>
 
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h6 class="fw-bold mb-0 text-primary">Recent Register</h6>
-            <button class="btn btn-primary btn-sm rounded-pill px-4 shadow" data-bs-toggle="modal" data-bs-target="#modalInput"><i class="fas fa-plus me-1"></i> Baru</button>
-        </div>
-
-        <div class="table-container shadow-lg">
-            <div class="table-responsive"><table class="table table-dark table-hover small mb-0">
-                <thead><tr><th>Tgl</th><th>Unit</th><th>Nama</th><th>Total</th></tr></thead>
-                <tbody id="table-body"></tbody>
-            </table></div>
+            <div class="card">
+                <h5 class="card-header fw-bold">Transaksi Terakhir</h5>
+                <div class="table-responsive text-nowrap p-3">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr class="text-muted">
+                                <th>TGL</th><th>UNIT</th><th>PENYEWA</th><th>DURASI</th><th>TOTAL</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body" class="table-border-bottom-0"></tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="modal fade" id="modalInput" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content shadow">
-                <div class="modal-body p-4">
-                    <h5 class="fw-bold text-primary mb-3">Register Rental</h5>
+            <div class="modal-content p-2">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold text-dark">Form Pendaftaran Rental</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
                     <form id="formRegister">
-                        <label class="form-label">Pilih Armada (Plat)</label>
-                        <select class="form-select mb-2" id="motor_id" required><option value="">-- Pilih --</option></select>
-                        
-                        <label class="form-label">Data Penyewa</label>
-                        <input list="listCustomer" class="form-control mb-2" id="customer_id" placeholder="Nama Lengkap" required>
-                        <datalist id="listCustomer"></datalist>
-                        
-                        <input type="tel" class="form-control mb-2" id="wa_number" placeholder="No WhatsApp (08xxx)" required>
-                        
-                        <label class="form-label">Alamat Antar & Jemput</label>
-                        <textarea class="form-control mb-2" id="addr_antar" rows="2" placeholder="Lokasi Antar"></textarea>
-                        <textarea class="form-control mb-2" id="addr_jemput" rows="2" placeholder="Lokasi Jemput"></textarea>
-                        
-                        <div class="row g-2 mb-3">
-                            <div class="col-6"><label class="form-label">Hari</label><input type="number" class="form-control" id="duration" placeholder="Jml Hari" required></div>
-                            <div class="col-6"><label class="form-label">Total Rp</label><input type="number" class="form-control" id="total_price" placeholder="Harga" required></div>
+                        <div class="mb-3">
+                            <label class="form-label">PILIH UNIT MOTOR</label>
+                            <select class="form-select" id="motor_id" required></select>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100 fw-bold py-2 shadow-sm">SIMPAN KE DATABASE</button>
+                        <div class="mb-3">
+                            <label class="form-label">NAMA CUSTOMER</label>
+                            <input list="listCustomer" class="form-control" id="customer_id" placeholder="Cari atau tulis nama..." required>
+                            <datalist id="listCustomer"></datalist>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">NOMOR WHATSAPP (Wajib untuk Auto-Notif)</label>
+                            <input type="tel" class="form-control" id="wa_number" placeholder="Contoh: 08123456789" required>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label class="form-label">DURASI (HARI)</label>
+                                <input type="number" class="form-control" id="duration" required>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">TOTAL BIAYA</label>
+                                <input type="number" class="form-control" id="total_price" required>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">ALAMAT ANTAR</label>
+                            <textarea class="form-control" id="addr_antar" rows="2"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">PROSES & SIMPAN DATA</button>
                     </form>
                 </div>
             </div>
@@ -102,10 +143,12 @@
             document.getElementById('loading-overlay').style.display = 'flex';
             fetch(`${webAppUrl}?action=read_full&email=${userEmail}`).then(r => r.json()).then(data => {
                 document.getElementById('stat-income').innerText = "Rp " + data.income;
-                document.getElementById('stat-units').innerText = data.unitsReady;
-                let h = ""; data.records.forEach(r => { h += `<tr><td>${r.tgl}</td><td>${r.unit}</td><td>${r.nama}</td><td>${r.total}</td></tr>`; });
+                document.getElementById('stat-units').innerText = data.unitsReady + " Unit";
+                let h = ""; data.records.forEach(r => { 
+                    h += `<tr><td><span class="badge bg-label-info" style="background:#e1f0ff; color:#03c3ec;">${r.tgl}</span></td><td><strong>${r.unit}</strong></td><td>${r.nama}</td><td>${r.durasi} Hari</td><td><span class="text-success fw-bold">Rp ${r.total}</span></td></tr>`; 
+                });
                 document.getElementById('table-body').innerHTML = h;
-                let m = '<option value="">-- Pilih --</option>'; data.motors.forEach(i => { m += `<option value="${i.no_motor}">${i.no_motor} (${i.tipe})</option>`; });
+                let m = '<option value="">-- Pilih Armada --</option>'; data.motors.forEach(i => { m += `<option value="${i.no_motor}">${i.no_motor} - ${i.tipe}</option>`; });
                 document.getElementById('motor_id').innerHTML = m;
                 let c = ""; data.customers.forEach(i => { c += `<option value="${i.nama}">`; });
                 document.getElementById('listCustomer').innerHTML = c;
@@ -122,7 +165,6 @@
                 customer: document.getElementById('customer_id').value,
                 wa: document.getElementById('wa_number').value,
                 addr_antar: document.getElementById('addr_antar').value,
-                addr_jemput: document.getElementById('addr_jemput').value,
                 durasi: document.getElementById('duration').value,
                 total: document.getElementById('total_price').value
             };
