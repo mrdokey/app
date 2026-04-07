@@ -3,34 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog & Edukasi Digital | MRD Digital Solution Bali</title>
-    <meta name="description" content="Kumpulan artikel seputar teknologi, sistem rental, otomasi bisnis, dan tips digital marketing dari MRD Digital Solution.">
     
+    <title>Blog & Edukasi Digital | MRD Digital Solution Bali</title>
+    <meta name="description" content="Update terbaru seputar sistem otomasi, rental manajemen, dan solusi IT dari MRD Digital Solution Tabanan, Bali.">
+    <meta name="author" content="MRD Digital Solution">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8f9fa; }
-        .blog-header { background: #212529; color: white; padding: 60px 0; }
-        .card-blog { border: none; transition: transform 0.3s; border-radius: 15px; overflow: hidden; }
-        .card-blog:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
-        .btn-read { border-radius: 50px; font-weight: bold; }
-        .navbar-brand { font-weight: bold; }
+        body { font-family: 'Inter', sans-serif; background-color: #fcfcfc; min-height: 100vh; display: flex; flex-direction: column; }
+        .navbar-brand { font-weight: 800; letter-spacing: 1px; }
+        .blog-header { 
+            background: linear-gradient(45deg, #212529, #343a40); 
+            color: white; 
+            padding: 80px 0;
+            border-bottom: 5px solid #0d6efd;
+        }
+        /* Style untuk Card yang akan di-render JS */
+        .card-blog { 
+            border: none; 
+            border-radius: 12px; 
+            transition: all 0.3s ease; 
+            background: #fff;
+            height: 100%;
+        }
+        .card-blog:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1); 
+        }
+        .badge-category { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: inline-block; }
+        .btn-read { border-radius: 50px; padding: 8px 20px; font-weight: 600; }
+        main { flex: 1; }
+        footer { background: #1a1a1a; color: #888; padding: 40px 0; margin-top: 50px; }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="../index.html">MRD DIGITAL</a>
+            <a class="navbar-brand text-primary" href="../index.html">MRD DIGITAL</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="#">Blog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="https://wa.me/62895428400665">Kontak</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://wa.me/62895428400665">Konsultasi</a></li>
                 </ul>
             </div>
         </div>
@@ -38,68 +58,33 @@
 
     <header class="blog-header text-center">
         <div class="container">
-            <h1 class="display-4 fw-bold text-primary">Wawasan Digital</h1>
-            <p class="lead">Tips otomasi dan solusi teknologi untuk bisnis Anda</p>
+            <h1 class="display-4 fw-bold">Wawasan <span class="text-primary">Digital</span></h1>
+            <p class="lead opacity-75">Tips & Solusi Teknologi untuk Bisnis Masa Kini</p>
         </div>
     </header>
 
-    <section class="container my-5">
-        <div class="row g-4">
-            
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 card-blog shadow-sm">
-                    <div class="card-body">
-                        <span class="badge bg-primary mb-2">Tutorial</span>
-                        <h5 class="card-title fw-bold">Cara Membuat Blog dari HTML Dasar</h5>
-                        <p class="card-text text-muted">Pelajari langkah mudah membangun blog kustom yang ringan dan SEO friendly...</p>
-                        <a href="cara-membuat-web.html" class="btn btn-outline-primary btn-read mt-3">Baca Selengkapnya</a>
-                    </div>
+    <main class="container my-5">
+        <div class="row g-4" id="blog-list">
+            <div class="text-center py-5">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
                 </div>
+                <p class="mt-2 text-muted">Memuat artikel...</p>
             </div>
-
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 card-blog shadow-sm">
-                    <div class="card-body">
-                        <span class="badge bg-success mb-2">Business</span>
-                        <h5 class="card-title fw-bold">Manfaat Sistem Otomasi Rental</h5>
-                        <p class="card-text text-muted">Bagaimana sistem digital bisa menghemat waktu kelola unit motor hingga 80%...</p>
-                        <a href="manfaat-sistem-otomasi-rental.html" class="btn btn-outline-primary btn-read mt-3">Baca Selengkapnya</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 card-blog shadow-sm">
-                    <div class="card-body">
-                        <span class="badge bg-danger mb-2">Security</span>
-                        <h5 class="card-title fw-bold">Keamanan Unit dengan GPS</h5>
-                        <p class="card-text text-muted">Cegah pencurian motor rental dengan fitur Engine Cut-Off langsung dari HP...</p>
-                        <a href="keamanan-rental-gps-tracker.html" class="btn btn-outline-primary btn-read mt-3">Baca Selengkapnya</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 card-blog shadow-sm">
-                    <div class="card-body">
-                        <span class="badge bg-purple mb-2" style="background-color: #6f42c1; color: white;">POS System</span>
-                        <h5 class="card-title fw-bold">Sistem Kasir Digital UMKM</h5>
-                        <p class="card-text text-muted">Solusi stok barang anti berantakan untuk toko dan usaha retail di Bali...</p>
-                        <a href="sistem-kasir-digital-umkm.html" class="btn btn-outline-primary btn-read mt-3">Baca Selengkapnya</a>
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </section>
+    </main>
 
-    <footer class="py-5 bg-dark text-white text-center mt-5">
-        <div class="container">
-            <p class="mb-2"><strong>MRD Digital Solution Bali</strong></p>
-            <p class="small text-muted mb-0">&copy; 2026 Seluruh Hak Cipta Dilindungi.</p>
+    <footer>
+        <div class="container text-center">
+            <h5 class="text-white mb-3 fw-bold">MRD DIGITAL SOLUTION</h5>
+            <p class="small mb-4">Solusi Otomasi Bisnis & Web Development • Tabanan, Bali</p>
+            <p class="text-muted small mb-0">&copy; 2026 MRD Digital Solution. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="list-artikel.js"></script>
+
 </body>
 </html>
