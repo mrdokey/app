@@ -3,6 +3,14 @@ console.log("Script list-artikel.js mulai jalan... Uhuy!");
 
 const daftarArtikel = [
     {
+    judul: "Berapa Lama Durasi Pembuatan Aplikasi Kustom?",
+    kategori: "Consulting",
+    warnaBadge: "bg-secondary text-white",
+    deskripsi: "Estimasi waktu pengembangan sistem AppSheet dan otomasi WhatsApp dari nol hingga siap pakai...",
+    link: "durasi-pembuatan-aplikasi-kustom.html"
+    },
+    
+    {
         judul: "Solusi Digital Rental Motor di Canggu & Seminyak",
         kategori: "Bali Business",
         warnaBadge: "bg-warning",
