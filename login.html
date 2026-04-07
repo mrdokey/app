@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | MRD Digital Solution</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root { --primary: #696cff; --bg: #f5f5f9; }
+        body { 
+            background: var(--bg); 
+            height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            font-family: 'Public Sans', sans-serif;
+        }
+        .login-card {
+            width: 100%;
+            max-width: 450px;
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .brand-section { text-align: center; margin-bottom: 30px; }
+        .brand-logo { font-size: 2rem; color: var(--primary); font-weight: 800; margin-bottom: 5px; }
+        .form-label { font-weight: 600; color: #566a7f; }
+        .select-client { 
+            padding: 12px; 
+            border-radius: 8px; 
+            border: 1px solid #d9dee3;
+            font-weight: 500;
+        }
+        .btn-enter { 
+            background: var(--primary); 
+            border: none; 
+            padding: 12px; 
+            font-weight: 700; 
+            transition: 0.3s;
+        }
+        .btn-enter:hover { transform: translateY(-3px); background: #5f61e6; }
+        .footer-text { font-size: 0.8rem; color: #a1acb8; text-align: center; margin-top: 25px; }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <div class="brand-section">
+        <div class="brand-logo"><i class="fas fa-shield-alt"></i> MRD</div>
+        <div class="fw-bold text-dark">Digital Solution - AMS RIDE</div>
+    </div>
+
+    <h5 class="fw-bold mb-3">Login Admin</h5>
+    <p class="text-muted small mb-4">Pilih Client untuk mengakses dashboard management.</p>
+
+    <div class="mb-4">
+        <label class="form-label">Nama Client / Brand</label>
+        <select id="clientSelect" class="form-select select-client">
+            <option value="" selected disabled>-- Pilih Perusahaan --</option>
+            <option value="https://www.appsheet.com/start/92abe587-6993-47cf-af5d-e43a6f69a2ce">JIMBARAN SCOOTER RENTAL</option>
+            <option value="https://www.appsheet.com/start/e10e9dd9-0fea-4484-8f7a-53ddd2531d0b">ARTA RENTAL</option>
+            <option value="https://www.appsheet.com/start/6b39327d-06ce-43e1-a5bd-d29604582459">RENTAL MOTOR BALI1</option>
+            <option value="https://www.appsheet.com/start/cbdf104e-b040-4b15-8410-f8343d947a11">KETUT RENT BIKE</option>
+            <option value="https://www.appsheet.com/start/e202fed5-00ae-446f-9433-5c1474b41d4d">HR BIKE RENTAL</option>
+        </select>
+    </div>
+
+    <button onclick="enterSystem()" class="btn btn-primary btn-enter w-100 rounded-3">
+        MASUK KE SISTEM <i class="fas fa-arrow-right ms-2"></i>
+    </button>
+
+    <div class="footer-text">
+        &copy; 2026 MRD Digital Solution. All Rights Reserved.
+    </div>
+</div>
+
+<script>
+    function enterSystem() {
+        const select = document.getElementById('clientSelect');
+        const selectedUrl = select.value;
+
+        if (!selectedUrl) {
+            alert("Silakan pilih client terlebih dahulu!");
+            return;
+        }
+
+        // Kita tambahkan parameter ?platform=desktop agar AppSheet langsung menyesuaikan di laptop
+        // Dan kita buka di tab baru agar tetap profesional
+        const finalUrl = selectedUrl + "?platform=desktop&guiprof=true";
+        
+        window.location.href = finalUrl;
+    }
+</script>
+
+</body>
+</html>
