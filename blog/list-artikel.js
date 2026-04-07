@@ -1,6 +1,9 @@
+// Cek apakah script terpanggil
+console.log("Script list-artikel.js mulai jalan... Uhuy!");
+
 const daftarArtikel = [
     {
-        judul: "Solusi Rental Motor di Canggu & Seminyak",
+        judul: "Solusi Digital Rental Motor di Canggu & Seminyak",
         kategori: "Bali Business",
         warnaBadge: "bg-warning",
         deskripsi: "Tingkatkan efisiensi pengelolaan armada rental di area padat wisatawan dengan sistem digital...",
@@ -33,35 +36,36 @@ const daftarArtikel = [
         warnaBadge: "bg-dark",
         deskripsi: "Bedanya aplikasi pasaran dengan sistem kustom dari MRD Digital Solution untuk skala bisnis...",
         link: "keunggulan-aplikasi-kustom-bali.html"
-    },
-    {
-        judul: "Otomasi WhatsApp Gateway",
-        kategori: "Automation",
-        warnaBadge: "bg-success",
-        deskripsi: "Kirim tagihan otomatis tanpa ketik manual. Efisiensi admin naik 100%...",
-        link: "otomasi-whatsapp-gateway-bisnis.html"
     }
 ];
 
-// Pastikan DOM sudah siap
-document.addEventListener("DOMContentLoaded", function() {
+// Fungsi untuk render
+function renderBlog() {
     const container = document.getElementById('blog-list');
+    
     if (container) {
-        container.innerHTML = ""; // Hapus spinner loading
-        
+        console.log("Container ketemu, mulai render...");
+        container.innerHTML = ""; // Hapus Spinner
+
         daftarArtikel.forEach(artikel => {
-            container.innerHTML += `
+            const card = `
                 <div class="col-md-6 col-lg-4">
-                    <div class="card card-blog shadow-sm">
+                    <div class="card card-blog shadow-sm h-100">
                         <div class="card-body">
-                            <span class="badge ${artikel.warnaBadge} badge-category text-dark">${artikel.kategori}</span>
+                            <span class="badge ${artikel.warnaBadge} mb-2">${artikel.kategori}</span>
                             <h5 class="card-title fw-bold">${artikel.judul}</h5>
                             <p class="card-text text-muted small">${artikel.deskripsi}</p>
-                            <a href="${artikel.link}" class="btn btn-outline-primary btn-sm btn-read">Baca Artikel</a>
+                            <a href="${artikel.link}" class="btn btn-outline-primary btn-sm rounded-pill">Baca Artikel</a>
                         </div>
                     </div>
-                </div>
-            `;
+                </div>`;
+            container.innerHTML += card;
         });
+        console.log("Render selesai! Mantap.");
+    } else {
+        console.log("Waduh, container 'blog-list' nggak ketemu!");
     }
-});
+}
+
+// Jalankan fungsi
+renderBlog();
