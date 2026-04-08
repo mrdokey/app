@@ -121,7 +121,7 @@
                                 <label class="form-label">Pilih Paket *</label>
                                 <select name="Paket" id="paketSelect" class="form-select" required onchange="updateHarga()">
                                     <option value="" disabled selected>-- Pilih Paket --</option>
-                                    <option value="Paket Demo">Paket Demo (Gratis)</option>
+                                    <option value="Free Edition">Free Edition (Gratis)</option>
                                     <option value="Basic">Basic</option>
                                     <option value="Advance">Advance</option>
                                     <option value="Full Package">Full Package</option>
@@ -203,7 +203,7 @@
         }
 
         let basePrices = {
-            "Paket Demo": 0,
+            "Free Edition": 0,
             "Basic": 750000,
             "Advance": 1500000,
             "Full Package": 2500000
@@ -226,8 +226,8 @@
         display.innerText = formatRupiah(hargaFinal);
         hidden.value = hargaFinal;
 
-        if (paket === "Paket Demo") {
-            btn.innerText = "DAFTAR & COBA DEMO SEKARANG";
+        if (paket === "Free Edition") {
+            btn.innerText = "DAFTAR & PASANG SEKARANG";
         } else {
             btn.innerText = "DAFTAR & BAYAR SEKARANG";
         }
