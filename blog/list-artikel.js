@@ -2,6 +2,27 @@
 console.log("Script list-artikel.js mulai jalan... Uhuy!");
 
 const daftarArtikel = [
+  {
+    "id": 13,
+    "judul": "Kenapa Owner Rental di Bali Harus Pensiun Pakai Buku Catatan?",
+    "slug": "pensiun-buku-catatan-rental",
+    "gambar": "https://images.unsplash.com/photo-1517842645767-c639042777db?q=80&w=500",
+    "ringkasan": "Risiko pakai buku manual itu nyata. Dari kena tumpahan kopi sampai data hilang. Waktunya digitalisasi!"
+  },
+  {
+    "id": 14,
+    "judul": "Rahasia Anti-Gondol: Verifikasi Penyewa di Era Digital",
+    "slug": "verifikasi-digital-anti-maling",
+    "gambar": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=500",
+    "ringkasan": "Bikin penyewa nakal gemetar dengan sistem verifikasi identitas otomatis di aplikasi rental Anda."
+  },
+  {
+    "id": 15,
+    "judul": "Satu Aplikasi Semua Bisa: Rental Motor & Penginapan Jadi Satu",
+    "slug": "integrasi-rental-dan-homestay",
+    "gambar": "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=500",
+    "ringkasan": "Kelola motor dan stok kamar homestay dalam satu genggaman. Efisiensi maksimal untuk UMKM Bali."
+  },
     {
     judul: "Berapa Lama Durasi Pembuatan Aplikasi Kustom?",
     kategori: "Consulting",
