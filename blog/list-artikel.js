@@ -2,6 +2,36 @@
 console.log("Script list-artikel.js mulai jalan... Uhuy!");
 
 const daftarArtikel = [
+      {
+        judul: "Keuntungan Sewa Motor Matic untuk Keliling Bali",
+        kategori: "Tips Rental",
+        warnaBadge: "success",
+        link: "artikel16.html"
+    },
+    {
+        judul: "Cara Cek Kondisi Mesin Motor Sebelum Disewa",
+        kategori: "Edukasi",
+        warnaBadge: "primary",
+        link: "artikel17.html"
+    },
+    {
+        judul: "Pentingnya Integrasi WhatsApp Automation di Bisnis Rental",
+        kategori: "Teknologi",
+        warnaBadge: "info",
+        link: "artikel18.html"
+    },
+    {
+        judul: "Syarat Sewa Motor di Bali untuk Wisatawan Lokal",
+        kategori: "Informasi",
+        warnaBadge: "warning",
+        link: "artikel19.html"
+    },
+    {
+        judul: "Inovasi Dashboard Keuangan Real-Time dengan AppSheet",
+        kategori: "Teknologi",
+        warnaBadge: "danger",
+        link: "artikel20.html"
+    },
   {
     judul: "Kenapa Owner Rental di Bali Harus Pensiun Pakai Buku Catatan?",
     kategori: "Digitalisasi",

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keuntungan Sewa Motor Matic - MRD Digital Solution</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; background: #f4f4f4; }
+        .post-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .hero-img { width: 100%; height: 400px; object-fit: cover; border-radius: 10px; margin-bottom: 20px; }
+        h1 { color: #2c3e50; border-left: 5px solid #e67e22; padding-left: 15px; }
+        .content { font-size: 1.1em; text-align: justify; }
+        .share-section { margin-top: 40px; padding-top: 20px; border-top: 2px dashed #ddd; text-align: center; }
+        .btn-wa { background: #25D366; color: white; border: none; padding: 15px 30px; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 1em; text-decoration: none; display: inline-block; transition: 0.3s; }
+        .btn-wa:hover { background: #128C7E; transform: scale(1.05); }
+    </style>
+</head>
+<body>
+    <div class="post-card">
+        <h1>Keuntungan Utama Sewa Motor Matic untuk Menjelajahi Bali</h1>
+        <p><i>Oleh: Admin MRD Digital Solution | Kategori: Tips Rental</i></p>
+        
+        <img src="https://images.unsplash.com/photo-1558981403-c5f91bbde3ec?auto=format&fit=crop&w=800&q=80" alt="Sewa Motor Bali" class="hero-img">
+
+        <div class="content">
+            <p>Bali adalah surga bagi para penjelajah. Namun, untuk menikmati setiap sudutnya, Anda butuh kendaraan yang lincah. Motor matic menjadi primadona bagi wisatawan di Bali. Mengapa?</p>
+            <p>Pertama, <strong>kemudahan berkendara</strong>. Anda tidak perlu repot dengan kopling atau gigi saat terjebak macet di area Canggu. Kedua, <strong>bagasi luas</strong> yang mampu menampung jas hujan dan perlengkapan pantai Anda.</p>
+            <p>Di MRD Rental, kami menjamin unit matic dalam kondisi prima. Servis rutin dan kebersihan menjadi standar utama kami untuk kenyamanan Anda.</p>
+        </div>
+
+        <div class="share-section">
+            <p>Suka dengan artikel ini? Bagikan ke teman liburanmu!</p>
+            <button class="btn-wa" onclick="shareSakti()">Bagikan via WhatsApp</button>
+        </div>
+    </div>
+
+    <script>
+        function shareSakti() {
+            let urlFix = window.location.href.replace("mrd-reborn33.github.io", "mrdsolution.my.id");
+            let teks = "Wah, info sewa motor di Bali ini keren banget! Cek deh: " + urlFix;
+            window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(teks));
+        }
+    </script>
+</body>
+</html>

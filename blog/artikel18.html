@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Automation Bisnis - MRD Digital Solution</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; background: #f4f4f4; }
+        .post-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .hero-img { width: 100%; height: 400px; object-fit: cover; border-radius: 10px; margin-bottom: 20px; }
+        h1 { color: #2c3e50; border-left: 5px solid #2ecc71; padding-left: 15px; }
+        .share-section { margin-top: 40px; padding-top: 20px; border-top: 2px dashed #ddd; text-align: center; }
+        .btn-wa { background: #25D366; color: white; border: none; padding: 15px 30px; border-radius: 50px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+    </style>
+</head>
+<body>
+    <div class="post-card">
+        <h1>Pentingnya Integrasi WhatsApp Automation di Bisnis Rental</h1>
+        <p><i>Oleh: Admin MRD Digital Solution | Kategori: Teknologi</i></p>
+        
+        <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&w=800&q=80" alt="WhatsApp Business" class="hero-img">
+
+        <div class="content">
+            <p>Di era digital, kecepatan merespon pelanggan adalah kunci. WhatsApp Automation memungkinkan bisnis rental mengirim pengingat pengembalian otomatis dan konfirmasi booking secara instan.</p>
+            <p><strong>MRD Digital Solution</strong> membantu Anda mengintegrasikan Google Sheets dan AppSheet dengan API WhatsApp. Bayangkan efisiensi yang didapat saat sistem bekerja untuk Anda 24 jam penuh!</p>
+        </div>
+
+        <div class="share-section">
+            <button class="btn-wa" onclick="shareSakti()">Bagikan via WhatsApp</button>
+        </div>
+    </div>
+
+    <script>
+        function shareSakti() {
+            let urlFix = window.location.href.replace("mrd-reborn33.github.io", "mrdsolution.my.id");
+            let teks = "Sistem rental jadi makin canggih pakai WA Automation: " + urlFix;
+            window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(teks));
+        }
+    </script>
+</body>
+</html>

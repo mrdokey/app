@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Mesin Sebelum Sewa - MRD Digital Solution</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; background: #f4f4f4; }
+        .post-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .hero-img { width: 100%; height: 400px; object-fit: cover; border-radius: 10px; margin-bottom: 20px; }
+        h1 { color: #2c3e50; border-left: 5px solid #3498db; padding-left: 15px; }
+        .info-box { background: #eef2f7; padding: 15px; border-radius: 8px; margin: 20px 0; }
+        .share-section { margin-top: 40px; padding-top: 20px; border-top: 2px dashed #ddd; text-align: center; }
+        .btn-wa { background: #25D366; color: white; border: none; padding: 15px 30px; border-radius: 50px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+    </style>
+</head>
+<body>
+    <div class="post-card">
+        <h1>Cara Cek Kondisi Mesin Motor Sebelum Disewa</h1>
+        <p><i>Oleh: Admin MRD Digital Solution | Kategori: Edukasi</i></p>
+        
+        <img src="https://images.unsplash.com/photo-1485902753229-40938d3f0bc5?auto=format&fit=crop&w=800&q=80" alt="Cek Mesin Motor" class="hero-img">
+
+        <div class="content">
+            <p>Keselamatan adalah hal utama saat berkendara. Sebelum Anda membawa motor rental ke jalan raya, lakukan pengecekan mandiri singkat.</p>
+            <div class="info-box">
+                <ul>
+                    <li><strong>Cek Rem:</strong> Pastikan pakem, baik depan maupun belakang.</li>
+                    <li><strong>Lampu & Sen:</strong> Sangat krusial untuk keamanan berkendara malam hari.</li>
+                    <li><strong>Kondisi Ban:</strong> Pastikan tekanan udara pas dan alur ban belum gundul.</li>
+                </ul>
+            </div>
+            <p>MRD Digital Solution memastikan sistem manajemen operasional kami memantau jadwal servis setiap unit secara otomatis, sehingga motor yang sampai di tangan Anda adalah motor terbaik.</p>
+        </div>
+
+        <div class="share-section">
+            <button class="btn-wa" onclick="shareSakti()">Bagikan via WhatsApp</button>
+        </div>
+    </div>
+
+    <script>
+        function shareSakti() {
+            let urlFix = window.location.href.replace("mrd-reborn33.github.io", "mrdsolution.my.id");
+            let teks = "Tips penting buat yang mau sewa motor: " + urlFix;
+            window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(teks));
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Keuangan AppSheet - MRD Digital Solution</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <article class="card shadow-sm border-0 p-4">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800" class="img-fluid rounded mb-4" alt="Data Dashboard">
+            <h1 class="fw-bold">Inovasi Dashboard Keuangan Real-Time dengan AppSheet</h1>
+            <p class="text-muted">Oleh: Mr. Do | 11 April 2026</p>
+
+            <div class="mb-4">
+                <span class="me-2 fw-bold">Bagikan:</span>
+                <button onclick="shareSaktiWA('Pantau cuan jadi lebih gampang pakai sistem ini:')" class="btn btn-success btn-sm rounded-pill me-1">
+                    <i class="fab fa-whatsapp"></i> WA
+                </button>
+                <button onclick="shareSaktiFB()" class="btn btn-primary btn-sm rounded-pill me-1">
+                    <i class="fab fa-facebook-f"></i> FB
+                </button>
+                <a href="https://www.instagram.com/mrd.digital_solution/" target="_blank" class="btn btn-danger btn-sm rounded-pill">
+                    <i class="fab fa-instagram"></i> IG
+                </a>
+            </div>
+
+            <hr>
+            <div class="content mt-4">
+                <p>Mengelola keuangan rental motor seringkali memusingkan jika masih pakai buku manual. <strong>MRD Digital Solution</strong> menghadirkan dashboard interaktif langsung di smartphone Anda.</p>
+                <p>Dengan integrasi grafik SVG, Anda bisa melihat pemasukan, pengeluaran, dan laba bersih secara visual dan <strong>Real-Time</strong>. Tidak ada lagi data yang tercecer atau salah hitung!</p>
+                <p>Tingkatkan efisiensi bisnis Anda sekarang juga dengan teknologi dari kami.</p>
+            </div>
+            <a href="index.html" class="btn btn-outline-secondary mt-4">Kembali ke Blog</a>
+        </article>
+    </div>
+
+    <script>
+        function shareSaktiWA(teksPesan) {
+            let urlFix = window.location.href.replace("mrd-reborn33.github.io", "mrdsolution.my.id");
+            window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(teksPesan + " " + urlFix));
+        }
+        function shareSaktiFB() {
+            let urlFix = window.location.href.replace("mrd-reborn33.github.io", "mrdsolution.my.id");
+            window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(urlFix));
+        }
+    </script>
+</body>
+</html>
