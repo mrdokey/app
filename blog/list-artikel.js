@@ -2,27 +2,27 @@
 console.log("Script list-artikel.js mulai jalan... Uhuy!");
 
 const daftarArtikel = [
-    {
-        judul: "Kenapa Owner Rental di Bali Harus Pensiun Pakai Buku Catatan?",
-        slug: "pensiun-buku-catatan-rental",
-        gambar: "https://images.unsplash.com/photo-1517842645767-c639042777db?q=80&w=500",
-        deskripsi: "Risiko pakai buku manual itu nyata. Dari kena tumpahan kopi sampai data hilang. Waktunya digitalisasi!",
-        link: "artikel13.html"
-    },
-    {
-        judul: "Rahasia Anti-Gondol: Verifikasi Penyewa di Era Digital",
-        slug: "verifikasi-digital-anti-maling",
-        gambar: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=500",
-        deskripsi: "Bikin penyewa nakal gemetar dengan sistem verifikasi identitas otomatis di aplikasi rental Anda.",
-        link: "artikel14.html"
-    },
-    {
-        judul: "Satu Aplikasi Semua Bisa: Rental Motor & Penginapan Jadi Satu",
-        slug: "integrasi-rental-dan-homestay",
-        gambar: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=500",
-        deskripsi: "Kelola motor dan stok kamar homestay dalam satu genggaman. Efisiensi maksimal untuk UMKM Bali.",
-        link: "artikel15.html"
-    },
+  {
+    judul: "Kenapa Owner Rental di Bali Harus Pensiun Pakai Buku Catatan?",
+    kategori: "Digitalisasi",
+    warnaBadge: "bg-danger text-white",
+    deskripsi: "Risiko pakai buku manual itu nyata. Dari kena tumpahan kopi sampai data hilang. Waktunya beralih ke sistem digital...",
+    link: "artikel13.html"
+  },
+  {
+    judul: "Rahasia Anti-Gondol: Verifikasi Penyewa di Era Digital",
+    kategori: "Keamanan",
+    warnaBadge: "bg-dark text-white",
+    deskripsi: "Bikin penyewa nakal gemetar dengan sistem verifikasi identitas otomatis yang terintegrasi di aplikasi rental Anda...",
+    link: "artikel14.html"
+  },
+  {
+    judul: "Satu Aplikasi Semua Bisa: Rental Motor & Penginapan Jadi Satu",
+    kategori: "Otomasi",
+    warnaBadge: "bg-success text-white",
+    deskripsi: "Kelola armada motor dan stok kamar homestay dalam satu genggaman. Efisiensi maksimal untuk operasional UMKM Bali...",
+    link: "artikel15.html"
+  },
     {
     judul: "Berapa Lama Durasi Pembuatan Aplikasi Kustom?",
     kategori: "Consulting",
