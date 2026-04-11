@@ -2,34 +2,39 @@
 console.log("Script list-artikel.js mulai jalan... Uhuy!");
 
 const daftarArtikel = [
-      {
+         {
         judul: "Keuntungan Sewa Motor Matic untuk Keliling Bali",
         kategori: "Tips Rental",
         warnaBadge: "success",
+        deskripsi: "Bali paling seru dijelajahi dengan motor matic karena lincah menembus kemacetan dan bagasinya luas untuk perlengkapan pantai...",
         link: "artikel16.html"
     },
     {
         judul: "Cara Cek Kondisi Mesin Motor Sebelum Disewa",
         kategori: "Edukasi",
         warnaBadge: "primary",
+        deskripsi: "Jangan asal gas! Pastikan Anda mengecek 3 hal penting ini pada motor rental demi keamanan dan kenyamanan selama di perjalanan...",
         link: "artikel17.html"
     },
     {
         judul: "Pentingnya Integrasi WhatsApp Automation di Bisnis Rental",
         kategori: "Teknologi",
         warnaBadge: "info",
+        deskripsi: "Kirim pengingat pengembalian otomatis dan konfirmasi booking secara real-time. Saatnya sistem Anda yang bekerja 24 jam penuh...",
         link: "artikel18.html"
     },
     {
         judul: "Syarat Sewa Motor di Bali untuk Wisatawan Lokal",
         kategori: "Informasi",
         warnaBadge: "warning",
+        deskripsi: "Mau sewa motor tapi nggak mau ribet? Cek dokumen apa saja yang wajib Anda siapkan agar proses sewa di MRD Rental jadi secepat kilat...",
         link: "artikel19.html"
     },
     {
         judul: "Inovasi Dashboard Keuangan Real-Time dengan AppSheet",
         kategori: "Teknologi",
         warnaBadge: "danger",
+        deskripsi: "Pantau cuan dan pengeluaran operasional rental langsung dari HP dengan grafik interaktif. Data akurat, bisnis makin melesat...",
         link: "artikel20.html"
     },
   {
