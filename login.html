@@ -27,12 +27,40 @@
         .brand-section { text-align: center; margin-bottom: 30px; }
         .brand-logo { font-size: 2rem; color: var(--primary); font-weight: 800; margin-bottom: 5px; }
         .form-label { font-weight: 600; color: #566a7f; }
-        .select-client { 
+        
+        /* Modifikasi untuk input pencarian */
+        .search-client { 
             padding: 12px; 
             border-radius: 8px; 
             border: 1px solid #d9dee3;
             font-weight: 500;
         }
+        .search-client:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(105, 108, 255, 0.1);
+        }
+        
+        /* Styling untuk list autocomplete */
+        #autocomplete-list {
+            position: absolute;
+            z-index: 1000;
+            width: 100%;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            margin-top: 5px;
+        }
+        .autocomplete-item {
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .autocomplete-item:hover {
+            background-color: var(--bg);
+            color: var(--primary);
+        }
+
         .btn-enter { 
             background: var(--primary); 
             border: none; 
@@ -53,20 +81,15 @@
     </div>
 
     <h5 class="fw-bold mb-3">Login Admin</h5>
-    <p class="text-muted small mb-4">Pilih Client untuk mengakses dashboard management.</p>
+    <p class="text-muted small mb-4">Ketik nama Client untuk mengakses dashboard management.</p>
 
-    <div class="mb-4">
+    <div class="mb-4 position-relative">
         <label class="form-label">Nama Client / Brand</label>
-        <select id="clientSelect" class="form-select select-client">
-            <option value="" selected disabled>-- Pilih Perusahaan --</option>
-            <option value="https://www.appsheet.com/start/92abe587-6993-47cf-af5d-e43a6f69a2ce">JIMBARAN SCOOTER RENTAL</option>
-            <option value="https://www.appsheet.com/start/e10e9dd9-0fea-4484-8f7a-53ddd2531d0b">ARTA RENTAL</option>
-            <option value="https://www.appsheet.com/start/6b39327d-06ce-43e1-a5bd-d29604582459">RENTAL MOTOR BALI1</option>
-            <option value="https://www.appsheet.com/start/cbdf104e-b040-4b15-8410-f8343d947a11">KETUT RENT BIKE</option>
-            <option value="https://www.appsheet.com/start/e202fed5-00ae-446f-9433-5c1474b41d4d">HR BIKE RENTAL</option>
-            <option value="https://www.appsheet.com/start/835e3ab3-0173-4129-b6ec-b4174ae053f6">BUDI.BALITOURS | VIP SCOOTER</option>
-            <option value="https://www.appsheet.com/start/ef399a53-dbe2-472f-97f9-ffa8082ffbbe">JACKY RENBIKE</option>
-        </select>
+        <input type="text" id="clientSearch" class="form-control search-client" placeholder="Ketik minimal 2 huruf..." autocomplete="off">
+        
+        <ul id="autocomplete-list" class="list-group"></ul>
+        
+        <input type="hidden" id="selectedUrl" value="">
     </div>
 
     <button onclick="enterSystem()" class="btn btn-primary btn-enter w-100 rounded-3">
@@ -79,19 +102,86 @@
 </div>
 
 <script>
-    function enterSystem() {
-        const select = document.getElementById('clientSelect');
-        const selectedUrl = select.value;
+    // 1. Pindahkan data client ke dalam Array Object JavaScript
+    const clients = [
+        { name: "JIMBARAN SCOOTER RENTAL", url: "https://www.appsheet.com/start/92abe587-6993-47cf-af5d-e43a6f69a2ce" },
+        { name: "ARTA RENTAL", url: "https://www.appsheet.com/start/e10e9dd9-0fea-4484-8f7a-53ddd2531d0b" },
+        { name: "RENTAL MOTOR BALI1", url: "https://www.appsheet.com/start/6b39327d-06ce-43e1-a5bd-d29604582459" },
+        { name: "KETUT RENT BIKE", url: "https://www.appsheet.com/start/cbdf104e-b040-4b15-8410-f8343d947a11" },
+        { name: "HR BIKE RENTAL", url: "https://www.appsheet.com/start/e202fed5-00ae-446f-9433-5c1474b41d4d" },
+        { name: "BUDI.BALITOURS | VIP SCOOTER", url: "https://www.appsheet.com/start/835e3ab3-0173-4129-b6ec-b4174ae053f6" },
+        { name: "JACKY RENBIKE", url: "https://www.appsheet.com/start/ef399a53-dbe2-472f-97f9-ffa8082ffbbe" },
+        { name: "493 SCOOTER RENTALS", url: "https://www.appsheet.com/start/f66478d0-869b-44de-b561-85d8cbca3f94" }
+    ];
 
-        if (!selectedUrl) {
-            alert("Silakan pilih client terlebih dahulu!");
+    const searchInput = document.getElementById('clientSearch');
+    const autocompleteList = document.getElementById('autocomplete-list');
+    const hiddenUrlInput = document.getElementById('selectedUrl');
+
+    // 2. Fungsi membaca ketikan user
+    searchInput.addEventListener('input', function() {
+        const val = this.value.toUpperCase();
+        autocompleteList.innerHTML = ''; 
+        hiddenUrlInput.value = ''; // Reset URL jika user mengetik ulang
+
+        // Syarat: Minimal ketik 2 huruf baru muncul
+        if (val.length < 2) {
+            autocompleteList.style.display = 'none';
             return;
         }
 
-        // Kita tambahkan parameter ?platform=desktop agar AppSheet langsung menyesuaikan di laptop
-        // Dan kita buka di tab baru agar tetap profesional
-        const finalUrl = selectedUrl + "?platform=desktop&guiprof=true";
-        
+        // Filter data client yang namanya mengandung huruf yang diketik
+        const filteredClients = clients.filter(client => 
+            client.name.toUpperCase().includes(val)
+        );
+
+        // Jika ada hasil yang cocok, tampilkan di bawah input
+        if (filteredClients.length > 0) {
+            autocompleteList.style.display = 'block';
+            
+            filteredClients.forEach(client => {
+                const li = document.createElement('li');
+                li.className = 'list-group-item autocomplete-item';
+                li.textContent = client.name;
+                
+                // Jika pilihan diklik, masukkan nama ke input dan simpan URL-nya
+                li.onclick = function() {
+                    searchInput.value = client.name;
+                    hiddenUrlInput.value = client.url;
+                    autocompleteList.style.display = 'none'; // Sembunyikan list setelah diklik
+                };
+                
+                autocompleteList.appendChild(li);
+            });
+        } else {
+            // Jika tidak ditemukan
+            autocompleteList.style.display = 'block';
+            const li = document.createElement('li');
+            li.className = 'list-group-item text-muted';
+            li.textContent = 'Client tidak ditemukan...';
+            autocompleteList.appendChild(li);
+        }
+    });
+
+    // 3. Menyembunyikan list jika user klik di luar kotak pencarian
+    document.addEventListener('click', function(e) {
+        if (e.target !== searchInput) {
+            autocompleteList.style.display = 'none';
+        }
+    });
+
+    // 4. Modifikasi fungsi enterSystem
+    function enterSystem() {
+        const targetUrl = hiddenUrlInput.value;
+
+        if (!targetUrl) {
+            alert("Silakan cari dan pilih nama client dari daftar terlebih dahulu!");
+            // Mengarahkan kursor kembali ke kolom input
+            searchInput.focus();
+            return;
+        }
+
+        const finalUrl = targetUrl + "?platform=desktop&guiprof=true";
         window.location.href = finalUrl;
     }
 </script>
