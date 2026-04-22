@@ -43,7 +43,7 @@
     .promo-applied { color: #2ecc71; font-size: 0.85rem; font-weight: bold; margin-top: 5px; display: none; }
     </style>
 </head>
-<body onload="updateHarga()">
+<body>
 
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
@@ -182,6 +182,32 @@
         hidden.value = hargaFinal;
     }
 
+    // FITUR AUTO-SELECT DARI URL
+    document.addEventListener("DOMContentLoaded", function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const paketParam = urlParams.get('p'); // Menangkap parameter '?p=' dari URL
+
+        if (paketParam) {
+            const aplikasiSelect = document.getElementById('aplikasiSelect');
+            const paketSelect = document.getElementById('paketSelect');
+
+            // Set layanan ke AMS otomatis
+            aplikasiSelect.value = "AMS";
+
+            // Set paket berdasarkan parameter URL
+            if (paketParam === 'basic') {
+                paketSelect.value = "Basic";
+            } else if (paketParam === 'advance') {
+                paketSelect.value = "Advance";
+            } else if (paketParam === 'full') {
+                paketSelect.value = "Full Package";
+            }
+        }
+        
+        // Jalankan update harga setelah parameter diisi
+        updateHarga();
+    });
+
     document.getElementById('registrationForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const btn = document.getElementById('btnSubmit');
@@ -211,5 +237,4 @@
     });
 </script>
 </body>
-                                    </html>
-                                    
+</html>
