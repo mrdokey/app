@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Arahkan Google ke sitemap kakak
+Sitemap: https://mrdsolution.my.id/sitemap.xml
