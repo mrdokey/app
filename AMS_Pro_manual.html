@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Penggunaan - AMS Pro (MRD Digital Solution)</title>
+    <!-- Bootstrap & Icons (Stabil di Acode) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background-color: #f8f9fa; font-family: 'Segoe UI', system-ui, sans-serif; }
+        .sidebar { position: sticky; top: 20px; height: calc(100vh - 40px); overflow-y: auto; background: #2d3436; color: white; border-radius: 15px; padding: 20px; }
+        .sidebar .nav-link { color: #b2bec3; font-weight: 500; padding: 10px 15px; border-radius: 8px; margin-bottom: 5px; transition: 0.3s; }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active { color: white; background: #fd7e14; }
+        .content-card { background: white; border-radius: 15px; padding: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: none; margin-bottom: 25px; }
+        .cmd-box { background: #f1f2f6; border-left: 5px solid #fd7e14; padding: 15px; border-radius: 0 10px 10px 0; font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; position: relative; }
+        .badge-step { background: #2d3436; color: white; border-radius: 50%; width: 25px; height: 25px; display: inline-flex; align-items: center; justify-content: center; margin-right: 10px; font-size: 0.85rem; }
+        .btn-preview { display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; width: 36px; height: 36px; color: white; font-size: 1rem; margin-right: 5px; }
+        .tag-info { font-family: 'Courier New', monospace; font-weight: bold; color: #d63031; background: #ffeaa7; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid py-4">
+    <div class="row g-4">
+        
+        <!-- SIDEBAR MENU -->
+        <div class="col-lg-3 d-none d-lg-block">
+            <div class="sidebar d-flex flex-column justify-content-between">
+                <div>
+                    <div class="text-center mb-4">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3721/3721619.png" alt="Logo" style="width: 50px;" class="mb-2">
+                        <h5 class="fw-bold m-0">AMS PRO MANUAL</h5>
+                        <span class="badge bg-warning text-dark mt-1">Standard & Advance</span>
+                    </div>
+                    <nav class="nav flex-column">
+                        <a class="nav-link active" href="#pendahuluan"><i class="fas fa-info-circle me-2"></i>Pendahuluan</a>
+                        <a class="nav-link" href="#armada"><i class="fas fa-motorcycle me-2"></i>Manajemen Armada</a>
+                        <a class="nav-link" href="#operasional"><i class="fas fa-tasks me-2"></i>Operasional Harian</a>
+                        <a class="nav-link" href="#settingwa"><i class="fas fa-cog me-2"></i>Kustomisasi Template WA</a>
+                        <a class="nav-link" href="#pajak"><i class="fas fa-calendar-alt me-2"></i>Pengingat Pajak</a>
+                        <a class="nav-link" href="#keuangan"><i class="fas fa-wallet me-2"></i>Laporan Keuangan</a>
+                        <a class="nav-link" href="#premium"><i class="fas fa-star text-warning me-2"></i>Fitur Premium (Bot/Web)</a>
+                    </nav>
+                </div>
+                <div class="text-center text-muted" style="font-size: 0.7rem;">
+                    Powered by<br><strong>MRD Digital Solution</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="col-lg-9 col-md-12">
+            
+            <!-- Header Mobile -->
+            <div class="d-lg-none bg-dark text-white p-3 rounded mb-4 text-center">
+                <h4 class="fw-bold m-0">AMS PRO - MANUAL GUIDE</h4>
+                <p class="m-0 small text-warning">MRD Digital Solution</p>
+            </div>
+
+            <!-- 1. PENDAHULUAN -->
+            <section id="pendahuluan" class="content-card">
+                <h3 class="fw-bold text-dark mb-3"><i class="fas fa-info-circle text-warning me-2"></i>1. Pendahuluan & Profil</h3>
+                <p>Selamat datang di sistem manajemen sewa kendaraan <strong>AMS Pro</strong> persembahan <strong>MRD Digital Solution</strong>. Panduan ini akan memandu Anda mengoperasikan sistem dari tingkat dasar hingga fitur otomatisasi lanjutan.</p>
+                
+                <h5 class="fw-bold text-secondary mt-4 mb-2">Menu Profile (Koneksi SaaS)</h5>
+                <p>Menu **Profile** di slide bar kiri digunakan untuk memantau status aplikasi Anda terhadap server SaaS MRD Digital Solution.</p>
+                <div class="alert alert-warning border-0 rounded-4">
+                    <i class="fas fa-exclamation-triangle me-2"></i> <strong>Penting:</strong> Halaman Profil ini bersifat **Read-Only** (hanya dibaca) dan tidak bisa diedit oleh pengguna. Ini berfungsi sebagai indikator pengunci lisensi dan status koneksi sistem Anda.
+                </div>
+            </section>
+
+            <!-- 2. MANAJEMEN ARMADA -->
+            <section id="armada" class="content-card">
+                <h3 class="fw-bold text-dark mb-3"><i class="fas fa-motorcycle text-warning me-2"></i>2. Pengelolaan & Pencarian Armada</h3>
+                <p>Sebelum memulai transaksi, pastikan seluruh unit motor Anda sudah terdaftar dengan rapi di sistem.</p>
+                
+                <h5 class="fw-bold text-secondary mb-2">A. Menambah Unit Baru (Tambah Unit)</h5>
+                <p>Untuk menambahkan armada baru ke dalam sistem inventaris:</p>
+                <div class="mb-4">
+                    <div class="d-flex align-items-start mb-2">
+                        <div class="badge-step">1</div>
+                        <div>Buka menu samping kiri (Slide Bar), lalu klik menu <strong>"Tambah Unit"</strong>.</div>
+                    </div>
+                    <div class="d-flex align-items-start mb-2">
+                        <div class="badge-step">2</div>
+                        <div>Isi data wajib: <strong>No Plat Motor</strong> (contoh: DK1234AB) dan <strong>Harga Sewa per Hari</strong>.</div>
+                    </div>
+                    <div class="d-flex align-items-start mb-2">
+                        <div class="badge-step">3</div>
+                        <div>Isi data tambahan seperti Tipe Motor, Brand, dan unggah **Foto Unit** asli. Klik <strong>Save</strong>.</div>
+                    </div>
+                </div>
+
+                <h5 class="fw-bold text-secondary mt-4 mb-2">B. Pencarian Unit (Cari Unit)</h5>
+                <ul>
+                    <li class="mb-2">Gunakan fitur <strong>"Cari Unit"</strong> di menu samping kiri jika Anda ingin mencari spesifikasi motor tertentu berdasarkan tipe atau brand.</li>
+                    <li class="mb-2">Sistem ini juga terintegrasi dengan pencarian global di bagian atas aplikasi untuk mempercepat pencarian plat nomor unit.</li>
+                </ul>
+            </section>
+
+            <!-- 3. OPERASIONAL HARIAN -->
+            <section id="operasional" class="content-card">
+                <h3 class="fw-bold text-dark mb-3"><i class="fas fa-tasks text-warning me-2"></i>3. Operasional Harian (Register, Monitoring & Aksi Cepat)</h3>
+                <p>Bagian ini menjelaskan aktivitas pembuatan transaksi sewa hingga eksekusi tombol aksi cepat di layar detail berdasarkan status transaksi.</p>
+                
+                <h5 class="fw-bold text-secondary mb-2">A. Membuat Transaksi Sewa Baru (Register)</h5>
+                <p>Klik tombol tambah **(+)** pada menu Register untuk mencatatkan sewa baru:</p>
+                <ul>
+                    <li>Pilih tanggal mulai dan tanggal selesai sewa (sistem otomatis menghitung jumlah hari).</li>
+                    <li>Pilih No Motor dan data Penyewa (otomatis memanggil database Customer).</li>
+                    <li>Sistem otomatis menampilkan harga sewa harian. Masukkan diskon atau DP jika ada.</li>
+                    <li>Sistem akan menyusun struk transaksi secara instan di kolom **Print Preview** sebelum data disimpan.</li>
+                </ul>
+
+                <!-- SKENARIO 1: BOOKED -->
+                <h5 class="fw-bold text-secondary mt-4 mb-3">B. Tombol Aksi Cepat pada Status "Booked" (Orange)</h5>
+                <p>Saat transaksi masih berstatus dipesan (**Booked**), admin dapat mengeksekusi tindakan operasional sekali klik dari baris tombol di layar detail:</p>
+                
+                <div class="mb-4">
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="btn-preview bg-primary"><i class="fas fa-edit"></i></div>
+                        <div><strong>EDIT:</strong> Membuka form transaksi kembali jika ada perubahan tanggal sewa, jumlah helm, atau diskon.</div>
+                    </div>
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="btn-preview bg-success"><i class="fas fa-motorcycle"></i></div>
+                        <div><strong>RENT (Start Rent):</strong> Klik tombol ini saat tamu datang mengambil motor. Status otomatis berubah menjadi **Rent** (Aktif) dan unit terhitung mulai jalan.</div>
+                    </div>
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="btn-preview bg-danger"><i class="fas fa-times-circle"></i></div>
+                        <div><strong>CANCEL:</strong> Membatalkan pesanan. Status otomatis berubah menjadi **Cancel** dan unit motor langsung dilepaskan kembali ke pool agar bisa disewa orang lain.</div>
+                    </div>
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="btn-preview bg-info"><i class="fas fa-print"></i></div>
+                        <div><strong>PRINT:</strong> Membuka preview struk nota pembayaran digital untuk langsung dicetak ke printer Bluetooth atau dibagikan ke pelanggan.</div>
+                    </div>
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="btn-preview bg-warning text-dark"><i class="fas fa-cash-register"></i></div>
+                        <div><strong>BAYAR:</strong> Digunakan untuk menginput sisa pembayaran atau cicilan pelunasan sewa seiring masa transaksi berjalan.</div>
+                    </div>
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="btn-preview bg-secondary"><i class="fas fa-exchange-alt"></i></div>
+                        <div><strong>TUKAR UNIT:</strong> Tombol penyelamat jika motor mengalami kendala di jalan atau tamu ingin melakukan *upgrade* tipe motor. Sistem akan otomatis menukar data plat nomor sewa tanpa merusak rekaman keuangan.</div>
+                    </div>
+                </div>
+
+                <!-- SKENARIO 2: RENT -->
+                <h5 class="fw-bold text-secondary mt-4 mb-3">C. Tombol Aksi Cepat pada Status "Rent" (Hijau)</h5>
+                <p>Saat transaksi sewa sedang aktif (**Rent**), tombol `RENT` dan `CANCEL` otomatis hilang, digantikan oleh tombol aksi baru:</p>
+                
+                <div class="mb-4">
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="btn-preview bg-primary"><i class="fas fa-check-circle"></i></div>
+                        <div><strong>DONE (Selesai Sewa):</strong> Klik tombol ini saat tamu mengembalikan motor dengan aman. Status sewa otomatis berubah menjadi **Done** (Selesai), melepaskan status motor kembali menjadi **Available** (Tersedia), dan merapikan sisa tagihan keuangan menjadi lunas.</div>
+                    </div>
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="btn-preview bg-success"><i class="fas fa-plus-circle"></i></div>
+                        <div><strong>PERPANJANG (Extend):</strong> Klik jika penyewa ingin menambah durasi hari sewa. Sistem akan membuka form perpanjangan durasi secara instan dan mengalkulasi ulang total biaya sewa baru secara otomatis.</div>
+                    </div>
+                    <div class="d-flex align-items-start mb-3 border-start ps-3 py-1">
+                        <span class="text-muted small"><em>Catatan: Tombol `EDIT`, `PRINT`, `BAYAR`, dan `TUKAR UNIT` tetap aktif selama masa sewa (Rent) untuk memudahkan perubahan situasional di lapangan.</em></span>
+                    </div>
+                </div>
+
+                <h5 class="fw-bold text-secondary mt-4 mb-2">D. Pemantauan Tugas (Monitoring)</h5>
+                <p>Gunakan menu **Monitoring** di bar bawah untuk memantau tugas harian staf lapangan:</p>
+                <ul>
+                    <li><strong>Daftar Tugas & Kembali:</strong> Menampilkan motor-motor yang harus kembali hari ini. Cukup klik tombol *Motorcycle* pada kartu tugas untuk merubah status sewa menjadi **Done** (Selesai).</li>
+                </ul>
+            </section>
+
+            <!-- 4. KUSTOMISASI TEMPLATE WA -->
+            <section id="settingwa" class="content-card">
+                <h3 class="fw-bold text-dark mb-3"><i class="fas fa-cog text-warning me-2"></i>4. Mengatur Template WhatsApp & Email (Setting WA)</h3>
+                <p>Sistem AMS Pro memungkinkan Anda mengedit sendiri kata-kata sambutan atau syarat sewa (T&C) melalui menu <strong>"Setting WA"</strong> di slide bar kiri.</p>
+                
+                <div class="alert alert-danger border-0 rounded-4">
+                    <i class="fas fa-exclamation-triangle me-2"></i> <strong>Aturan Wajib:</strong> Anda bebas mengubah kalimat atau bahasa, tetapi **DILARANG MENGHAPUS atau MENGUBAH tanda kurung pemanggil data** agar sistem tidak error mengirim pesan kosong.
+                </div>
+
+                <h5 class="fw-bold text-secondary mt-4 mb-2">A. Template Instan (New Register)</h5>
+                <p>Digunakan untuk mengirim invoice saat pertama kali motor dibooking. Harus menggunakan kurung siku ganda **`<<[nama_kolom]>>`**.</p>
+                <ul>
+                    <li>Nama Tamu: <span class="tag-info">&lt;&lt;[nama]&gt;&gt;</span></li>
+                    <li>Sisa Tagihan: <span class="tag-info">&lt;&lt;[sisa tagihan]&gt;&gt;</span></li>
+                    <li>Total Harga: <span class="tag-info">&lt;&lt;[total]&gt;&gt;</span></li>
+                </ul>
+
+                <h5 class="fw-bold text-secondary mt-4 mb-2">B. Template Otomatis H-1 (H-1 Start Rent & H-1 Return)</h5>
+                <p>Digunakan oleh sistem MRD untuk mengirim pengingat otomatis H-1 via WA dan Email tamu. Harus menggunakan kurung siku tunggal **`[nama_kolom]`**.</p>
+                <ul>
+                    <li>Nama Tamu: <span class="tag-info">[nama]</span></li>
+                    <li>Plat Motor: <span class="tag-info">[no motor]</span></li>
+                    <li>Tanggal Pengembalian: <span class="tag-info">[tgl kembali]</span></li>
+                </ul>
+            </section>
+
+            <!-- 5. PENGINGAT PAJAK -->
+            <section id="pajak" class="content-card">
+                <h3 class="fw-bold text-dark mb-3"><i class="fas fa-calendar-alt text-warning me-2"></i>5. Fitur Pengingat Pajak Motor</h3>
+                <p>Agar operasional aman dari tilang, sistem dilengkapi fitur otomatisasi pengingat masa aktif STNK/Pajak motor.</p>
+                <div class="mb-3">
+                    <div class="d-flex align-items-start mb-2">
+                        <div class="badge-step">1</div>
+                        <div>Masuk ke menu samping kiri, klik <strong>"Pengingat Pajak"</strong>.</div>
+                    </div>
+                    <div class="d-flex align-items-start mb-2">
+                        <div class="badge-step">2</div>
+                        <div>Masukkan data motor dan tanggal jatuh tempo pembayaran pajaknya.</div>
+                    </div>
+                    <div class="d-flex align-items-start mb-2">
+                        <div class="badge-step">3</div>
+                        <div>Ubah status menjadi **"DONE"** setelah pajak dibayarkan.</div>
+                    </div>
+                </div>
+                <div class="alert alert-success border-0 rounded-4">
+                    <i class="fas fa-magic me-1"></i> <strong>Otomatisasi Kalender:</strong> Begitu Anda memasukkan data pajak, sistem MRD akan otomatis membuat agenda tahunan berulang (Yearly Recurrence) di Google Calendar Admin Anda.
+                </div>
+            </section>
+
+            <!-- 6. LAPORAN KEUANGAN -->
+            <section id="keuangan" class="content-card">
+                <h3 class="fw-bold text-dark mb-3"><i class="fas fa-wallet text-warning me-2"></i>6. Manajemen & Laporan Keuangan (Double-Entry Cash Flow)</h3>
+                <p>Modul Keuangan AMS Pro dirancang untuk memonitor kas masuk dan keluar secara real-time, terbagi menjadi sistem otomatis dan manual.</p>
+                
+                <div class="alert alert-info border-0 rounded-4">
+                    <strong>Penting untuk Diketahui:</strong>
+                    <ul class="m-0 mt-2">
+                        <li><strong>Pemasukan Sewa Otomatis:</strong> Setiap transaksi sewa baru atau pelunasan yang dicatat di menu <strong>Register</strong> akan otomatis masuk ke tabel Cashflow melalui Bot Automation. Anda tidak perlu mencatatnya lagi secara manual.</li>
+                        <li><strong>Pemasukan Manual (Kondisional):</strong> Menu "Input Keuangan" untuk jenis "Masuk" hanya digunakan secara kondisional, seperti mencatat biaya tambahan penjemputan/antar, denda keterlambatan, atau sewa aksesoris tambahan di luar nota utama.</li>
+                        <li><strong>Pengeluaran Manual:</strong> Seluruh biaya operasional (bensin, service, cuci motor, dll) harus diinput secara manual melalui menu "Input Keuangan" dengan memilih jenis "Keluar".</li>
+                    </ul>
+                </div>
+
+                <h5 class="fw-bold text-secondary mb-2">A. Cara Input Transaksi Manual (Input Keuangan)</h5>
+                <p>Gunakan menu samping kiri <strong>"Input Keuangan"</strong> untuk mencatatkan kas masuk tambahan atau kas keluar:</p>
+                <div class="mb-4">
+                    <div class="d-flex align-items-start mb-2">
+                        <div class="badge-step">1</div>
+                        <div>Pilih tanggal transaksi dan pilih jenis transaksi: <strong>Masuk</strong> (Biaya tambahan kondisional) atau <strong>Keluar</strong> (Biaya operasional).</div>
+                    </div>
+                    <div class="d-flex align-items-start mb-2">
+                        <div class="badge-step">2</div>
+                        <div><strong>Hubungkan ke Unit Motor (Unit-Specific):</strong> Pilih plat nomor motor jika transaksi ditujukan khusus untuk unit tersebut (misalnya biaya service motor atau biaya tambahan antar khusus motor tersebut).</div>
+                    </div>
+                    <div class="d-flex align-items-start mb-2">
+                        <div class="badge-step">3</div>
+                        <div><strong>Pengeluaran Umum (General Expense):</strong> Kosongkan kolom "Motor" jika pengeluaran bersifat umum untuk operasional ruko/kantor (contoh: biaya listrik, air, atau ATK).</div>
+                    </div>
+                    <div class="d-flex align-items-start mb-2">
+                        <div class="badge-step">4</div>
+                        <div>Pilih Kategori pengeluaran/pemasukan, masukkan nominal jumlah uang, lalu klik <strong>Save</strong>.</div>
+                    </div>
+                </div>
+
+                <h5 class="fw-bold text-secondary mt-4 mb-2">B. Membaca Laporan & Filter Profit per Unit</h5>
+                <ul>
+                    <li class="mb-2"><strong>Filter Laporan:</strong> Menyaring laporan keuangan berdasarkan satu unit motor spesifik dan rentang bulan tertentu untuk melihat laba bersih murni dari motor tersebut setelah dikurangi biaya operasionalnya.</li>
+                    <li class="mb-2"><strong>LapBul (Laporan Bulanan):</strong> Perbandingan pendapatan bersih bulan berjalan terhadap pencapaian bulan lalu.</li>
+                    <li class="mb-2"><strong>Keuangan Tren:</strong> Grafik batang untuk memantau fluktuasi kas masuk dan keluar dari bulan ke bulan.</li>
+                </ul>
+            </section>
+
+            <!-- 7. FITUR PREMIUM (BOT WA & PORTAL WEB TAMU) -->
+            <section id="premium" class="content-card bg-light border-start border-4 border-warning">
+                <h3 class="fw-bold text-dark mb-3"><i class="fas fa-star text-warning me-2"></i>7. Modul Premium / Advance (Opsional)</h3>
+                <p class="text-muted">Fitur di bawah ini hanya aktif untuk pelanggan paket **Advance** atau pengerjaan **Custom**.</p>
+                
+                <h5 class="fw-bold text-dark mt-4 mb-2"><i class="fab fa-whatsapp text-success me-2"></i>A. WhatsApp Bot System (Paket Advance)</h5>
+                <p>Operasikan sistem rental langsung via WhatsApp tanpa perlu login ke aplikasi. Cukup ketik format ini ke Bot WA Anda:</p>
+                
+                <div class="cmd-box mb-3">
+                  <strong>Format Cek Unit:</strong><br>
+                  Cek 20-05-2026 sampai 25-05-2026
+                </div>
+
+                <div class="cmd-box mb-3">
+                  <strong>Format Input Booking:</strong><br>
+                  Booking<br>
+                  No Motor: DK1234AB<br>
+                  Nama: Mr. John Doe<br>
+                  No WA: 081234567890<br>
+                  Email: john@gmail.com<br>
+                  Tgl Sewa: 20-05-2026 10:00<br>
+                  Tgl Kembali: 25-05-2026 10:00<br>
+                  Harga: 150000<br>
+                  Byr DP: 50000<br>
+                  Alamat Jemput: Airport<br>
+                  Alamat Antar: Kuta Hotel
+                </div>
+
+                <h5 class="fw-bold text-dark mt-4 mb-2"><i class="fas fa-globe text-primary me-2"></i>B. Portal Web Tamu (Fitur Custom)</h5>
+                <p>Memungkinkan turis memesan unit langsung dari website melalui scan QR Code di meja kasir. Data dari website langsung tersinkronisasi mumpuni ke AppSheet Anda.</p>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Smooth scrolling & Sidebar active state handler
+    const links = document.querySelectorAll('.sidebar .nav-link');
+    window.addEventListener('scroll', () => {
+        let fromTop = window.scrollY + 50;
+        links.forEach(link => {
+            let section = document.querySelector(link.hash);
+            if (
+                section.offsetTop <= fromTop &&
+                section.offsetTop + section.offsetHeight > fromTop
+            ) {
+                links.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+</body>
+</html>
