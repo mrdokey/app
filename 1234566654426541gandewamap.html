@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>RMB1 GPS Tracker - MRD Solution</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f5f6fa;
+    }
+    #map {
+      height: 100%;
+      width: 100%;
+      z-index: 1;
+    }
+    
+    /* STYLE KOTAK INFORMASI */
+    .info-box {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      z-index: 1000;
+      width: 290px;
+      box-sizing: border-box;
+    }
+    
+    .vehicle-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #2c3e50;
+      margin-bottom: 4px;
+    }
+    .imei-text {
+      font-size: 11px;
+      color: #7f8c8d;
+    }
+    .info-divider {
+      border-top: 1px solid #e2e8f0;
+      margin: 8px 0;
+    }
+    .grid-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+    .grid-item {
+      background: #f8fafc;
+      padding: 6px;
+      border-radius: 6px;
+      border: 1px solid #edf2f7;
+    }
+    .grid-label {
+      font-size: 10px;
+      color: #a0aec0;
+      text-transform: uppercase;
+    }
+    .grid-value {
+      font-weight: bold;
+      color: #4a5568;
+    }
+    
+    .rent-info {
+      font-size: 11px;
+      color: #4a5568;
+      background: #f8fafc;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #edf2f7;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+    .rent-info div {
+      margin-bottom: 2px;
+    }
+    
+    .address-text {
+      font-size: 11px;
+      color: #4a5568;
+      line-height: 1.4;
+      background: #f8fafc;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #edf2f7;
+      max-height: 45px;
+      overflow-y: auto;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      color: white;
+      font-size: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .online { background-color: #2ecc71; }
+    .offline { background-color: #e74c3c; }
+    
+    .gmaps-btn {
+      display: block;
+      text-align: center;
+      background-color: #34a853;
+      color: white;
+      padding: 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 13px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    /* GAYA TOMBOL REMOTE KONTROL */
+    .remote-title {
+      font-size: 11px;
+      color: #a0aec0;
+      margin-bottom: 5px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .remote-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .btn-remote {
+      padding: 8px;
+      font-size: 11px;
+      font-weight: bold;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: opacity 0.2s;
+    }
+    .btn-remote:active {
+      opacity: 0.8;
+    }
+    .btn-cutoff {
+      background-color: #e74c3c; /* Merah untuk matikan mesin */
+    }
+    .btn-restore {
+      background-color: #3498db; /* Biru untuk pulihkan mesin */
+    }
+    
+    .branding-footer {
+      font-size: 9px;
+      color: #a0aec0;
+      text-align: center;
+      margin-top: 10px;
+      border-top: 1px dashed #edf2f7;
+      padding-top: 6px;
+    }
+
+    /* LOADING SCREEN */
+    #loading {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: white;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: sans-serif;
+    }
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 15px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* RESPONSIVE LAYOUT UNTUK HP */
+    @media (max-width: 600px) {
+      .info-box {
+        position: absolute;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        border-radius: 20px 20px 0 0;
+        box-shadow: 0 -4px 15px rgba(0,0,0,0.15);
+        padding: 18px;
+      }
+      #map {
+        height: calc(100% - 100px); 
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div id="loading">
+    <div class="spinner"></div>
+    <div style="color: #7f8c8d; font-size: 14px;">Menghubungkan ke GPS RMB1...</div>
+  </div>
+
+  <div class="info-box">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+      <div>
+        <div id="plateLabel" class="vehicle-title">Memuat...</div>
+        <div id="imeiLabel" class="imei-text">IMEI: -</div>
+      </div>
+      <div>
+        <span id="statusBadge" class="status-badge offline">OFFLINE</span>
+      </div>
+    </div>
+    
+    <div class="info-divider"></div>
+    
+    <!-- PANEL REMOTE KONTROL -->
+    <div class="remote-title">Kontrol Mesin (Imobiliser):</div>
+    <div class="remote-grid">
+      <button class="btn-remote btn-cutoff" onclick="sendRemoteCommand('cutoff')">Matikan Mesin</button>
+      <button class="btn-remote btn-restore" onclick="sendRemoteCommand('restore')">Pulihkan Mesin</button>
+    </div>
+    
+    <div class="info-divider"></div>
+    
+    <div class="remote-title">Informasi Sewa:</div>
+    <div class="rent-info">
+      <div>👤 <strong>Penyewa:</strong> <span id="renterLabel">Memuat...</span></div>
+      <div>📅 <strong>Mulai:</strong> <span id="startLabel">-</span></div>
+      <div>📅 <strong>Selesai:</strong> <span id="endLabel">-</span></div>
+    </div>
+    
+    <div class="grid-info">
+      <div class="grid-item">
+        <div class="grid-label">Kecepatan</div>
+        <div id="speedLabel" class="grid-value">-</div>
+      </div>
+      <div class="grid-item">
+        <div class="grid-label">Mesin (ACC)</div>
+        <div id="accLabel" class="grid-value">-</div>
+      </div>
+    </div>
+    
+    <div style="font-size: 11px; color: #a0aec0; margin-bottom: 3px; font-weight: bold; text-transform: uppercase;">Lokasi Terkini:</div>
+    <div id="addressLabel" class="address-text">Mencari posisi...</div>
+    
+    <div id="updateLabel" style="font-size: 10px; color: #a0aec0; text-align: right; margin-top: 5px; font-style: italic;">
+      Update: -
+    </div>
+    
+    <a id="gmapsLink" href="#" target="_blank" class="gmaps-btn">
+      Buka Rute di Google Maps
+    </a>
+    
+    <div class="branding-footer">
+      RMB1 Rental Motor Bali<br>
+      <span style="color: #3498db; font-weight: bold;">Powered by MRD Digital Solution</span>
+    </div>
+  </div>
+
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    var urlParams = new URLSearchParams(window.location.search);
+    var imei = urlParams.get('imei');
+    
+    var gasApiUrl = "https://script.google.com/macros/s/AKfycbxckp7xuGU1hkvsm_cAY5yh9cpAOkOu0MHR0B_-0E9KuyrGroB4sY1Enzi1VH9rtnVR7Q/exec?imei=" + imei;
+
+    if (!imei) {
+      document.body.innerHTML = "<div style='padding:20px; font-family:sans-serif;'>Error: Parameter IMEI tidak ditemukan.</div>";
+    } else {
+      loadGpsData();
+    }
+
+    // Fungsi mengambil lokasi realtime
+    function loadGpsData() {
+      fetch(gasApiUrl)
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById("loading").style.display = "none";
+          
+          if (data.success || data.lat !== 0) {
+            document.getElementById("plateLabel").innerText = data.plate;
+            document.getElementById("imeiLabel").innerText = "IMEI: " + imei;
+            document.getElementById("speedLabel").innerText = data.speed;
+            document.getElementById("accLabel").innerText = data.accStatus;
+            document.getElementById("addressLabel").innerText = data.address;
+            document.getElementById("updateLabel").innerText = "Update: " + data.lastUpdate;
+            document.getElementById("gmapsLink").href = "https://www.google.com/maps/search/?api=1&query=" + data.lat + "," + data.lng;
+            
+            document.getElementById("renterLabel").innerText = data.renter;
+            document.getElementById("startLabel").innerText = data.rentStart;
+            document.getElementById("endLabel").innerText = data.rentEnd;
+            
+            var badge = document.getElementById("statusBadge");
+            badge.innerText = data.status;
+            badge.className = "status-badge " + data.status.toLowerCase();
+
+            // Inisialisasi Peta
+            var map = L.map('map').setView([data.lat, data.lng], 15);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              maxZoom: 19,
+              attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            L.marker([data.lat, data.lng]).addTo(map)
+              .bindPopup("<b>" + data.plate + "</b><br>Koordinat: " + data.lat + ", " + data.lng)
+              .openPopup();
+          } else {
+            alert("Gagal memuat koordinat GPS.");
+          }
+        })
+        .catch(error => {
+          console.error("Error fetching data:", error);
+          document.getElementById("loading").innerHTML = "<div style='color:red;'>Gagal terhubung ke server API GPS.</div>";
+        });
+    }
+
+    // Fungsi kirim perintah remote
+    function sendRemoteCommand(action) {
+      var actionLabel = (action === "cutoff") ? "MEMATIKAN MESIN" : "MEMULIHKAN MESIN";
+      var warningMsg = (action === "cutoff") 
+        ? "PERINGATAN: Anda akan mematikan mesin motor ini secara remote. Pastikan motor dalam keadaan berhenti.\n\nLanjutkan?" 
+        : "Anda akan memulihkan mesin motor agar bisa dinyalakan kembali.\n\nLanjutkan?";
+
+      if (confirm(warningMsg)) {
+        var pin = prompt("Masukkan PIN Keamanan Admin:");
+        if (pin === null || pin === "") return; // Batal jika PIN kosong
+
+        // Tampilkan loading screen sementara perintah dikirim
+        document.getElementById("loading").style.display = "flex";
+        document.getElementById("loading").querySelector("div:last-child").innerText = "Mengirim perintah " + actionLabel + "...";
+
+        var commandUrl = gasApiUrl + "&action=" + action + "&pin=" + pin;
+
+        fetch(commandUrl)
+          .then(response => response.json())
+          .then(result => {
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("loading").querySelector("div:last-child").innerText = "Menghubungkan ke GPS RMB1...";
+            
+            if (result.success) {
+              alert("Sukses: " + result.message);
+              // Segarkan data peta setelah instruksi terkirim
+              location.reload();
+            } else {
+              alert("Gagal: " + result.message);
+            }
+          })
+          .catch(error => {
+            document.getElementById("loading").style.display = "none";
+            console.error("Error sending remote command:", error);
+            alert("Terjadi kesalahan sistem saat mengirim perintah.");
+          });
+      }
+    }
+  </script>
+</body>
+</html>
