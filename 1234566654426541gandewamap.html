@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>RMB1 GPS Tracker - MRD Solution</title>
+  <title>Gandewa Rental GPS Tracker - MRD Solution</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     body, html {
@@ -215,7 +215,7 @@
   <!-- Loading Screen -->
   <div id="loading">
     <div class="spinner"></div>
-    <div style="color: #7f8c8d; font-size: 14px;">Menghubungkan ke GPS RMB1...</div>
+    <div style="color: #7f8c8d; font-size: 14px;">Menghubungkan ke GPS Gandewa Rental...</div>
   </div>
 
   <div class="info-box">
@@ -270,7 +270,7 @@
     </a>
     
     <div class="branding-footer">
-      RMB1 Rental Motor Bali<br>
+      Gandewa Rental Rental Motor Bali<br>
       <span style="color: #3498db; font-weight: bold;">Powered by MRD Digital Solution</span>
     </div>
   </div>
@@ -282,7 +282,7 @@
     var urlParams = new URLSearchParams(window.location.search);
     var imei = urlParams.get('imei');
     
-    var gasApiUrl = "https://script.google.com/macros/s/AKfycbxckp7xuGU1hkvsm_cAY5yh9cpAOkOu0MHR0B_-0E9KuyrGroB4sY1Enzi1VH9rtnVR7Q/exec?imei=" + imei;
+    var gasApiUrl = "https://script.google.com/macros/s/AKfycbzNAmnOCKsiaTC6xj21_wSxF9rrQgMI0pO9BR5TFxDdnaKUa5y99wP579Bb_1k9KrKVZQ/exec?imei=" + imei;
 
     if (!imei) {
       document.body.innerHTML = "<div style='padding:20px; font-family:sans-serif;'>Error: Parameter IMEI tidak ditemukan.</div>";
@@ -355,7 +355,7 @@
           .then(response => response.json())
           .then(result => {
             document.getElementById("loading").style.display = "none";
-            document.getElementById("loading").querySelector("div:last-child").innerText = "Menghubungkan ke GPS RMB1...";
+            document.getElementById("loading").querySelector("div:last-child").innerText = "Menghubungkan ke GPS Gandewa Rental...";
             
             if (result.success) {
               alert("Sukses: " + result.message);
