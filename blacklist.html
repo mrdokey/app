@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>AMS Pro - Portal Blacklist Terpusat</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     body {
       margin: 0;
@@ -317,7 +316,7 @@
 
   <script>
     // Konfigurasi API Anda
-    const gasWebUrl = "https://script.google.com/macros/s/AKfycbzxdUUlskv5csUSBL9OnECGrgKzhUKdRufFMZu82eSwhOBH5ICu5zyS5k0O3Xd7TS4xGA/exec";
+    const gasWebUrl = "https://script.google.com/macros/s/AKfycbxdUUlskv5csUSBL9OnECGrgKzhUKdRufFMZu82eSwhOBH5ICu5zyS5k0O3Xd7TS4xGA/exec";
     const vpsApiUrl = "http://103.31.38.30:3002/api/blacklist";
 
     var finalUploadedImgUrl = ""; // Menampung URL KTP dari Drive
@@ -351,7 +350,8 @@
     function getDirectDriveImgUrl(url) {
       if (url && url.includes("drive.google.com")) {
         try {
-          var fileId = url.split("/d/")[1].split("/")[0];
+          // Ekstraksi File ID dari Google Drive URL secara presisi
+          var fileId = url.match(/[-\w]{25,}/)[0];
           return "https://drive.google.com/uc?export=view&id=" + fileId;
         } catch (e) { return url; }
       }
@@ -456,8 +456,10 @@
     // Simpan data baru ke SQLite di VPS
     function submitToVps(event) {
       event.preventDefault();
-      var nik = document.getElementById("inputNik").value;
-      var name = document.getElementById("inputNama").value;
+      
+      // Normalisasi NIK & Nama: Hilangkan Spasi & Jadikan Huruf Kapital (Mencegah Duplikasi)
+      var nik = document.getElementById("inputNik").value.trim().toUpperCase().replace(/\s+/g, "");
+      var name = document.getElementById("inputNama").value.trim().toUpperCase();
       var alasan = document.getElementById("inputAlasan").value;
       var admin = document.getElementById("inputAdmin").value;
 
@@ -503,7 +505,9 @@
 
     // Cari data blacklist di VPS berdasarkan NIK / Passport
     function queryVpsBlacklist() {
-      var nik = document.getElementById("checkNikInput").value.trim();
+      // Normalisasi input pencarian: Hilangkan spasi & jadikan kapital
+      var nik = document.getElementById("checkNikInput").value.trim().toUpperCase().replace(/\s+/g, "");
+      
       if (!nik) {
         alert("Silakan masukkan NIK / nomor passport terlebih dahulu!");
         return;
