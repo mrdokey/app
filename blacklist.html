@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>AMS Pro - Input Blacklist Terpusat</title>
+  <title>AMS Pro - Portal Blacklist Terpusat</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     body {
       margin: 0;
@@ -24,29 +25,51 @@
       flex-direction: column;
       justify-content: space-between;
     }
-    .header {
-      text-align: center;
-      margin-bottom: 20px;
+    
+    /* GAYA TOMBOL BERANDA */
+    .btn-home {
+      display: flex;
+      align-items: center;
+      background: #ffffff;
+      border: 2px solid #edf2f7;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: inherit;
     }
-    .header h2 {
-      margin: 0;
-      font-size: 20px;
+    .btn-home:active {
+      transform: scale(0.98);
+      background-color: #f8fafc;
+    }
+    .btn-icon {
+      font-size: 32px;
+      margin-right: 15px;
+    }
+    .btn-text-title {
+      font-weight: bold;
+      font-size: 16px;
       color: #2c3e50;
     }
-    .header p {
-      margin: 5px 0 0 0;
+    .btn-text-desc {
       font-size: 12px;
       color: #7f8c8d;
+      margin-top: 3px;
     }
+
+    /* FORM STYLING */
     .form-group {
       margin-bottom: 15px;
     }
     label {
       display: block;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: bold;
       margin-bottom: 6px;
-      color: #34495e;
+      color: #4a5568;
       text-transform: uppercase;
     }
     input[type="text"], input[type="number"], textarea {
@@ -58,23 +81,21 @@
       box-sizing: border-box;
       outline: none;
       background-color: #f8f9fa;
-      transition: border-color 0.2s;
     }
     input:focus, textarea:focus {
       border-color: #3498db;
       background-color: #ffffff;
     }
     
-    /* STYLE UNTUK INPUT KAMERA KTP */
     .camera-area {
       border: 2px dashed #3498db;
       border-radius: 12px;
-      padding: 20px;
+      padding: 15px;
       text-align: center;
       background-color: #f0f8ff;
       cursor: pointer;
       position: relative;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
     .camera-area input[type="file"] {
       position: absolute;
@@ -82,20 +103,15 @@
       opacity: 0;
       cursor: pointer;
     }
-    .camera-icon {
-      font-size: 32px;
-      margin-bottom: 8px;
-    }
     .preview-img {
       width: 100%;
-      max-height: 200px;
+      max-height: 180px;
       object-fit: contain;
       border-radius: 8px;
       display: none;
       margin-top: 10px;
     }
     
-    /* STATUS INDIKATOR UPLOAD */
     .upload-status {
       font-size: 12px;
       margin-top: 5px;
@@ -109,21 +125,69 @@
     .btn-submit {
       width: 100%;
       padding: 14px;
-      background-color: #2c3e50;
+      background-color: #3498db;
       color: white;
       border: none;
       border-radius: 8px;
       font-size: 15px;
       font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      margin-top: 10px;
     }
     .btn-submit:disabled {
       background-color: #bdc3c7;
-      cursor: not-allowed;
     }
     
+    .btn-back {
+      width: 100%;
+      padding: 12px;
+      background-color: #e2e8f0;
+      color: #4a5568;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    /* CARD VERIFIKASI */
+    .status-card {
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      margin-top: 15px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    .status-safe { background-color: #ebfbee; border: 2px solid #2ecc71; color: #27ae60; }
+    .status-warning { background-color: #fdf2f2; border: 2px solid #e74c3c; color: #c0392b; }
+    .status-icon { font-size: 48px; margin-bottom: 8px; }
+    .status-title { font-size: 18px; font-weight: bold; margin-bottom: 5px; }
+    
+    .detail-panel {
+      margin-top: 15px;
+      background: #f8fafc;
+      border: 1px solid #edf2f7;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: left;
+    }
+    .detail-item { margin-bottom: 8px; }
+    .detail-label { font-weight: bold; color: #718096; font-size: 10px; text-transform: uppercase; }
+    .detail-value { font-weight: bold; color: #2d3748; font-size: 13px; }
+    .ktp-preview { width: 100%; border-radius: 6px; margin-top: 8px; display: none; }
+
+    /* LOADING SPINNER */
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
     .footer {
       font-size: 10px;
       color: #95a5a6;
@@ -132,98 +196,178 @@
       border-top: 1px dashed #edf2f7;
       padding-top: 10px;
     }
-    .footer strong {
-      color: #3498db;
-    }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <div>
-      <div class="header">
-        <h2>AMS Pro Blacklist Database</h2>
-        <p>Sistem Pengamanan Sindikat Penggelapan Motor & Mobil</p>
+    
+    <!-- ========================================== -->
+    <!-- SCREEN 1: BERANDA UTAMA                    -->
+    <!-- ========================================== -->
+    <div id="screen-home">
+      <div style="text-align: center; margin-bottom: 30px; margin-top: 40px;">
+        <h2 style="margin: 0; color: #2c3e50;">AMS Pro Blacklist Portal</h2>
+        <p style="margin: 5px 0 0 0; font-size: 12px; color: #7f8c8d;">Sistem Proteksi Klien MRD Digital Solution</p>
       </div>
 
-      <!-- Area Pengambilan Foto KTP -->
+      <!-- Tombol Pilihan 1: Input -->
+      <div class="btn-home" onclick="switchScreen('screen-input')">
+        <div class="btn-icon">🚨</div>
+        <div>
+          <div class="btn-text-title">Laporkan Blacklist</div>
+          <div class="btn-text-desc">Unggah foto KTP/Passport untuk melaporkan pelaku penggelapan.</div>
+        </div>
+      </div>
+
+      <!-- Tombol Pilihan 2: Cek Status -->
+      <div class="btn-home" onclick="switchScreen('screen-check')">
+        <div class="btn-icon">🔍</div>
+        <div>
+          <div class="btn-text-title">Cek Status Blacklist</div>
+          <div class="btn-text-desc">Masukkan NIK/Passport atau scan dokumen untuk verifikasi penyewa.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SCREEN 2: FORM INPUT DATA BLACKLIST        -->
+    <!-- ========================================== -->
+    <div id="screen-input" style="display: none;">
+      <h3 style="margin-top:0;">🚨 Input Data Blacklist</h3>
+      
+      <!-- Upload / Kamera KTP -->
       <div class="form-group">
-        <label>Foto KTP Pelaku (Wajib)</label>
+        <label>Unggah / Potret KTP Pelaku</label>
         <div class="camera-area">
-          <div id="cameraPrompt">
-            <div class="camera-icon">📸</div>
-            <span style="font-size: 13px; font-weight: bold; color: #3498db;">Ambil Foto KTP</span><br>
-            <span style="font-size: 11px; color: #7f8c8d;">Klik untuk membuka kamera HP</span>
+          <div id="inputPrompt">
+            <div style="font-size: 28px;">📸</div>
+            <span style="font-size: 12px; font-weight: bold; color: #3498db;">Pilih Foto KTP</span><br>
+            <span style="font-size: 10px; color: #7f8c8d;">Bisa Kamera atau dari Galeri</span>
           </div>
-          <!-- Input File khusus memicu kamera pada HP -->
-          <input type="file" id="ktpInput" accept="image/*" capture="camera" onchange="processAndUploadKtp(this)">
-          <img id="imagePreview" class="preview-img" alt="Pratinjau KTP">
+          <input type="file" id="inputFiles" accept="image/*" onchange="processAndUpload(this, 'input')">
+          <img id="inputPreview" class="preview-img">
         </div>
-        <div id="uploadStatus" class="upload-status"></div>
+        <div id="inputUploadStatus" class="upload-status"></div>
       </div>
 
-      <!-- Formulir Isian Teks -->
-      <form id="blacklistForm" onsubmit="submitBlacklistData(event)">
+      <form id="inputForm" onsubmit="submitToVps(event)">
         <div class="form-group">
-          <label>Nomor NIK KTP (16 Digit)</label>
-          <input type="number" id="nikInput" required placeholder="Contoh: 5102XXXXXXXXXXXX" oninput="limitNikLength(this)">
+          <label>NIK / Nomor Passport</label>
+          <input type="text" id="inputNik" required placeholder="Akan terisi otomatis setelah upload">
         </div>
-
         <div class="form-group">
           <label>Nama Lengkap Pelaku</label>
-          <input type="text" id="nameInput" required placeholder="Sesuai nama KTP">
+          <input type="text" id="inputNama" required placeholder="Akan terisi otomatis setelah upload">
         </div>
-
         <div class="form-group">
           <label>Detail Pelanggaran / Kasus</label>
-          <textarea id="caseInput" required rows="3" placeholder="Contoh: Melarikan motor Nmax plat DK XXXX, mengganti nomor HP, KTP palsu."></textarea>
+          <textarea id="inputAlasan" required rows="2" placeholder="Tulis rincian penipuan/penggelapan..."></textarea>
         </div>
-
         <div class="form-group">
           <label>Admin Pelapor (Nama Rental Anda)</label>
-          <input type="text" id="adminLabel" placeholder="Contoh: Gandewa Rental" required>
+          <input type="text" id="inputAdmin" required placeholder="Contoh: Gandewa Rental">
         </div>
-
-        <button type="submit" id="submitBtn" class="gmaps-btn" style="width: 100%; border: none; background-color: #e74c3c;" disabled>
-          Simpan Ke Daftar Hitam Terpusat
-        </button>
+        <button type="submit" id="inputSubmitBtn" class="btn-submit" style="background-color:#e74c3c;" disabled>Simpan Ke Daftar Hitam</button>
       </form>
+      <button class="btn-back" onclick="switchScreen('screen-home')">Kembali ke Beranda</button>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SCREEN 3: CEK DATA BLACKLIST               -->
+    <!-- ========================================== -->
+    <div id="screen-check" style="display: none;">
+      <h3 style="margin-top:0;">🔍 Cek Status Blacklist</h3>
+
+      <!-- Opsi Scan Cepat -->
+      <div class="form-group">
+        <label>Scan Cepat Dokumen KTP/Passport</label>
+        <div class="camera-area" style="padding: 10px; background-color: #f4f6fa; border: 1.5px dashed #bdc3c7;">
+          <div id="checkPrompt">
+            <span style="font-size: 11px; font-weight: bold; color: #7f8c8d;">📷 Klik untuk Scan / Potret Dokumen</span>
+          </div>
+          <input type="file" id="checkScanFiles" accept="image/*" onchange="processAndUpload(this, 'check')">
+        </div>
+        <div id="checkUploadStatus" class="upload-status"></div>
+      </div>
+
+      <!-- Input Manual NIK -->
+      <div class="form-group">
+        <label>Masukkan NIK atau Nomor Passport</label>
+        <div style="display:flex; gap: 8px;">
+          <input type="text" id="checkNikInput" style="background-color:#fff;" placeholder="Contoh: 5102XXXXXXXXXXXX">
+          <button onclick="queryVpsBlacklist()" style="padding: 12px 20px; background:#2c3e50; color:white; border:none; border-radius:8px; font-weight:bold;">Cek</button>
+        </div>
+      </div>
+
+      <!-- Spinner saat proses cari -->
+      <div id="checkSpinner" style="display:none;" class="spinner"></div>
+
+      <!-- Hasil Pengecekan -->
+      <div id="checkResultArea" style="display:none;"></div>
+
+      <button class="btn-back" onclick="switchScreen('screen-home')">Kembali ke Beranda</button>
     </div>
 
     <div class="footer">
-      AMS Pro Master Registry System<br>
-      Sistem Keamanan Terintegrasi <strong>MRD Digital Solution</strong>
+      AMS Pro Master Registry Portal<br>
+      Sistem Proteksi Klien <strong>MRD Digital Solution</strong>
     </div>
   </div>
 
   <script>
-    // URL Web App GAS Uploader Anda yang sudah dideploy
+    // Konfigurasi API Anda
     const gasWebUrl = "https://script.google.com/macros/s/AKfycbxdUUlskv5csUSBL9OnECGrgKzhUKdRufFMZu82eSwhOBH5ICu5zyS5k0O3Xd7TS4xGA/exec";
-    
-    // URL API VPS Anda pada Port 3002
     const vpsApiUrl = "http://103.31.38.30:3002/api/blacklist";
 
-    var uploadedImageUrl = ""; // Menyimpan URL KTP dari Drive
+    var finalUploadedImgUrl = ""; // Menampung URL KTP dari Drive
 
-    // Batasi NIK agar tidak lebih dari 16 angka
-    function limitNikLength(element) {
-      if (element.value.length > 16) {
-        element.value = element.value.slice(0, 16);
-      }
+    // Navigasi Layar (SPA)
+    function switchScreen(screenId) {
+      document.getElementById('screen-home').style.display = 'none';
+      document.getElementById('screen-input').style.display = 'none';
+      document.getElementById('screen-check').style.display = 'none';
+      document.getElementById(screenId).style.display = 'block';
+      resetAllStates();
     }
 
-    // Fungsi kompresi gambar dan upload langsung ke GAS -> Google Drive
-    function processAndUploadKtp(input) {
+    function resetAllStates() {
+      // Reset Form Input
+      document.getElementById("inputForm").reset();
+      document.getElementById("inputPreview").style.display = "none";
+      document.getElementById("inputPrompt").style.display = "block";
+      document.getElementById("inputUploadStatus").style.display = "none";
+      document.getElementById("inputSubmitBtn").disabled = true;
+      finalUploadedImgUrl = "";
+
+      // Reset Form Cek
+      document.getElementById("checkNikInput").value = "";
+      document.getElementById("checkResultArea").style.display = "none";
+      document.getElementById("checkUploadStatus").style.display = "none";
+      document.getElementById("checkPrompt").style.display = "block";
+    }
+
+    // Mengubah link Google Drive biasa menjadi Direct Link Gambar
+    function getDirectDriveImgUrl(url) {
+      if (url && url.includes("drive.google.com")) {
+        try {
+          var fileId = url.split("/d/")[1].split("/")[0];
+          return "https://drive.google.com/uc?export=view&id=" + fileId;
+        } catch (e) { return url; }
+      }
+      return url;
+    }
+
+    // Kompresi Gambar & Upload otomatis
+    function processAndUpload(input, mode) {
       if (input.files && input.files[0]) {
         var file = input.files[0];
+        var statusDivId = (mode === 'input') ? "inputUploadStatus" : "checkUploadStatus";
+        var statusDiv = document.getElementById(statusDivId);
         
-        // Tampilkan Loading Status
-        var statusDiv = document.getElementById("uploadStatus");
         statusDiv.style.display = "block";
         statusDiv.className = "upload-status status-loading";
-        statusDiv.innerText = "⏳ Sedang mengompresi & mengunggah gambar...";
-        
-        document.getElementById("submitBtn").disabled = true;
+        statusDiv.innerText = "⏳ Memproses gambar & membaca teks KTP...";
 
         var reader = new FileReader();
         reader.readAsDataURL(file);
@@ -231,9 +375,8 @@
           var img = new Image();
           img.src = event.target.result;
           img.onload = function () {
-            // Melakukan kompresi di sisi browser menggunakan Canvas
             var canvas = document.createElement('canvas');
-            var MAX_WIDTH = 1000; // Maksimalkan lebar 1000px saja agar ringan
+            var MAX_WIDTH = 1000; 
             var width = img.width;
             var height = img.height;
 
@@ -246,30 +389,30 @@
 
             var ctx = canvas.getContext("2d");
             ctx.drawImage(img, 0, 0, width, height);
-
-            // Konversi ke Base64 JPEG dengan kualitas 70% (Sangat hemat ruang & kencang)
             var base64Compressed = canvas.toDataURL("image/jpeg", 0.7);
 
-            // Tampilkan Preview Gambar
-            var preview = document.getElementById("imagePreview");
-            preview.src = base64Compressed;
-            preview.style.display = "block";
-            document.getElementById("cameraPrompt").style.display = "none";
+            if (mode === 'input') {
+              var preview = document.getElementById("inputPreview");
+              preview.src = base64Compressed;
+              preview.style.display = "block";
+              document.getElementById("inputPrompt").style.display = "none";
+            }
 
-            // Jalankan pengunggahan ke GAS Web App
-            uploadToGoogleDrive(base64Compressed, file.name);
+            // Tembak ke GAS Web App
+            uploadToDriveAndOcr(base64Compressed, file.name, mode);
           };
         };
       }
     }
 
-    // Mengunggah Base64 langsung ke GAS
-    function uploadToGoogleDrive(base64Data, originalName) {
-      var statusDiv = document.getElementById("uploadStatus");
+    // Upload & Ambil Data KTP lewat OCR GAS (100% Free)
+    function uploadToDriveAndOcr(base64Data, originalName, mode) {
+      var statusDivId = (mode === 'input') ? "inputUploadStatus" : "checkUploadStatus";
+      var statusDiv = document.getElementById(statusDivId);
 
       var payload = {
         "image": base64Data,
-        "filename": "KTP_" + new Date().getTime() + "_" + originalName
+        "filename": "KTP_PORTAL_" + new Date().getTime() + "_" + originalName
       };
 
       fetch(gasWebUrl, {
@@ -279,37 +422,46 @@
       .then(response => response.json())
       .then(result => {
         if (result.success) {
-          uploadedImageUrl = result.imageUrl; // Kunci URL KTP dari Drive
-          statusDiv.className = "upload-status status-success";
-          statusDiv.innerText = "✅ Foto KTP sukses terunggah ke Google Drive!";
-          document.getElementById("submitBtn").disabled = false; // Aktifkan tombol submit
+          if (mode === 'input') {
+            finalUploadedImgUrl = result.imageUrl;
+            if (result.nik) document.getElementById("inputNik").value = result.nik;
+            if (result.nama) document.getElementById("inputNama").value = result.nama;
+            
+            statusDiv.className = "upload-status status-success";
+            statusDiv.innerText = result.nik && result.nama ? "✅ Scan Sukses! NIK & Nama terisi otomatis." : "⚠️ Berhasil diunggah. Silakan lengkapi kolom kosong manual.";
+            document.getElementById("inputSubmitBtn").disabled = false;
+          } else {
+            // Mode Check (Verifikasi Cepat lewat Scan)
+            statusDiv.className = "upload-status status-success";
+            statusDiv.innerText = "✅ Dokumen sukses discan!";
+            if (result.nik) {
+              document.getElementById("checkNikInput").value = result.nik;
+              queryVpsBlacklist(); // Langsung jalankan pencarian otomatis ke VPS
+            } else {
+              alert("Gagal mendeteksi NIK otomatis pada foto. Silakan ketik NIK/Passport manual.");
+            }
+          }
         } else {
           statusDiv.className = "upload-status status-error";
-          statusDiv.innerText = "❌ Gagal mengunggah: " + result.error;
+          statusDiv.innerText = "❌ Gagal memproses: " + result.error;
         }
       })
       .catch(error => {
-        console.error("Error upload:", error);
+        console.error("Error:", error);
         statusDiv.className = "upload-status status-error";
-        statusDiv.innerText = "❌ Terjadi gangguan jaringan saat mengunggah foto.";
+        statusDiv.innerText = "❌ Terjadi gangguan jaringan saat memproses dokumen.";
       });
     }
 
-    // Kirim seluruh formulir data teks ke API VPS
-    function submitBlacklistData(event) {
+    // Simpan data baru ke SQLite di VPS
+    function submitToVps(event) {
       event.preventDefault();
-      
-      var nik = document.getElementById("nikInput").value;
-      var name = document.getElementById("nameInput").value;
-      var caseDetail = document.getElementById("caseInput").value;
-      var adminReport = document.getElementById("adminLabel").value;
+      var nik = document.getElementById("inputNik").value;
+      var name = document.getElementById("inputNama").value;
+      var alasan = document.getElementById("inputAlasan").value;
+      var admin = document.getElementById("inputAdmin").value;
 
-      if (nik.length !== 16) {
-        alert("NIK harus tepat berisi 16 digit angka!");
-        return;
-      }
-
-      if (!uploadedImageUrl) {
+      if (!finalUploadedImgUrl) {
         alert("Foto KTP wajib diunggah terlebih dahulu!");
         return;
       }
@@ -317,46 +469,96 @@
       var payload = {
         "nik": nik,
         "nama": name,
-        "alasan": caseDetail,
-        "foto_url": uploadedImageUrl,
-        "created_by": adminReport
+        "alasan": alasan,
+        "foto_url": finalUploadedImgUrl,
+        "created_by": admin
       };
 
-      // Tampilkan proses loading di tombol
-      var submitBtn = document.getElementById("submitBtn");
-      submitBtn.disabled = true;
-      submitBtn.innerText = "⏳ Sedang Menyimpan ke VPS...";
+      var btn = document.getElementById("inputSubmitBtn");
+      btn.disabled = true;
+      btn.innerText = "⏳ Menyimpan ke VPS...";
 
       fetch(vpsApiUrl, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       })
       .then(response => response.json())
       .then(result => {
-        submitBtn.disabled = false;
-        submitBtn.innerText = "Simpan Ke Daftar Hitam Terpusat";
-
+        btn.disabled = false;
+        btn.innerText = "Simpan Ke Daftar Hitam";
         if (result.success) {
           alert("SUKSES: " + result.message);
-          // Reset Form setelah sukses disimpan
-          document.getElementById("blacklistForm").reset();
-          document.getElementById("imagePreview").style.display = "none";
-          document.getElementById("cameraPrompt").style.display = "block";
-          document.getElementById("uploadStatus").style.display = "none";
-          uploadedImageUrl = "";
+          switchScreen('screen-home');
         } else {
           alert("GAGAL: " + result.message);
         }
       })
-      .catch(error => {
-        submitBtn.disabled = false;
-        submitBtn.innerText = "Simpan Ke Daftar Hitam Terpusat";
-        console.error("Error VPS Save:", error);
-        alert("Gagal terhubung ke database VPS. Pastikan port 3002 aktif.");
+      .catch(err => {
+        btn.disabled = false;
+        btn.innerText = "Simpan Ke Daftar Hitam";
+        alert("Koneksi Error: Gagal menyimpan data ke database VPS.");
       });
+    }
+
+    // Cari data blacklist di VPS berdasarkan NIK / Passport
+    function queryVpsBlacklist() {
+      var nik = document.getElementById("checkNikInput").value.trim();
+      if (!nik) {
+        alert("Silakan masukkan NIK / nomor passport terlebih dahulu!");
+        return;
+      }
+
+      var spinner = document.getElementById("checkSpinner");
+      var resultArea = document.getElementById("checkResultArea");
+      
+      spinner.style.display = "block";
+      resultArea.style.display = "none";
+
+      fetch(vpsApiUrl + "/" + nik)
+        .then(response => response.json())
+        .then(result => {
+          spinner.style.display = "none";
+          resultArea.style.display = "block";
+
+          if (result.success) {
+            if (result.isBlacklisted) {
+              var data = result.data;
+              var directImg = getDirectDriveImgUrl(data.foto_url);
+              resultArea.innerHTML = `
+                <div class="status-card status-warning">
+                  <div class="status-icon">🚨</div>
+                  <div class="status-title">TERDAFTAR BLACKLIST</div>
+                  <div style="font-size:12px;">Dilarang memproses sewa untuk penyewa ini!</div>
+                </div>
+                <div class="detail-panel">
+                  <div class="detail-item"><div class="detail-label">Nama Pelaku</div><div class="detail-value">${data.nama}</div></div>
+                  <div class="detail-item"><div class="detail-label">NIK / Passport</div><div class="detail-value">${data.nik}</div></div>
+                  <div class="detail-item"><div class="detail-label">Kasus / Alasan</div><div class="detail-value" style="color:#c0392b; font-weight:normal;">${data.alasan}</div></div>
+                  <div class="detail-item"><div class="detail-label">Pelapor</div><div class="detail-value" style="font-size:12px; color:#7f8c8d;">${data.created_by}</div></div>
+                  <div class="detail-item">
+                    <div class="detail-label">Pratinjau KTP/Passport</div>
+                    <img src="${directImg}" class="ktp-preview" style="display:block;">
+                  </div>
+                </div>
+              `;
+            } else {
+              resultArea.innerHTML = `
+                <div class="status-card status-safe">
+                  <div class="status-icon">✓</div>
+                  <div class="status-title">AMAN / BERSIH</div>
+                  <div style="font-size:12px;">NIK / Passport tidak terdaftar di daftar hitam nasional.</div>
+                </div>
+              `;
+            }
+          } else {
+            resultArea.innerHTML = `<div style="color:red; text-align:center;">Gagal mengambil data dari server.</div>`;
+          }
+        })
+        .catch(err => {
+          spinner.style.display = "none";
+          alert("Gagal terhubung ke VPS. Pastikan port 3002 berjalan.");
+        });
     }
   </script>
 </body>
