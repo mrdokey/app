@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MRD Solution - Hybrid POS & Multi-Outlet F&B Management System</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co.com/gMmSSTgq/IMG-20260606-WA0000.jpg">
+    
+    <!-- TAILWIND CSS & GOOGLE FONTS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; color: #f8fafc; overflow-x: hidden; }
+        .gradient-glow { background: radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.15), transparent 70%); }
+        .card-glass { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(16px); border: 1px solid rgba(51, 65, 85, 0.6); }
+        .card-glass:hover { border-color: rgba(245, 158, 11, 0.5); transform: translateY(-4px); }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    </style>
+</head>
+<body class="selection:bg-amber-500 selection:text-slate-950">
+
+    <!-- BACKGROUND LIGHTING EFFECT -->
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-amber-500/10 blur-[140px] rounded-full"></div>
+        <div class="absolute top-[800px] -left-[200px] w-[600px] h-[600px] bg-indigo-500/10 blur-[160px] rounded-full"></div>
+        <div class="absolute top-[1600px] -right-[200px] w-[700px] h-[700px] bg-emerald-500/10 blur-[180px] rounded-full"></div>
+    </div>
+
+    <!-- 1. NAVIGATION BAR -->
+    <nav class="fixed top-0 inset-x-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="https://i.ibb.co.com/gMmSSTgq/IMG-20260606-WA0000.jpg" alt="MRD Solution" class="w-10 h-10 rounded-xl shadow-lg border border-amber-500/30">
+                <div>
+                    <span class="text-base font-black tracking-tight text-white block leading-none">MRD SOLUTION</span>
+                    <span class="text-[9px] font-black tracking-widest text-amber-500 uppercase">Hybrid F&B POS Engine</span>
+                </div>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8 text-xs font-bold text-slate-300">
+                <a href="#features" class="hover:text-amber-400 transition" id="nav-features">Key Features</a>
+                <a href="#architecture" class="hover:text-amber-400 transition" id="nav-arch">Hybrid Engine</a>
+                <a href="#cityledger" class="hover:text-amber-400 transition" id="nav-ledger">City Ledger AR</a>
+                <a href="#pricing" class="hover:text-amber-400 transition" id="nav-pricing">Pricing Plans</a>
+                <a href="#faq" class="hover:text-amber-400 transition" id="nav-faq">FAQ</a>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <!-- LANGUAGE SWITCHER BUTTON (EN / ID) -->
+                <button onclick="toggleLandingLanguage()" class="px-3 py-2 bg-slate-900 border border-slate-700 hover:border-amber-500 text-amber-400 rounded-xl text-xs font-black transition flex items-center gap-1.5 shadow-sm">
+                    <i data-lucide="languages" class="w-3.5 h-3.5"></i> <span id="lang-btn-text">EN</span>
+                </button>
+
+                <a href="https://wa.me/62895428400665?text=Halo%20MRD%20Solution,%20saya%20ingin%20jadwalkan%20Live%20Demo%20AMR%20POS." target="_blank" class="hidden sm:flex px-5 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 rounded-xl text-xs font-black shadow-lg shadow-amber-500/20 transition active:scale-95 items-center gap-1.5 uppercase tracking-wider">
+                    <i data-lucide="play-circle" class="w-4 h-4"></i> <span id="btn-request-demo">Book Free Demo</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. HERO SECTION -->
+    <section class="relative z-10 pt-36 pb-20 sm:pt-44 sm:pb-32 overflow-hidden text-center px-4">
+        <div class="max-w-5xl mx-auto space-y-6">
+            
+            <!-- Badge USP -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/90 border border-amber-500/30 text-amber-400 text-xs font-black uppercase tracking-widest shadow-xl animate-fade-in">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span id="hero-pill">Zero Downtime • Local-First Offline & Cloud SaaS</span>
+            </div>
+
+            <!-- Main Heading -->
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.1] max-w-4xl mx-auto" id="hero-title">
+                The POS That <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-500 to-amber-300">Never Stops</span> When Your Internet Drops.
+            </h1>
+
+            <p class="text-base sm:text-lg text-slate-400 font-medium max-w-2xl mx-auto leading-relaxed" id="hero-desc">
+                High-performance Hybrid POS engineered for cafes, bars, and multi-branch restaurants. Enjoy blazing-fast LAN printing & offline sales locally, with real-time cloud revenue audit & City Ledger AR tracking.
+            </p>
+
+            <!-- CTA Action Buttons -->
+            <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="https://wa.me/62895428400665?text=Halo%20MRD%20Solution,%20saya%20tertarik%20mencoba%20POS%20ini." target="_blank" class="w-full sm:w-auto px-8 py-4 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-sm rounded-2xl shadow-2xl shadow-amber-500/25 transition active:scale-95 flex items-center justify-center gap-2 uppercase tracking-wider">
+                    <i data-lucide="sparkles" class="w-5 h-5"></i> <span id="hero-btn-start">Start Free Trial</span>
+                </a>
+                <a href="#features" class="w-full sm:w-auto px-8 py-4 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-bold text-sm rounded-2xl transition flex items-center justify-center gap-2">
+                    <i data-lucide="eye" class="w-5 h-5 text-amber-500"></i> <span id="hero-btn-explore">Explore Features</span>
+                </a>
+            </div>
+
+            <!-- Social Proof Highlights -->
+            <div class="pt-10 flex flex-wrap items-center justify-center gap-8 text-xs font-bold text-slate-400">
+                <div class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i> <span id="proof-1">100% Offline-Safe Cashier</span></div>
+                <div class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i> <span id="proof-2">Multi-Printer Parallel ESC/POS</span></div>
+                <div class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i> <span id="proof-3">City Ledger & AR Debt Tracking</span></div>
+            </div>
+
+            <!-- HERO MOCKUP PREVIEW -->
+            <div class="pt-12 relative max-w-5xl mx-auto">
+                <div class="relative rounded-3xl p-3 bg-gradient-to-b from-slate-700/50 to-slate-900/80 border border-slate-700 shadow-2xl">
+                    <div class="bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 p-6 md:p-10 space-y-6 text-left">
+                        
+                        <!-- Top Fake POS Header -->
+                        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-3 h-3 rounded-full bg-rose-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                                <span class="text-xs font-black text-amber-400 ml-2 uppercase tracking-wider">AMR POS Engine v3 • Live Active Shift</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-xs">
+                                <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2.5 py-1 rounded-lg font-bold flex items-center gap-1"><i data-lucide="wifi" class="w-3.5 h-3.5"></i> LAN Connected</span>
+                                <span class="bg-indigo-950 text-indigo-300 border border-indigo-800 px-2.5 py-1 rounded-lg font-bold">Outlet: Canggu Beach Club</span>
+                            </div>
+                        </div>
+
+                        <!-- 3 Mini Stats -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800">
+                                <span class="text-[10px] font-bold text-slate-500 uppercase">Gross Revenue (Today)</span>
+                                <h4 class="text-xl font-black text-white mt-1">Rp 18.450.000</h4>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800">
+                                <span class="text-[10px] font-bold text-slate-500 uppercase">Active Tables (Dine-in)</span>
+                                <h4 class="text-xl font-black text-amber-400 mt-1">24 Tables • 82 PAX</h4>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800">
+                                <span class="text-[10px] font-bold text-slate-500 uppercase">City Ledger (AR Balance)</span>
+                                <h4 class="text-xl font-black text-rose-400 mt-1">Rp 2.150.000 (Settling)</h4>
+                            </div>
+                        </div>
+
+                        <!-- Mini Fake Grid Item -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <div class="p-3 bg-slate-900 rounded-xl border border-slate-800 flex justify-between items-center">
+                                <div><p class="text-xs font-bold text-white">Wagyu Truffle Burger</p><p class="text-[10px] text-amber-500 font-bold">Rp 125.000</p></div>
+                                <span class="text-[9px] bg-indigo-950 text-indigo-400 px-1.5 py-0.5 rounded font-bold">Kitchen</span>
+                            </div>
+                            <div class="p-3 bg-slate-900 rounded-xl border border-slate-800 flex justify-between items-center">
+                                <div><p class="text-xs font-bold text-white">Negroni Signature</p><p class="text-[10px] text-amber-500 font-bold">Rp 95.000</p></div>
+                                <span class="text-[9px] bg-sky-950 text-sky-400 px-1.5 py-0.5 rounded font-bold">Bar</span>
+                            </div>
+                            <div class="p-3 bg-slate-900 rounded-xl border border-slate-800 flex justify-between items-center">
+                                <div><p class="text-xs font-bold text-white">Calamari Rings</p><p class="text-[10px] text-amber-500 font-bold">Rp 48.000</p></div>
+                                <span class="text-[9px] bg-indigo-950 text-indigo-400 px-1.5 py-0.5 rounded font-bold">Kitchen</span>
+                            </div>
+                            <div class="p-3 bg-slate-900 rounded-xl border border-slate-800 flex justify-between items-center">
+                                <div><p class="text-xs font-bold text-white">Bali Hai Draft 500ml</p><p class="text-[10px] text-amber-500 font-bold">Rp 55.000</p></div>
+                                <span class="text-[9px] bg-sky-950 text-sky-400 px-1.5 py-0.5 rounded font-bold">Bar</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 3. ARCHITECTURE HIGHLIGHT: HYBRID ENGINE -->
+    <section id="architecture" class="py-24 z-10 relative bg-slate-950 border-y border-slate-850 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto space-y-16">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <h2 class="text-xs font-black uppercase tracking-widest text-amber-500" id="arch-sub">The Hybrid Revolution</h2>
+                <h3 class="text-3xl sm:text-5xl font-black text-white tracking-tight" id="arch-title">Why Traditional Cloud POS Fails In Busy Restaurants</h3>
+                <p class="text-sm sm:text-base text-slate-400" id="arch-desc">Most modern POS systems force you to rely 100% on active internet. When Wi-Fi lags, printers stop, bills queue, and customers get furious. MRD Solution solves this forever.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Competitor Card -->
+                <div class="p-8 rounded-3xl bg-slate-900/40 border border-rose-500/20 space-y-6 text-left">
+                    <div class="w-12 h-12 bg-rose-500/10 text-rose-500 rounded-2xl flex items-center justify-center"><i data-lucide="wifi-off" class="w-6 h-6"></i></div>
+                    <h4 class="text-xl font-bold text-white" id="comp-title">Standard 100% Cloud POS</h4>
+                    <ul class="space-y-3.5 text-xs text-slate-400 font-medium">
+                        <li class="flex items-start gap-2.5"><i data-lucide="x" class="w-4 h-4 text-rose-500 shrink-0 mt-0.5"></i> <span id="comp-1">Transactions freeze completely when ISP / Wi-Fi is unstable.</span></li>
+                        <li class="flex items-start gap-2.5"><i data-lucide="x" class="w-4 h-4 text-rose-500 shrink-0 mt-0.5"></i> <span id="comp-2">Kitchen ticket delays caused by slow cloud server hops.</span></li>
+                        <li class="flex items-start gap-2.5"><i data-lucide="x" class="w-4 h-4 text-rose-500 shrink-0 mt-0.5"></i> <span id="comp-3">Lost orders and missing receipts during peak dinner rush.</span></li>
+                        <li class="flex items-start gap-2.5"><i data-lucide="x" class="w-4 h-4 text-rose-500 shrink-0 mt-0.5"></i> <span id="comp-4">High monthly recurring fees per register tablet.</span></li>
+                    </ul>
+                </div>
+
+                <!-- MRD Solution Card -->
+                <div class="p-8 rounded-3xl bg-slate-900 border-2 border-amber-500/40 space-y-6 text-left shadow-2xl shadow-amber-500/10">
+                    <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-2xl flex items-center justify-center"><i data-lucide="cpu" class="w-6 h-6"></i></div>
+                    <h4 class="text-xl font-black text-amber-400" id="mrd-title">MRD Solution Hybrid Local-First Engine</h4>
+                    <ul class="space-y-3.5 text-xs text-slate-300 font-bold">
+                        <li class="flex items-start gap-2.5"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i> <span id="mrd-1">100% Offline Resilience: Local mini-server processes orders instantly via LAN.</span></li>
+                        <li class="flex items-start gap-2.5"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i> <span id="mrd-2">Zero-Latency Printer Routing directly to Kitchen & Bar thermal hardware.</span></li>
+                        <li class="flex items-start gap-2.5"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i> <span id="mrd-3">Silent Auto-Sync to Cloud VPS once internet resumes.</span></li>
+                        <li class="flex items-start gap-2.5"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i> <span id="mrd-4">Single SaaS backoffice for multi-branch and unlimited registers.</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. CORE FEATURES SHOWCASE -->
+    <section id="features" class="py-24 z-10 relative px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto space-y-16">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <h2 class="text-xs font-black uppercase tracking-widest text-amber-500" id="feat-sub">Enterprise Capabilities</h2>
+                <h3 class="text-3xl sm:text-5xl font-black text-white tracking-tight" id="feat-title">Engineered Specifically For High-Volume F&B</h3>
+                <p class="text-sm sm:text-base text-slate-400" id="feat-desc">From floor management to accounting reconciliation, everything your managers and chefs need is seamlessly integrated.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+                
+                <!-- Feature 1: Multi-Printer Routing -->
+                <div class="card-glass p-8 rounded-3xl transition-all space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center"><i data-lucide="printer" class="w-6 h-6"></i></div>
+                    <h4 class="text-lg font-black text-white" id="f1-title">Multi-Printer Parallel Routing</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed" id="f1-desc">Split food orders to the Kitchen ESC/POS and cocktail orders to the Bar printer simultaneously in milliseconds without overlapping characters.</p>
+                </div>
+
+                <!-- Feature 2: Smart Table & Split Bill -->
+                <div class="card-glass p-8 rounded-3xl transition-all space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center"><i data-lucide="scissors" class="w-6 h-6"></i></div>
+                    <h4 class="text-lg font-black text-white" id="f2-title">Dynamic Split & Merge Bills</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed" id="f2-desc">Effortlessly split bills by individual items or PAX count. Auto-merge open table orders with full receipt audit history protection.</p>
+                </div>
+
+                <!-- Feature 3: City Ledger & AR -->
+                <div class="card-glass p-8 rounded-3xl transition-all space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-rose-500/10 text-rose-400 flex items-center justify-center"><i data-lucide="book-open" class="w-6 h-6"></i></div>
+                    <h4 class="text-lg font-black text-white" id="f3-title">Dedicated City Ledger & AR</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed" id="f3-desc">Separate order consumption dates from payment settlement dates. Track VIP & owner tabs without messing up daily closing gross sales.</p>
+                </div>
+
+                <!-- Feature 4: Staff Attendance & Geofence GPS -->
+                <div class="card-glass p-8 rounded-3xl transition-all space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center"><i data-lucide="map-pin" class="w-6 h-6"></i></div>
+                    <h4 class="text-lg font-black text-white" id="f4-title">GPS Geofenced Staff Attendance</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed" id="f4-desc">Kiosk facial selfie capture with strict GPS radius validation. Dual-pass geolocation prevents fake GPS clock-ins and sends instant WhatsApp notices.</p>
+                </div>
+
+                <!-- Feature 5: Shift Closing & Z-Report -->
+                <div class="card-glass p-8 rounded-3xl transition-all space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-sky-500/10 text-sky-400 flex items-center justify-center"><i data-lucide="file-check-2" class="w-6 h-6"></i></div>
+                    <h4 class="text-lg font-black text-white" id="f5-title">100% Balanced Shift Closing</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed" id="f5-desc">Thermal and On-Screen Z-Reports detailing Gross, Discounts, PB1 Tax, Service Charge, Rounding, Compliments/FOC, and EDC variance reconciliation.</p>
+                </div>
+
+                <!-- Feature 6: Multi-Tenant & Multi-Branch -->
+                <div class="card-glass p-8 rounded-3xl transition-all space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-400 flex items-center justify-center"><i data-lucide="building-2" class="w-6 h-6"></i></div>
+                    <h4 class="text-lg font-black text-white" id="f6-title">Multi-Branch Roaming Cashiers</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed" id="f6-desc">Staff can roam across different branches; the system dynamically binds the cashier to the clocked-in outlet location and isolates menu catalogs.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. CITY LEDGER & ACCOUNTING SPOTLIGHT -->
+    <section id="cityledger" class="py-24 z-10 relative bg-slate-950 border-y border-slate-850 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 text-left">
+            <div class="flex-1 space-y-6">
+                <span class="text-xs font-black uppercase tracking-widest text-amber-500" id="spot-pill">Accounting & AR Master</span>
+                <h3 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight" id="spot-title">
+                    Eliminate Closing Discrepancies Forever.
+                </h3>
+                <p class="text-sm sm:text-base text-slate-400 leading-relaxed" id="spot-desc">
+                    In traditional POS systems, when a customer pays an old debt, the POS recounts the items as new sales today, destroying your kitchen stock audit and confusing your accountants. MRD Solution cleanly separates:
+                </p>
+                <div class="space-y-3 text-xs font-bold text-slate-300">
+                    <div class="p-3.5 bg-slate-900 rounded-2xl border border-slate-800 flex items-center gap-3">
+                        <i data-lucide="calendar" class="w-5 h-5 text-amber-400 shrink-0"></i>
+                        <div><p class="text-white font-black" id="spot-p1-title">Order Consumption Date Locked</p><p class="text-[10px] text-slate-400 font-normal" id="spot-p1-desc">When food is eaten, stock and COGS are decremented on that exact day.</p></div>
+                    </div>
+                    <div class="p-3.5 bg-slate-900 rounded-2xl border border-slate-800 flex items-center gap-3">
+                        <i data-lucide="credit-card" class="w-5 h-5 text-emerald-400 shrink-0"></i>
+                        <div><p class="text-white font-black" id="spot-p2-title">Settlement Date Tracked Separately</p><p class="text-[10px] text-slate-400 font-normal" id="spot-p2-desc">When the invoice is settled 3 days later, only cash/bank funds increase without double-counting product sales.</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex-1 w-full max-w-lg">
+                <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-2xl space-y-4">
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                        <span class="text-xs font-black text-amber-500 uppercase flex items-center gap-1.5"><i data-lucide="book-open" class="w-4 h-4"></i> City Ledger Backoffice</span>
+                        <span class="text-[9px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full font-bold">100% Balanced</span>
+                    </div>
+                    <div class="space-y-2.5 text-xs">
+                        <div class="p-3 bg-slate-950 rounded-xl border border-slate-850 flex justify-between items-center">
+                            <div><p class="font-bold text-white">Owner Tab (#211808)</p><p class="text-[10px] text-slate-400">Consumed: 12/08 • Settled: 13/08</p></div>
+                            <span class="font-black text-emerald-400">Rp 95.700 [PAID]</span>
+                        </div>
+                        <div class="p-3 bg-slate-950 rounded-xl border border-slate-850 flex justify-between items-center">
+                            <div><p class="font-bold text-white">VIP Event Gathering</p><p class="text-[10px] text-slate-400">Consumed: 14/08 • Tempo 7 Days</p></div>
+                            <span class="font-black text-rose-400">Rp 2.450.000 [UNPAID]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. PRICING SECTION -->
+    <section id="pricing" class="py-24 z-10 relative px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto space-y-16 text-center">
+            <div class="max-w-3xl mx-auto space-y-4">
+                <h2 class="text-xs font-black uppercase tracking-widest text-amber-500" id="price-sub">Simple & Transparent</h2>
+                <h3 class="text-3xl sm:text-5xl font-black text-white tracking-tight" id="price-title">Choose The Plan That Scales Your Business</h3>
+                <p class="text-sm sm:text-base text-slate-400" id="price-desc">No hidden transaction cut fees. Own your data and run unlimited cash registers.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left max-w-6xl mx-auto">
+                
+                <!-- Plan 1: Single Outlet Starter -->
+                <div class="card-glass p-8 rounded-3xl space-y-6 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <span class="text-xs font-black uppercase tracking-widest text-slate-400" id="plan1-name">Single Cafe</span>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-3xl sm:text-4xl font-black text-white">Rp 249.000</span>
+                            <span class="text-xs text-slate-400 font-bold">/ Month</span>
+                        </div>
+                        <p class="text-xs text-slate-400" id="plan1-desc">Perfect for single coffee shops, food trucks, and small bistros.</p>
+                        <hr class="border-slate-800">
+                        <ul class="space-y-3 text-xs text-slate-300 font-medium">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> 1 Main Outlet Location</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Offline LAN POS Engine</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Multi-Printer ESC/POS Routing</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> GPS Staff Attendance Kiosk</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/62895428400665?text=Halo%20MRD%20Solution,%20saya%20tertarik%20Paket%20Single%20Cafe." target="_blank" class="w-full py-3.5 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-white font-bold text-xs rounded-xl text-center transition block" id="plan1-btn">Choose Single Cafe</a>
+                </div>
+
+                <!-- Plan 2: Multi-Branch Pro (Featured) -->
+                <div class="p-8 rounded-3xl bg-slate-900 border-2 border-amber-500 space-y-6 flex flex-col justify-between shadow-2xl shadow-amber-500/15 relative">
+                    <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-amber-500 text-slate-950 text-[10px] font-black uppercase tracking-widest px-3.5 py-1 rounded-full shadow-lg">Most Popular</div>
+                    <div class="space-y-4">
+                        <span class="text-xs font-black uppercase tracking-widest text-amber-400" id="plan2-name">Multi-Branch Pro</span>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-3xl sm:text-4xl font-black text-white">Rp 499.000</span>
+                            <span class="text-xs text-slate-400 font-bold">/ Month</span>
+                        </div>
+                        <p class="text-xs text-slate-400" id="plan2-desc">Ideal for fast-growing restaurant chains, bars, and beach clubs.</p>
+                        <hr class="border-slate-800">
+                        <ul class="space-y-3 text-xs text-slate-200 font-bold">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Up to 5 Branch Outlets</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Dedicated City Ledger (AR) Module</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Waiter Order & Kitchen Display (KDS)</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> WhatsApp Automated Audit Alerts</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Roaming Cashier Shift Management</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/62895428400665?text=Halo%20MRD%20Solution,%20saya%20tertarik%20Paket%20Multi-Branch%20Pro." target="_blank" class="w-full py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs rounded-xl text-center shadow-lg transition block uppercase tracking-wider" id="plan2-btn">Get Multi-Branch Pro</a>
+                </div>
+
+                <!-- Plan 3: Enterprise / Custom SaaS -->
+                <div class="card-glass p-8 rounded-3xl space-y-6 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <span class="text-xs font-black uppercase tracking-widest text-slate-400" id="plan3-name">Enterprise White-Label</span>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-3xl sm:text-4xl font-black text-white">Custom</span>
+                        </div>
+                        <p class="text-xs text-slate-400" id="plan3-desc">Dedicated private VPS instance, custom domain, and white-label branding.</p>
+                        <hr class="border-slate-800">
+                        <ul class="space-y-3 text-xs text-slate-300 font-medium">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Unlimited Branch Outlets</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Dedicated Isolated VPS Database</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Custom Hardware & API Integration</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> 24/7 Dedicated Priority SLA Support</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/62895428400665?text=Halo%20MRD%20Solution,%20saya%20ingin%20konsultasi%20Paket%20Enterprise." target="_blank" class="w-full py-3.5 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-white font-bold text-xs rounded-xl text-center transition block" id="plan3-btn">Talk To Enterprise Team</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. FREQUENTLY ASKED QUESTIONS (FAQ) -->
+    <section id="faq" class="py-24 z-10 relative bg-slate-950 border-t border-slate-850 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto space-y-12 text-left">
+            <div class="text-center space-y-3">
+                <h2 class="text-xs font-black uppercase tracking-widest text-amber-500" id="faq-sub">Got Questions?</h2>
+                <h3 class="text-3xl sm:text-4xl font-black text-white tracking-tight" id="faq-title">Frequently Asked Questions</h3>
+            </div>
+
+            <div class="space-y-4">
+                <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-2">
+                    <h4 class="font-black text-sm text-white flex items-center justify-between" id="q1">
+                        Can the POS really print orders when the internet is completely disconnected?
+                    </h4>
+                    <p class="text-xs text-slate-400 leading-relaxed" id="a1">
+                        Yes, 100%! All cashier registers, kitchen printers, and bar displays communicate directly through your local Wi-Fi router (LAN) without touching the public internet. Transactions continue at full speed.
+                    </p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-2">
+                    <h4 class="font-black text-sm text-white flex items-center justify-between" id="q2">
+                        What hardware equipment do I need to run MRD Solution?
+                    </h4>
+                    <p class="text-xs text-slate-400 leading-relaxed" id="a2">
+                        You can use standard affordable hardware: Windows PC or Mini PC for the local server, Android tablets or iPads for cashiers/waiters, and standard 58mm/80mm ESC/POS thermal printers (Ethernet/LAN/USB).
+                    </p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-2">
+                    <h4 class="font-black text-sm text-white flex items-center justify-between" id="q3">
+                        How does the City Ledger AR feature benefit our restaurant accounting?
+                    </h4>
+                    <p class="text-xs text-slate-400 leading-relaxed" id="a3">
+                        It prevents the classic nightmare of double-counting. When guests or owners eat on credit today and pay next week, the system correctly logs food revenue on the consumption date and logs cash intake on the payment date.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. BOTTOM CALL TO ACTION -->
+    <section class="py-20 z-10 relative px-4">
+        <div class="max-w-5xl mx-auto rounded-3xl p-10 sm:p-16 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600 text-slate-950 text-center space-y-6 shadow-2xl shadow-amber-500/20">
+            <h2 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight" id="cta-title">
+                Ready To Upgrade Your F&B Operations?
+            </h2>
+            <p class="text-sm sm:text-base font-bold max-w-xl mx-auto text-slate-900 leading-relaxed" id="cta-desc">
+                Schedule a 15-minute live demo with our solution architects. We’ll show you how zero-downtime hybrid POS transforms your floor and kitchen.
+            </p>
+            <div class="pt-2">
+                <a href="https://wa.me/62895428400665?text=Halo%20MRD%20Solution,%20saya%20ingin%20jadwalkan%20Live%20Demo%20AMR%20POS." target="_blank" class="inline-flex items-center gap-2 px-8 py-4 bg-slate-950 hover:bg-slate-900 text-white font-black text-xs rounded-2xl shadow-xl transition active:scale-95 uppercase tracking-wider">
+                    <i data-lucide="phone-call" class="w-4 h-4 text-amber-400"></i> <span id="cta-btn">Connect With Sales on WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. FOOTER -->
+    <footer class="bg-slate-950 border-t border-slate-900 py-12 px-4 z-10 relative text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <img src="https://i.ibb.co.com/gMmSSTgq/IMG-20260606-WA0000.jpg" class="w-8 h-8 rounded-xl opacity-80">
+                <p class="font-black text-slate-300">MRD SOLUTION • SaaS POS Engine</p>
+            </div>
+            <p id="footer-copy">© 2026 MRD Solution. All Rights Reserved. Empowering F&B Businesses with Zero-Downtime POS.</p>
+        </div>
+    </footer>
+
+    <!-- I18N BILINGUAL JAVASCRIPT ENGINE (EN / ID TOGGLE) -->
+    <script>
+        const landingI18n = {
+            EN: {
+                langBtn: "EN",
+                navFeatures: "Key Features",
+                navArch: "Hybrid Engine",
+                navLedger: "City Ledger AR",
+                navPricing: "Pricing Plans",
+                navFaq: "FAQ",
+                btnRequestDemo: "Book Free Demo",
+                heroPill: "Zero Downtime • Local-First Offline & Cloud SaaS",
+                heroTitle: 'The POS That <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-500 to-amber-300">Never Stops</span> When Your Internet Drops.',
+                heroDesc: "High-performance Hybrid POS engineered for cafes, bars, and multi-branch restaurants. Enjoy blazing-fast LAN printing & offline sales locally, with real-time cloud revenue audit & City Ledger AR tracking.",
+                heroBtnStart: "Start Free Trial",
+                heroBtnExplore: "Explore Features",
+                proof1: "100% Offline-Safe Cashier",
+                proof2: "Multi-Printer Parallel ESC/POS",
+                proof3: "City Ledger & AR Debt Tracking",
+                archSub: "The Hybrid Revolution",
+                archTitle: "Why Traditional Cloud POS Fails In Busy Restaurants",
+                archDesc: "Most modern POS systems force you to rely 100% on active internet. When Wi-Fi lags, printers stop, bills queue, and customers get furious. MRD Solution solves this forever.",
+                compTitle: "Standard 100% Cloud POS",
+                comp1: "Transactions freeze completely when ISP / Wi-Fi is unstable.",
+                comp2: "Kitchen ticket delays caused by slow cloud server hops.",
+                comp3: "Lost orders and missing receipts during peak dinner rush.",
+                comp4: "High monthly recurring fees per register tablet.",
+                mrdTitle: "MRD Solution Hybrid Local-First Engine",
+                mrd1: "100% Offline Resilience: Local mini-server processes orders instantly via LAN.",
+                mrd2: "Zero-Latency Printer Routing directly to Kitchen & Bar thermal hardware.",
+                mrd3: "Silent Auto-Sync to Cloud VPS once internet resumes.",
+                mrd4: "Single SaaS backoffice for multi-branch and unlimited registers.",
+                featSub: "Enterprise Capabilities",
+                featTitle: "Engineered Specifically For High-Volume F&B",
+                featDesc: "From floor management to accounting reconciliation, everything your managers and chefs need is seamlessly integrated.",
+                f1Title: "Multi-Printer Parallel Routing",
+                f1Desc: "Split food orders to the Kitchen ESC/POS and cocktail orders to the Bar printer simultaneously in milliseconds without overlapping characters.",
+                f2Title: "Dynamic Split & Merge Bills",
+                f2Desc: "Effortlessly split bills by individual items or PAX count. Auto-merge open table orders with full receipt audit history protection.",
+                f3Title: "Dedicated City Ledger & AR",
+                f3Desc: "Separate order consumption dates from payment settlement dates. Track VIP & owner tabs without messing up daily closing gross sales.",
+                f4Title: "GPS Geofenced Staff Attendance",
+                f4Desc: "Kiosk facial selfie capture with strict GPS radius validation. Dual-pass geolocation prevents fake GPS clock-ins and sends instant WhatsApp notices.",
+                f5Title: "100% Balanced Shift Closing",
+                f5Desc: "Thermal and On-Screen Z-Reports detailing Gross, Discounts, PB1 Tax, Service Charge, Rounding, Compliments/FOC, and EDC variance reconciliation.",
+                f6Title: "Multi-Branch Roaming Cashiers",
+                f6Desc: "Staff can roam across different branches; the system dynamically binds the cashier to the clocked-in outlet location and isolates menu catalogs.",
+                spotPill: "Accounting & AR Master",
+                spotTitle: "Eliminate Closing Discrepancies Forever.",
+                spotDesc: "In traditional POS systems, when a customer pays an old debt, the POS recounts the items as new sales today, destroying your kitchen stock audit and confusing your accountants. MRD Solution cleanly separates:",
+                spotP1Title: "Order Consumption Date Locked",
+                spotP1Desc: "When food is eaten, stock and COGS are decremented on that exact day.",
+                spotP2Title: "Settlement Date Tracked Separately",
+                spotP2Desc: "When the invoice is settled 3 days later, only cash/bank funds increase without double-counting product sales.",
+                priceSub: "Simple & Transparent",
+                priceTitle: "Choose The Plan That Scales Your Business",
+                priceDesc: "No hidden transaction cut fees. Own your data and run unlimited cash registers.",
+                plan1Name: "Single Cafe",
+                plan1Desc: "Perfect for single coffee shops, food trucks, and small bistros.",
+                plan1Btn: "Choose Single Cafe",
+                plan2Name: "Multi-Branch Pro",
+                plan2Desc: "Ideal for fast-growing restaurant chains, bars, and beach clubs.",
+                plan2Btn: "Get Multi-Branch Pro",
+                plan3Name: "Enterprise White-Label",
+                plan3Desc: "Dedicated private VPS instance, custom domain, and white-label branding.",
+                plan3Btn: "Talk To Enterprise Team",
+                faqSub: "Got Questions?",
+                faqTitle: "Frequently Asked Questions",
+                q1: "Can the POS really print orders when the internet is completely disconnected?",
+                a1: "Yes, 100%! All cashier registers, kitchen printers, and bar displays communicate directly through your local Wi-Fi router (LAN) without touching the public internet. Transactions continue at full speed.",
+                q2: "What hardware equipment do I need to run MRD Solution?",
+                a2: "You can use standard affordable hardware: Windows PC or Mini PC for the local server, Android tablets or iPads for cashiers/waiters, and standard 58mm/80mm ESC/POS thermal printers (Ethernet/LAN/USB).",
+                q3: "How does the City Ledger AR feature benefit our restaurant accounting?",
+                a3: "It prevents the classic nightmare of double-counting. When guests or owners eat on credit today and pay next week, the system correctly logs food revenue on the consumption date and logs cash intake on the payment date.",
+                ctaTitle: "Ready To Upgrade Your F&B Operations?",
+                ctaDesc: "Schedule a 15-minute live demo with our solution architects. We’ll show you how zero-downtime hybrid POS transforms your floor and kitchen.",
+                ctaBtn: "Connect With Sales on WhatsApp",
+                footerCopy: "© 2026 MRD Solution. All Rights Reserved. Empowering F&B Businesses with Zero-Downtime POS."
+            },
+            ID: {
+                langBtn: "ID",
+                navFeatures: "Fitur Utama",
+                navArch: "Engine Hybrid",
+                navLedger: "Buku Piutang AR",
+                navPricing: "Paket Harga",
+                navFaq: "FAQ",
+                btnRequestDemo: "Minta Demo Gratis",
+                heroPill: "Zero Downtime • Offline Lokal & Cloud SaaS",
+                heroTitle: 'Aplikasi POS yang <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-500 to-amber-300">Tetap Jalan</span> Saat Internet Kafe Anda Mati.',
+                heroDesc: "Sistem POS Hybrid performa tinggi untuk kafe, resto, bar, dan beach club. Transaksi kasir & cetak dapur tetap super cepat via LAN lokal, dilengkapi audit omzet cloud & buku piutang City Ledger.",
+                heroBtnStart: "Coba Gratis Sekarang",
+                heroBtnExplore: "Pelajari Fitur",
+                proof1: "100% Kebal Internet Mati",
+                proof2: "Multi-Printer Rute Dapur & Bar",
+                proof3: "Buku Piutang & City Ledger AR",
+                archSub: "Revolusi POS Hybrid",
+                archTitle: "Kenapa POS Cloud Biasa Sering Bikin Rusuh di Kafe Ramai?",
+                archDesc: "Banyak POS modern memaksa Anda bergantung 100% pada internet online. Saat Wi-Fi ngadat, printer macet, nota antre, dan tamu komplain. MRD Solution menuntaskan masalah ini selamanya.",
+                compTitle: "Sistem POS Cloud Biasa",
+                comp1: "Transaksi kasir macet total saat koneksi Wi-Fi / Indihome tidak stabil.",
+                comp2: "Tiket pesanan ke dapur telat karena harus lewat server cloud luar.",
+                comp3: "Risiko pesanan hilang dan nota selisih saat jam sibuk malam hari.",
+                comp4: "Biaya langganan bulanan mahal dihitung per tablet register.",
+                mrdTitle: "MRD Solution Hybrid Local-First Engine",
+                mrd1: "Ketahanan 100% Offline: Mini-server lokal memproses pesanan instan lewat LAN.",
+                mrd2: "Cetak Tiket Dapur & Bar Instan tanpa delay ke printer thermal fisik.",
+                mrd3: "Auto-Sync Otomatis ke Cloud VPS begitu koneksi internet aktif kembali.",
+                mrd4: "Satu dashboard Backoffice untuk kelola banyak cabang & register tanpa batas.",
+                featSub: "Kemampuan Enterprise",
+                featTitle: "Dirancang Khusus Untuk Operasional Kafe & Resto Padat",
+                featDesc: "Dari kelola meja, rute koki dapur, hingga rekonsiliasi akuntansi, semua kebutuhan manajer dan chef terintegrasi rapi.",
+                f1Title: "Multi-Printer Rute Otomatis",
+                f1Desc: "Pisahkan pesanan makanan ke printer dapur dan minuman ke printer bar secara bersamaan dalam milidetik tanpa teks bertumpuk.",
+                f2Title: "Split Bill & Gabung Meja Dinamis",
+                f2Desc: "Pecah tagihan per-item atau per-PAX dengan sangat mudah. Gabungkan meja aktif otomatis dengan riwayat audit nota terlindungi.",
+                f3Title: "Modul Khusus City Ledger & AR",
+                f3Desc: "Pisahkan tanggal konsumsi makan dari tanggal pelunasan uang. Pantau piutang owner & VIP tanpa merusak laporan omzet harian.",
+                f4Title: "Absensi Staf GPS Geofencing",
+                f4Desc: "Kiosk foto selfie dengan validasi radius GPS ketat. Fitur dual-pass mencegah absen palsu dan otomatis kirim notifikasi WhatsApp.",
+                f5Title: "Closing Shift Balans 100%",
+                f5Desc: "Laporan Z-Report print thermal & layar rinci: Penjualan Kotor, Diskon, Pajak PB1, Service Charge, FOC, dan selisih rekonsiliasi EDC.",
+                f6Title: "Kasir Roaming Antar Cabang",
+                f6Desc: "Staf bebas bertugas di cabang mana saja; sistem otomatis mengunci kasir ke cabang tempat ia absen dan menyaring katalog menu cabang.",
+                spotPill: "Master Akuntansi & Piutang",
+                spotTitle: "Tuntaskan Selisih Laporan Closing Selamanya.",
+                spotDesc: "Di sistem POS lama, saat tamu melunasi bon piutang lama, POS menghitung makanannya sebagai omzet baru hari ini, membuat stok dapur kacau dan akuntan pusing. MRD Solution memisahkannya dengan tegas:",
+                spotP1Title: "Tanggal Konsumsi Terkunci Rapi",
+                spotP1Desc: "Saat makanan dimakan, HPP dan stok bahan baku berkurang tepat di hari konsumsi.",
+                spotP2Title: "Tanggal Pelunasan Dicatat Terpisah",
+                spotP2Desc: "Saat nota dilunasi 3 hari kemudian, murni uang kas/bank yang bertambah tanpa menggandakan omzet penjualan makanan.",
+                priceSub: "Sederhana & Transparan",
+                priceTitle: "Pilih Paket yang Sesuai dengan Skala Bisnis Anda",
+                priceDesc: "Tanpa potongan biaya transaksi tersembunyi. Miliki data Anda sendiri dan jalankan kasir tanpa batas.",
+                plan1Name: "Single Cafe",
+                plan1Desc: "Sempurna untuk coffee shop tunggal, food truck, dan bistro kafe mandiri.",
+                plan1Btn: "Pilih Single Cafe",
+                plan2Name: "Multi-Branch Pro",
+                plan2Desc: "Ideal untuk jaringan kafe berkembang, restoran ramai, bar, dan beach club.",
+                plan2Btn: "Pilih Multi-Branch Pro",
+                plan3Name: "Enterprise White-Label",
+                plan3Desc: "Server VPS privat terisolasi, domain kustom, dan branding nama Anda sendiri.",
+                plan3Btn: "Hubungi Tim Enterprise",
+                faqSub: "Pertanyaan Umum",
+                faqTitle: "Frequently Asked Questions",
+                q1: "Apakah POS benar-benar bisa cetak pesanan saat internet mati total?",
+                a1: "Ya, 100%! Seluruh tablet kasir, printer dapur, dan display bar berkomunikasi langsung via router Wi-Fi lokal (LAN) tanpa butuh internet publik. Transaksi jalan terus tanpa hambatan.",
+                q2: "Perangkat keras apa yang dibutuhkan untuk menjalankan sistem ini?",
+                a2: "Anda bisa menggunakan perangkat hemat & standar: PC / Mini PC Windows untuk server lokal, tablet Android / iPad untuk kasir/waiter, dan printer thermal ESC/POS 58mm/80mm (LAN/USB).",
+                q3: "Apa keuntungan fitur City Ledger AR bagi akuntansi restoran kami?",
+                a3: "Mencegah kesalahan hitung ganda. Saat tamu atau owner makan secara bon hari ini dan bayar minggu depan, omzet makanan tercatat di hari makan dan uang kas tercatat di hari bayar.",
+                ctaTitle: "Siap Meningkatkan Performa Kafe & Resto Anda?",
+                ctaDesc: "Jadwalkan demo langsung selama 15 menit dengan tim arsitek solusi kami. Kami tunjukkan bagaimana POS Hybrid zero-downtime mentransformasi dapur dan lantai kasir Anda.",
+                ctaBtn: "Hubungi Sales via WhatsApp",
+                footerCopy: "© 2026 MRD Solution. All Rights Reserved. Solusi POS Hybrid Zero-Downtime untuk Kafe & Restoran."
+            }
+        };
+
+        let currentLang = localStorage.getItem("MRD_LANDING_LANG") || "EN";
+
+        function applyLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem("MRD_LANDING_LANG", lang);
+            const t = landingI18n[lang] || landingI18n["EN"];
+
+            document.getElementById("lang-btn-text").innerText = t.langBtn;
+            document.getElementById("nav-features").innerText = t.navFeatures;
+            document.getElementById("nav-arch").innerText = t.navArch;
+            document.getElementById("nav-ledger").innerText = t.navLedger;
+            document.getElementById("nav-pricing").innerText = t.navPricing;
+            document.getElementById("nav-faq").innerText = t.navFaq;
+            document.getElementById("btn-request-demo").innerText = t.btnRequestDemo;
+
+            document.getElementById("hero-pill").innerText = t.heroPill;
+            document.getElementById("hero-title").innerHTML = t.heroTitle;
+            document.getElementById("hero-desc").innerText = t.heroDesc;
+            document.getElementById("hero-btn-start").innerText = t.heroBtnStart;
+            document.getElementById("hero-btn-explore").innerText = t.heroBtnExplore;
+
+            document.getElementById("proof-1").innerText = t.proof1;
+            document.getElementById("proof-2").innerText = t.proof2;
+            document.getElementById("proof-3").innerText = t.proof3;
+
+            document.getElementById("arch-sub").innerText = t.archSub;
+            document.getElementById("arch-title").innerText = t.archTitle;
+            document.getElementById("arch-desc").innerText = t.archDesc;
+
+            document.getElementById("comp-title").innerText = t.compTitle;
+            document.getElementById("comp-1").innerText = t.comp1;
+            document.getElementById("comp-2").innerText = t.comp2;
+            document.getElementById("comp-3").innerText = t.comp3;
+            document.getElementById("comp-4").innerText = t.comp4;
+
+            document.getElementById("mrd-title").innerText = t.mrdTitle;
+            document.getElementById("mrd-1").innerText = t.mrd1;
+            document.getElementById("mrd-2").innerText = t.mrd2;
+            document.getElementById("mrd-3").innerText = t.mrd3;
+            document.getElementById("mrd-4").innerText = t.mrd4;
+
+            document.getElementById("feat-sub").innerText = t.featSub;
+            document.getElementById("feat-title").innerText = t.featTitle;
+            document.getElementById("feat-desc").innerText = t.featDesc;
+
+            document.getElementById("f1-title").innerText = t.f1Title;
+            document.getElementById("f1-desc").innerText = t.f1Desc;
+            document.getElementById("f2-title").innerText = t.f2Title;
+            document.getElementById("f2-desc").innerText = t.f2Desc;
+            document.getElementById("f3-title").innerText = t.f3Title;
+            document.getElementById("f3-desc").innerText = t.f3Desc;
+            document.getElementById("f4-title").innerText = t.f4Title;
+            document.getElementById("f4-desc").innerText = t.f4Desc;
+            document.getElementById("f5-title").innerText = t.f5Title;
+            document.getElementById("f5-desc").innerText = t.f5Desc;
+            document.getElementById("f6-title").innerText = t.f6Title;
+            document.getElementById("f6-desc").innerText = t.f6Desc;
+
+            document.getElementById("spot-pill").innerText = t.spotPill;
+            document.getElementById("spot-title").innerText = t.spotTitle;
+            document.getElementById("spot-desc").innerText = t.spotDesc;
+            document.getElementById("spot-p1-title").innerText = t.spotP1Title;
+            document.getElementById("spot-p1-desc").innerText = t.spotP1Desc;
+            document.getElementById("spot-p2-title").innerText = t.spotP2Title;
+            document.getElementById("spot-p2-desc").innerText = t.spotP2Desc;
+
+            document.getElementById("price-sub").innerText = t.priceSub;
+            document.getElementById("price-title").innerText = t.priceTitle;
+            document.getElementById("price-desc").innerText = t.priceDesc;
+
+            document.getElementById("plan1-name").innerText = t.plan1Name;
+            document.getElementById("plan1-desc").innerText = t.plan1Desc;
+            document.getElementById("plan1-btn").innerText = t.plan1Btn;
+
+            document.getElementById("plan2-name").innerText = t.plan2Name;
+            document.getElementById("plan2-desc").innerText = t.plan2Desc;
+            document.getElementById("plan2-btn").innerText = t.plan2Btn;
+
+            document.getElementById("plan3-name").innerText = t.plan3Name;
+            document.getElementById("plan3-desc").innerText = t.plan3Desc;
+            document.getElementById("plan3-btn").innerText = t.plan3Btn;
+
+            document.getElementById("faq-sub").innerText = t.faqSub;
+            document.getElementById("faq-title").innerText = t.faqTitle;
+            document.getElementById("q1").innerText = t.q1;
+            document.getElementById("a1").innerText = t.a1;
+            document.getElementById("q2").innerText = t.q2;
+            document.getElementById("a2").innerText = t.a2;
+            document.getElementById("q3").innerText = t.q3;
+            document.getElementById("a3").innerText = t.a3;
+
+            document.getElementById("cta-title").innerText = t.ctaTitle;
+            document.getElementById("cta-desc").innerText = t.ctaDesc;
+            document.getElementById("cta-btn").innerText = t.ctaBtn;
+            document.getElementById("footer-copy").innerText = t.footerCopy;
+
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
+        function toggleLandingLanguage() {
+            const next = currentLang === "EN" ? "ID" : "EN";
+            applyLanguage(next);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            applyLanguage(currentLang);
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
